@@ -3,11 +3,11 @@ databaseChangeLog:
       - dbms:
           type: postgresql
   - changeSet:
-      id: BOK-001-202107192300
+      id: BOK-001-202107191625
       author: amyasoedov
       comment: Create Initial DB Struct
       # runOnChange: true
       changes:
         - sqlFile:
-            path: BOK-001-202107201007.sql
+            path: BOK-001-202107201625.sql
             relativeToChangelogFile: true
