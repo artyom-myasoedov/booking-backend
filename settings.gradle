@@ -1,0 +1,6 @@
+rootProject.name = 'booking-backend'
+include 'rest'
+include 'db'
+include 'security'
+include 'service'
+

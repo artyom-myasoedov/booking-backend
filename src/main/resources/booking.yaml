@@ -1,0 +1,889 @@
+swagger: "2.0"
+info:
+  description: "Booking"
+  version: "1.0.0"
+  title: "Booking service"
+host: "booking.swagger.io"
+basePath: "/v2"
+tags:
+  - name: "booking"
+    description: "Booking service"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /admin:
+    post:
+      tags:
+        - "admin"
+      summary: "Create admin"
+      description: "This can only be done by the logged in admin."
+      operationId: "createAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created admin object"
+          required: true
+          schema:
+            $ref: "#/definitions/AdminForBack"
+      responses:
+        "200":
+          description: "successful operation"
+  /admin/login:
+    get:
+      tags:
+        - "admin"
+      summary: "Logs admin into the system"
+      description: ""
+      operationId: "loginAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "username"
+          in: "query"
+          description: "The user name for login"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "query"
+          description: "The password for login in clear text"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AdminForFront"
+        "400":
+          description: "Invalid username/password supplied"
+  /admin/logout:
+    get:
+      tags:
+        - "admin"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutAdmin"
+      produces:
+        - "application/json"
+      parameters: [ ]
+      responses:
+        default:
+          description: "successful operation"
+  /admin/{adminId}:
+    get:
+      tags:
+        - "admin"
+      summary: "Get admin by id"
+      description: ""
+      operationId: "getAdminById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "adminId"
+          in: "path"
+          description: ""
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AdminForFront"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Admin not found"
+    put:
+      tags:
+        - "admin"
+      summary: "Updated admin"
+      description: "This can only be done by the logged in admin."
+      operationId: "updateAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "adminId"
+          in: "path"
+          description: "id that need to be updated"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "body"
+          name: "body"
+          description: "Updated admin object"
+          required: true
+          schema:
+            $ref: "#/definitions/AdminForBack"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AdminForFront"
+        "400":
+          description: "Invalid admin supplied"
+        "404":
+          description: "Admin not found"
+    delete:
+      tags:
+        - "admin"
+      summary: "Delete admin"
+      description: "This can only be done by the logged in admin."
+      operationId: "deleteAdmin"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "adminId"
+          in: "path"
+          description: "The id that needs to be deleted"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "string"
+        "400":
+          description: "Invalid adminId supplied"
+        "404":
+          description: "Admin not found"
+  /equipment/{equipmentId}:
+    get:
+      tags:
+        - "booking"
+      summary: "Find equipment by ID"
+      description: "Returns a single equipment"
+      operationId: "getEquipment"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "equipmentId"
+          in: "path"
+          description: "ID of equipment to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Equipment"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Equipment not found"
+    delete:
+      tags:
+        - "booking"
+      summary: "Deletes a equipment"
+      description: "Deletes a equipment from storage by id"
+      operationId: "deleteEquipment"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "api_key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "equipmentId"
+          in: "path"
+          description: "Equipment id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Equipment not found"
+  /equipment/update:
+    put:
+      tags:
+        - "booking"
+      summary: "Update a equipment in the storage with body"
+      description: "Returns updated equipment"
+      operationId: "updateEquipmentWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "equipment"
+          in: "body"
+          description: "body of a new equipment to update"
+          required: true
+          schema:
+            $ref: "#/definitions/Equipment"
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/Equipment"
+        "405":
+          description: "Invalid input"
+  /equipment/byRoomId:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a list of equipments by room id"
+      description: "Returns list of equipments"
+      operationId: "getEquipmentByRoomId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "roomId"
+          in: "query"
+          description: "room id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Equipment"
+        "405":
+          description: "Invalid input"
+  /equipment/getAllEquipments:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a list of equipments by room id"
+      description: "Returns list of equipments"
+      operationId: "getallEquipments"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Equipment"
+        "405":
+          description: "Invalid input"
+  /equipment/add:
+    post:
+      tags:
+        - "booking"
+      summary: "Add a equipment in the storage with body"
+      description: "Returns added equipment"
+      operationId: "addEquipmentWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "equipment"
+          in: "body"
+          description: "body of a new equipment to add"
+          required: true
+          schema:
+            $ref: "#/definitions/Equipment"
+      responses:
+        "200":
+          description: "Successfully added"
+          schema:
+            $ref: "#/definitions/Equipment"
+        "405":
+          description: "Invalid input"
+
+  /review/{reviewId}:
+    get:
+      tags:
+        - "booking"
+      summary: "Find review by ID"
+      description: "Returns a single review"
+      operationId: "getReview"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "reviewId"
+          in: "path"
+          description: "ID of review to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ReviewForFront"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Review not found"
+    delete:
+      tags:
+        - "booking"
+      summary: "Deletes a review"
+      description: "Deletes a review from storage by id"
+      operationId: "deleteReview"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "api_key"
+          in: "header"
+          required: false
+          type: "string"
+        - name: "reviewId"
+          in: "path"
+          description: "Review id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Successfully deleted"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Review not found"
+  /review/update:
+    put:
+      tags:
+        - "booking"
+      summary: "Update a review in the storage with body"
+      description: "Returns updated review"
+      operationId: "updateReviewWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "review"
+          in: "body"
+          description: "body of a new review to update"
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewForBack"
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/ReviewForFront"
+        "405":
+          description: "Invalid input"
+  /review/add:
+    put:
+      tags:
+        - "booking"
+      summary: "Add a review in the storage with body"
+      description: "Returns added review"
+      operationId: "addReviewWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "review"
+          in: "body"
+          description: "body of a new review to add"
+          required: true
+          schema:
+            $ref: "#/definitions/ReviewForBack"
+      responses:
+        "200":
+          description: "Successfully added"
+          schema:
+            $ref: "#/definitions/ReviewForFront"
+        "405":
+          description: "Invalid input"
+  /review/byClientId:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a reviews by client id"
+      description: "Returns list of reviews"
+      operationId: "getReviewsByClientId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "clientId"
+          in: "query"
+          description: "client id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ReviewForFront"
+        "405":
+          description: "Invalid input"
+  /review/byLandlordId:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a reviews by landlord id"
+      description: "Returns list of reviews"
+      operationId: "getReviewsByLandlordId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "landlordId"
+          in: "query"
+          description: "landlord id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ReviewForFront"
+        "405":
+          description: "Invalid input"
+  /review/byRoomId:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a reviews by room id"
+      description: "Returns list of reviews"
+      operationId: "getReviewsByRoomId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "roomId"
+          in: "query"
+          description: "room id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ReviewForFront"
+        "405":
+          description: "Invalid input"
+  /booking/{bookingId}:
+    get:
+      tags:
+        - "booking"
+      summary: "Find booking by ID"
+      description: "Returns a single booking"
+      operationId: "getBooking"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "bookingId"
+          in: "path"
+          description: "ID of booking to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Booking"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Booking not found"
+    delete:
+      tags:
+        - "booking"
+      summary: "Deletes a booking"
+      description: "Deletes a booking from storage by id"
+      operationId: "deleteBooking"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "bookingId"
+          in: "path"
+          description: "ID of booking to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Successfully deleted"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Booking not found"
+  /booking/add:
+    post:
+      tags:
+        - "booking"
+      summary: "Add a booking in the storage with body"
+      description: "Returns added booking"
+      operationId: "addBookingWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "booking"
+          in: "body"
+          description: "body of a new booking to add"
+          required: true
+          schema:
+            $ref: "#/definitions/Booking"
+      responses:
+        "200":
+          description: "Successfully added"
+          schema:
+            $ref: "#/definitions/Booking"
+        "405":
+          description: "Invalid input"
+  /booking/update:
+    put:
+      tags:
+        - "booking"
+      summary: "Updates a booking in the storage with body"
+      description: "Returns updated booking"
+      operationId: "updateBookingWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "room"
+          in: "body"
+          description: "body of a new booking to update"
+          required: true
+          schema:
+            $ref: "#/definitions/Booking"
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/Booking"
+        "405":
+          description: "Invalid input"
+  /booking/byClientId:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a bookings by client id"
+      description: "Returns list of bookings"
+      operationId: "getBookingByClientId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "clientId"
+          in: "query"
+          description: "client id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Booking"
+        "405":
+          description: "Invalid input"
+  /booking/byRoomId:
+    get:
+      tags:
+        - "booking"
+      summary: "Returns a bookings by room id"
+      description: "Returns list of bookings"
+      operationId: "getBookingByRoomId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "roomId"
+          in: "query"
+          description: "room id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Booking"
+        "405":
+          description: "Invalid input"
+definitions:
+  AdminForBack:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      login:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      password:
+        type: "string"
+      photoUrl:
+        type: "string"
+    xml:
+      name: "AdminForBack"
+  AdminForFront:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      photoUrl:
+        type: "string"
+    xml:
+      name: "AdminForFront"
+  UserForBack:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      login:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      rating:
+        type: "number"
+      phone:
+        type: "string"
+      photoUrl:
+        type: "string"
+    xml:
+      name: "UserForBack"
+  UserForFront:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      rating:
+        type: "number"
+      phone:
+        type: "string"
+      photoUrl:
+        type: "string"
+    xml:
+      name: "UserForFront"
+  TypeOfRent:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      numberOfHours:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "TypeOfRent"
+  Room:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      size:
+        type: "integer"
+        format: "int64"
+      landlord:
+        $ref: "#/definitions/UserForFront"
+      typeOfRoom:
+        type: "string"
+      numberOfPeople:
+        type: "integer"
+        format: "int64"
+      status:
+        type: "string"
+        enum:
+          - "availavle"
+          - "not confirmed"
+          - "booked"
+      adress:
+        type: "string"
+      description:
+        type: "string"
+      rating:
+        type: "number"
+      minRentPeriod:
+        type: "integer"
+      photoUrls:
+        type: "array"
+        xml:
+          name: "photoUrl"
+          wrapped: true
+        items:
+          type: "string"
+      typesOfRent:
+        type: "array"
+        xml:
+          name: "typesOfRent"
+          wrapped: true
+        items:
+          $ref: "#/definitions/TypeOfRent"
+      equipments:
+        type: "array"
+        xml:
+          name: "equipments"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Equipment"
+      reviews:
+        type: "array"
+        xml:
+          name: "reviews"
+          wrapped: true
+        items:
+          $ref: "#/definitions/ReviewForFront"
+    xml:
+      name: "Room"
+  RoomWithoutReviews:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      size:
+        type: "integer"
+        format: "int64"
+      landlord:
+        $ref: "#/definitions/UserForFront"
+      typeOfRoom:
+        type: "string"
+      numberOfPeople:
+        type: "integer"
+        format: "int64"
+      status:
+        type: "string"
+        enum:
+          - "available"
+          - "not confirmed"
+          - "booked"
+      adress:
+        type: "string"
+      description:
+        type: "string"
+      minRentPeriod:
+        type: "integer"
+      photoUrls:
+        type: "array"
+        xml:
+          name: "photoUrl"
+          wrapped: true
+        items:
+          type: "string"
+      typesOfRent:
+        type: "array"
+        xml:
+          name: "typesOfRent"
+          wrapped: true
+        items:
+          $ref: "#/definitions/TypeOfRent"
+      equipments:
+        type: "array"
+        xml:
+          name: "equipments"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Equipment"
+    xml:
+      name: "RoomWithoutReviews"
+  Equipment:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      amount:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Equipment"
+  ReviewForBack:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      authorId:
+        type: "integer"
+        format: "int64"
+      targetId:
+        type: "integer"
+        format: "int64"
+      rate:
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+    xml:
+      name: "ReviewForBack"
+  ReviewForFront:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      author:
+        $ref: "#/definitions/UserForFront"
+      rate:
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+    xml:
+      name: "ReviewForFront"
+  Booking:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      room:
+        $ref: "#/definitions/Room"
+      tenant:
+        $ref: "#/definitions/UserForFront"
+      periodOfBooking:
+        type: "string"
+    xml:
+      name: "Booking"
+
