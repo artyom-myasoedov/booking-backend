@@ -10,6 +10,7 @@ CREATE TABLE booking.admins
     photo_path VARCHAR(255)
 );
 
+
 CREATE TABLE booking.users
 (
     user_id      SERIAL      NOT NULL PRIMARY KEY,
