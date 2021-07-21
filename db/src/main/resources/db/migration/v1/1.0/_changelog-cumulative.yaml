@@ -29,3 +29,12 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202107211850.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: BOK-001-202107212210
+      author: amyasoedov
+      comment: Changed time types, types_of_rent and added cascade deleting
+      # runOnChange: true
+      changes:
+        - sqlFile:
+            path: BOK-001-202107212210.sql
+            relativeToChangelogFile: true
