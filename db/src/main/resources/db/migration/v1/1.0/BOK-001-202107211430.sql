@@ -1,4 +1,3 @@
-DROP SCHEMA booking CASCADE;
 CREATE SCHEMA booking;
 
 CREATE TABLE booking.admins
