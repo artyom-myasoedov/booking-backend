@@ -5,7 +5,7 @@ CREATE TABLE booking.roles
 );
 
 ALTER TABLE booking.users
-    ADD COLUMN role_id VARCHAR(50) REFERENCES booking.roles (role_id);
+    ADD COLUMN role_id INTEGER REFERENCES booking.roles (role_id);
 
 CREATE TABLE booking.equipments
 (
