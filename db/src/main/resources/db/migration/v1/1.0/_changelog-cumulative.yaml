@@ -12,11 +12,20 @@ databaseChangeLog:
             path: BOK-001-202107211430.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: BOK-002-202107211850
+      id: BOK-002-202107211501
+      author: mlarionov
+      comment: Create Initial DB Struct phase 2
+      # runOnChange: true
+      changes:
+        - sqlFile:
+            path: BOK-002-202107211501.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: BOK-003-202107211850
       author: ismetanin
       comment: Create Initial DB Struct phase 2
       # runOnChange: true
       changes:
         - sqlFile:
-            path: BOK-002-202107211850.sql
+            path: BOK-003-202107211850.sql
             relativeToChangelogFile: true
