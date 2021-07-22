@@ -1,3 +1,4 @@
+DROP TABLE booking.user_ratings;
 ALTER TABLE booking.room_reviews
     RENAME TO reviews;
 
