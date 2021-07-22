@@ -47,3 +47,13 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202107212345.sql
             relativeToChangelogFile: true
+
+  - changeSet:
+      id: BOK-001-202107221000
+      author: mlarionov
+      comment: Changed room type and it's status to enum
+      # runOnChange: true
+      changes:
+        - sqlFile:
+            path: BOK-001-202107221000.sql
+            relativeToChangelogFile: true
