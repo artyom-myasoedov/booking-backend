@@ -16,4 +16,4 @@ ALTER TABLE booking.reviews
     RENAME COLUMN author_user_id TO author_id;
 
 ALTER TABLE booking.reviews
-    ADD COLUMN review_target_id INTEGER NOT NULL REFERENCES booking.reviews_targets (review_target_id);
+    ADD COLUMN review_target_id INTEGER NOT NULL REFERENCES booking.review_targets(review_target_id);
