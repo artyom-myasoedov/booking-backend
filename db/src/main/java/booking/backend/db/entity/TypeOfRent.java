@@ -2,7 +2,6 @@ package booking.backend.db.entity;
 
 import java.util.Optional;
 
-//TODO как сделать тип аренды? оставить в енам или переделать в класс или и так и так
 public enum TypeOfRent {
 
   BY_HOUR(1, 1),
@@ -13,7 +12,6 @@ public enum TypeOfRent {
 
   private final Integer numberOfHours;
   private final Integer id;
-  private Integer price;
 
   TypeOfRent(Integer numberOfHours, Integer id) {
     this.numberOfHours = numberOfHours;
@@ -26,14 +24,6 @@ public enum TypeOfRent {
 
   public Integer getId() {
     return id;
-  }
-
-  public Integer getPrice() {
-    return price;
-  }
-
-  public void setPrice(Integer price) {
-    this.price = price;
   }
 
   public static Optional<TypeOfRent> fromId(Integer id) {

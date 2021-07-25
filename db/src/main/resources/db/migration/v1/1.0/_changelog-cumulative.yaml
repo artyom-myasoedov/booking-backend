@@ -57,3 +57,12 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202107221000.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: BOK-001-202107252340
+      author: amyasoedov
+      comment: Migrate price in room_types_of_rent to decimal
+      # runOnChange: true
+      changes:
+        - sqlFile:
+            path: BOK-001-202107252340.sql
+            relativeToChangelogFile: true
