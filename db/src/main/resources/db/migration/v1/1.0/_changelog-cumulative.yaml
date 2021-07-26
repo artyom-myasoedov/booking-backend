@@ -66,3 +66,12 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202107252340.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: BOK-001-202107262310
+      author: amyasoedov
+      comment: Edit equipment
+      # runOnChange: true
+      changes:
+        - sqlFile:
+            path: BOK-001-202107262310.sql
+            relativeToChangelogFile: true
