@@ -3,7 +3,7 @@ package booking.backend.db.entity;
 import java.util.Optional;
 
 public enum ReviewTarget {
-  LANDLORD(1),
+  USER(1),
   ROOM(2);
 
   private final Integer id;
