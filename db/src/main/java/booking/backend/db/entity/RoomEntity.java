@@ -1,7 +1,29 @@
 package booking.backend.db.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
+@NamedEntityGraph(
+  name = "room-with-reviews",
+  attributeNodes = {
+    @NamedAttributeNode("id"),
+    @NamedAttributeNode("square"),
+    @NamedAttributeNode("typeOfRoom"),
+    @NamedAttributeNode("roomStatus"),
+    @NamedAttributeNode("capacity"),
+    @NamedAttributeNode("description"),
+    @NamedAttributeNode("minRentalPeriod"),
+    @NamedAttributeNode("landlord"),
+    @NamedAttributeNode(value = "typesOfRent", subgraph = "typesOfRent"),
+    @NamedAttributeNode(value = "reviews", subgraph = "reviews"),
+  },
+  subgraphs = {
+    @NamedSubgraph(
+      name =
+    ),
+
+  }
+)
 @Table(name = "rooms", schema = "booking")
 @Entity(name = "rooms")
 public class RoomEntity {
@@ -20,8 +42,8 @@ public class RoomEntity {
   @Column(name = "status")
   private RoomStatus roomStatus;
 
-  @Column(name = "landlord_id")
-  private Integer landlordId;
+  @ManyToOne(targetEntity = )
+  private Integer landlord;
 
   @Column(name = "capacity")
   private Integer capacity;
@@ -34,6 +56,13 @@ public class RoomEntity {
 
   @Column(name = "min_rental_period")
   private Integer minRentalPeriod;
+
+  @OneToMany
+  private List<TypeOfRentEntity> typeOfRents;
+
+  @OneToMany
+  private List<?> reviews;
+
 
 
 }
