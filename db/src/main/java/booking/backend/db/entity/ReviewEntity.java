@@ -20,11 +20,17 @@ public class ReviewEntity {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "author_id")
-  private Integer authorId;
+  @ManyToOne
+  @JoinColumn(
+    name = "author_id",
+    referencedColumnName = "user_id",
+    insertable = false,
+    updatable = false
+  )
+  private UserEntity author;
 
   @Column(name = "review_target_id")
-  private ReviewTarget reviewTargetId;
+  private ReviewTarget reviewTarget;
 
   public Integer getId() {
     return id;
@@ -58,19 +64,19 @@ public class ReviewEntity {
     this.description = description;
   }
 
-  public Integer getAuthorId() {
-    return authorId;
+  public UserEntity getAuthor() {
+    return author;
   }
 
-  public void setAuthorId(Integer authorId) {
-    this.authorId = authorId;
+  public void setAuthor(UserEntity author) {
+    this.author = author;
   }
 
-  public ReviewTarget getReviewTargetId() {
-    return reviewTargetId;
+  public ReviewTarget getReviewTarget() {
+    return reviewTarget;
   }
 
-  public void setReviewTargetId(ReviewTarget reviewTargetId) {
-    this.reviewTargetId = reviewTargetId;
+  public void setReviewTarget(ReviewTarget reviewTarget) {
+    this.reviewTarget = reviewTarget;
   }
 }
