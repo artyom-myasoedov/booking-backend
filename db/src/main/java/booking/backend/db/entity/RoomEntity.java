@@ -19,9 +19,23 @@ import java.util.List;
   },
   subgraphs = {
     @NamedSubgraph(
-      name =
+      name = "type-of-rent",
+      attributeNodes = {
+        @NamedAttributeNode("price"),
+        @NamedAttributeNode("id")
+      }
     ),
-
+    @NamedSubgraph(
+      name = "review",
+      attributeNodes = {
+        @NamedAttributeNode("id"),
+        @NamedAttributeNode("ratedEntityId"),
+        @NamedAttributeNode("rating"),
+        @NamedAttributeNode("description"),
+        @NamedAttributeNode("authorId"),
+        @NamedAttributeNode("reviewTargetId")
+      }
+    )
   }
 )
 @Table(name = "rooms", schema = "booking")
@@ -42,8 +56,14 @@ public class RoomEntity {
   @Column(name = "status")
   private RoomStatus roomStatus;
 
-  @ManyToOne(targetEntity = )
-  private Integer landlord;
+  @ManyToOne
+  @JoinColumn(
+    name = "landlord_id",
+    referencedColumnName = "user_id",
+    insertable = false,
+    updatable = false
+  )
+  private UserEntity landlord;
 
   @Column(name = "capacity")
   private Integer capacity;
@@ -58,11 +78,16 @@ public class RoomEntity {
   private Integer minRentalPeriod;
 
   @OneToMany
+  @JoinColumn(
+    name = "type_of_rent"
+  )
   private List<TypeOfRentEntity> typeOfRents;
 
-  @OneToMany
-  private List<?> reviews;
+  @OneToMany()
+  private List<ReviewEntity> reviews;
 
+  @OneToMany()
+  private List<String> photoUrls;
 
 
 }
