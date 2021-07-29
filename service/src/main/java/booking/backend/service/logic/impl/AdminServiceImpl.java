@@ -1,7 +1,7 @@
-package booking.backend.service.mapper.logic.impl;
+package booking.backend.service.logic.impl;
 
-import booking.backend.service.mapper.AdminDto;
-import booking.backend.service.mapper.logic.AdminService;
+import booking.backend.service.model.AdminDto;
+import booking.backend.service.logic.AdminService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

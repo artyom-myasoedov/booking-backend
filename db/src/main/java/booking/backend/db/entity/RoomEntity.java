@@ -13,7 +13,7 @@ import java.util.List;
     @NamedAttributeNode("capacity"),
     @NamedAttributeNode("description"),
     @NamedAttributeNode("minRentalPeriod"),
-    @NamedAttributeNode("landlord"),
+    @NamedAttributeNode(value = "landlord", subgraph = "landlord"),
     @NamedAttributeNode(value = "typesOfRent", subgraph = "typesOfRent"),
     @NamedAttributeNode(value = "reviews", subgraph = "reviews"),
   },
@@ -21,8 +21,8 @@ import java.util.List;
     @NamedSubgraph(
       name = "type-of-rent",
       attributeNodes = {
-        @NamedAttributeNode("price"),
-        @NamedAttributeNode("id")
+        @NamedAttributeNode("id"),
+        @NamedAttributeNode("price")
       }
     ),
     @NamedSubgraph(
@@ -34,6 +34,19 @@ import java.util.List;
         @NamedAttributeNode("description"),
         @NamedAttributeNode("authorId"),
         @NamedAttributeNode("reviewTargetId")
+      }
+    ),
+    @NamedSubgraph(
+      name = "landlord",
+      attributeNodes = {
+        @NamedAttributeNode("id"),
+        @NamedAttributeNode("username"),
+        @NamedAttributeNode("firstName"),
+        @NamedAttributeNode("lastName"),
+        @NamedAttributeNode("photoPath"),
+        @NamedAttributeNode("role"),
+        @NamedAttributeNode("phoneNumber"),
+        @NamedAttributeNode("email")
       }
     )
   }
@@ -59,9 +72,7 @@ public class RoomEntity {
   @ManyToOne
   @JoinColumn(
     name = "landlord_id",
-    referencedColumnName = "user_id",
-    insertable = false,
-    updatable = false
+    referencedColumnName = "user_id"
   )
   private UserEntity landlord;
 
@@ -77,17 +88,119 @@ public class RoomEntity {
   @Column(name = "min_rental_period")
   private Integer minRentalPeriod;
 
-  @OneToMany
-  @JoinColumn(
-    name = "type_of_rent"
-  )
+  @OneToMany//Как делать если room_id лежит в embeddedId
   private List<TypeOfRentEntity> typeOfRents;
 
-  @OneToMany()
+  @OneToMany//Как делать если у review только id комнаты
   private List<ReviewEntity> reviews;
 
-  @OneToMany()
+  @OneToMany//Как делать, если нет сущности юрла
   private List<String> photoUrls;
 
+  @OneToMany
+  private List<EquipmentEntity> equipments;
 
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getSquare() {
+    return square;
+  }
+
+  public void setSquare(Integer square) {
+    this.square = square;
+  }
+
+  public TypeOfRoom getTypeOfRoom() {
+    return typeOfRoom;
+  }
+
+  public void setTypeOfRoom(TypeOfRoom typeOfRoom) {
+    this.typeOfRoom = typeOfRoom;
+  }
+
+  public RoomStatus getRoomStatus() {
+    return roomStatus;
+  }
+
+  public void setRoomStatus(RoomStatus roomStatus) {
+    this.roomStatus = roomStatus;
+  }
+
+  public UserEntity getLandlord() {
+    return landlord;
+  }
+
+  public void setLandlord(UserEntity landlord) {
+    this.landlord = landlord;
+  }
+
+  public Integer getCapacity() {
+    return capacity;
+  }
+
+  public void setCapacity(Integer capacity) {
+    this.capacity = capacity;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Integer getMinRentalPeriod() {
+    return minRentalPeriod;
+  }
+
+  public void setMinRentalPeriod(Integer minRentalPeriod) {
+    this.minRentalPeriod = minRentalPeriod;
+  }
+
+  public List<TypeOfRentEntity> getTypeOfRents() {
+    return typeOfRents;
+  }
+
+  public void setTypeOfRents(List<TypeOfRentEntity> typeOfRents) {
+    this.typeOfRents = typeOfRents;
+  }
+
+  public List<ReviewEntity> getReviews() {
+    return reviews;
+  }
+
+  public void setReviews(List<ReviewEntity> reviews) {
+    this.reviews = reviews;
+  }
+
+  public List<String> getPhotoUrls() {
+    return photoUrls;
+  }
+
+  public void setPhotoUrls(List<String> photoUrls) {
+    this.photoUrls = photoUrls;
+  }
+
+  public List<EquipmentEntity> getEquipments() {
+    return equipments;
+  }
+
+  public void setEquipments(List<EquipmentEntity> equipments) {
+    this.equipments = equipments;
+  }
 }

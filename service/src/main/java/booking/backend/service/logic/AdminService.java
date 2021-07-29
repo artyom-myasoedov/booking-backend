@@ -1,6 +1,6 @@
-package booking.backend.service.mapper.logic;
+package booking.backend.service.logic;
 
-import booking.backend.service.mapper.AdminDto;
+import booking.backend.service.model.AdminDto;
 
 import java.util.List;
 

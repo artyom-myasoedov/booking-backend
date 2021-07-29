@@ -1,4 +1,4 @@
-package booking.backend.service.mapper;
+package booking.backend.service.model;
 
 public class AdminDto {
   Integer id;

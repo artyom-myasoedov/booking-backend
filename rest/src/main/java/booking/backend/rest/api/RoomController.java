@@ -1,19 +1,18 @@
 package booking.backend.rest.api;
 
-import booking.backend.db.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+import booking.backend.service.logic.RoomService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 @RequestMapping("/room")
 public class RoomController {
 
 
-  private final RoomRepository roomRepository;
+  private final RoomService roomService;
 
-  @Autowired
-  public RoomController(RoomRepository roomRepository) {
-    this.roomRepository = roomRepository;
+  public RoomController(RoomService roomService) {
+    this.roomService = roomService;
   }
 }
