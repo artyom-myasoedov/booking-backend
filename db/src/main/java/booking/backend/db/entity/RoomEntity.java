@@ -16,6 +16,8 @@ import java.util.List;
     @NamedAttributeNode(value = "landlord", subgraph = "landlord"),
     @NamedAttributeNode(value = "typesOfRent", subgraph = "typesOfRent"),
     @NamedAttributeNode(value = "reviews", subgraph = "reviews"),
+    @NamedAttributeNode(value = "photoUrls", subgraph = "photo-url"),
+    @NamedAttributeNode(value = "equipments", subgraph = "equipment")
   },
   subgraphs = {
     @NamedSubgraph(
@@ -47,6 +49,21 @@ import java.util.List;
         @NamedAttributeNode("role"),
         @NamedAttributeNode("phoneNumber"),
         @NamedAttributeNode("email")
+      }
+    ),
+    @NamedSubgraph(
+      name = "photo-url",
+      attributeNodes = {
+        @NamedAttributeNode("roomPhotoId"),
+        @NamedAttributeNode("roomId"),
+        @NamedAttributeNode("photoUrl")
+      }
+    ),
+    @NamedSubgraph(
+      name = "equipment",
+      attributeNodes = {
+        @NamedAttributeNode("id"),
+        @NamedAttributeNode("description")
       }
     )
   }
@@ -89,15 +106,31 @@ public class RoomEntity {
   private Integer minRentalPeriod;
 
   @OneToMany//Как делать если room_id лежит в embeddedId
-  private List<TypeOfRentEntity> typeOfRents;
+  @JoinColumn(
+    name = "room_id",
+    referencedColumnName = "room_id"
+  )
+  private List<TypeOfRentEntity> typesOfRent;
 
   @OneToMany//Как делать если у review только id комнаты
+  @JoinColumn(
+    name = "rated_entity_id",
+    referencedColumnName = "room_id"
+  )
   private List<ReviewEntity> reviews;
 
   @OneToMany//Как делать, если нет сущности юрла
-  private List<String> photoUrls;
+  @JoinColumn(
+    name = "room_id",
+    referencedColumnName = "room_id"
+  )
+  private List<PhotoUrlEntity> photoUrls;
 
   @OneToMany
+  @JoinColumn(
+    name = "room_id",
+    referencedColumnName = "room_id"
+  )
   private List<EquipmentEntity> equipments;
 
   public Integer getId() {
@@ -173,11 +206,11 @@ public class RoomEntity {
   }
 
   public List<TypeOfRentEntity> getTypeOfRents() {
-    return typeOfRents;
+    return typesOfRent;
   }
 
   public void setTypeOfRents(List<TypeOfRentEntity> typeOfRents) {
-    this.typeOfRents = typeOfRents;
+    this.typesOfRent = typeOfRents;
   }
 
   public List<ReviewEntity> getReviews() {
@@ -188,11 +221,11 @@ public class RoomEntity {
     this.reviews = reviews;
   }
 
-  public List<String> getPhotoUrls() {
+  public List<PhotoUrlEntity> getPhotoUrls() {
     return photoUrls;
   }
 
-  public void setPhotoUrls(List<String> photoUrls) {
+  public void setPhotoUrls(List<PhotoUrlEntity> photoUrls) {
     this.photoUrls = photoUrls;
   }
 

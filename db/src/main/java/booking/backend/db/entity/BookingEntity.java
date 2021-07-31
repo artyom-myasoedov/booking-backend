@@ -1,6 +1,7 @@
 package booking.backend.db.entity;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Table(name = "bookings", schema = "booking")
 @Entity(name = "bookings")
@@ -21,7 +22,7 @@ public class BookingEntity {
   private Integer rental_period;
 
   @Column(name = "rental_start_date")
-  private String rental_start_date;
+  private Instant rental_start_date;
 
 
   public void setId(Integer id) {
@@ -56,11 +57,11 @@ public class BookingEntity {
     this.rental_period = rental_period;
   }
 
-  public String getRental_start_date() {
+  public Instant getRental_start_date() {
     return rental_start_date;
   }
 
-  public void setRental_start_date(String rental_start_date) {
+  public void setRental_start_date(Instant rental_start_date) {
     this.rental_start_date = rental_start_date;
   }
 }
