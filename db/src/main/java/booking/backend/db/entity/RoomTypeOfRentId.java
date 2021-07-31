@@ -6,16 +6,16 @@ import java.util.Objects;
 
 public class RoomTypeOfRentId implements Serializable {
   @Column(name = "type_of_rent_id")
-  private Integer typeOfRentId;
+  private TypeOfRent typeOfRentId;
 
   @Column(name = "room_id")
   private Integer roomId;
 
-  public Integer getTypeOfRentId() {
+  public TypeOfRent getTypeOfRentId() {
     return typeOfRentId;
   }
 
-  public void setTypeOfRentId(Integer typeOfRentId) {
+  public void setTypeOfRentId(TypeOfRent typeOfRentId) {
     this.typeOfRentId = typeOfRentId;
   }
 
