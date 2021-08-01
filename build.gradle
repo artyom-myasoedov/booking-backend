@@ -3,9 +3,8 @@ plugins {
     id 'java'
 }
 
-
-
 allprojects {
+
     apply plugin: 'java'
 
     group 'booking-team'
@@ -14,6 +13,10 @@ allprojects {
     repositories {
         mavenCentral()
     }
+
+//    dependencies {
+//        implementation("booking.backend.commons:commons")
+//    }
 }
 
 dependencies {
