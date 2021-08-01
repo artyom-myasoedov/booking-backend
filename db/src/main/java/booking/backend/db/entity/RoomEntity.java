@@ -105,21 +105,21 @@ public class RoomEntity {
   @Column(name = "min_rental_period")
   private Integer minRentalPeriod;
 
-  @OneToMany//Как делать если room_id лежит в embeddedId
+  @OneToMany
   @JoinColumn(
     name = "room_id",
     referencedColumnName = "room_id"
   )
   private List<TypeOfRentEntity> typesOfRent;
 
-  @OneToMany//Как делать если у review только id комнаты
+  @OneToMany
   @JoinColumn(
     name = "rated_entity_id",
     referencedColumnName = "room_id"
   )
   private List<ReviewEntity> reviews;
 
-  @OneToMany//Как делать, если нет сущности юрла
+  @OneToMany
   @JoinColumn(
     name = "room_id",
     referencedColumnName = "room_id"
