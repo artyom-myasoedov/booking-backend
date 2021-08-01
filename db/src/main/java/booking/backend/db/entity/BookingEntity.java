@@ -12,56 +12,63 @@ public class BookingEntity {
   @Column(name = "booking_id")
   private Integer id;
 
-  @Column(name = "room_id")
-  private Integer room_id;
+  @ManyToOne
+  @JoinColumn(
+    name = "room_id",
+    referencedColumnName = "room_id"
+  )
+  private RoomEntity room;
 
-  @Column(name = "tenant_id")
-  private Integer tenant_id;
+  @ManyToOne
+  @JoinColumn(
+    name = "tenant_id",
+    referencedColumnName = "user_id"
+  )
+  private UserEntity tenant;
 
   @Column(name = "rental_period")
-  private Integer rental_period;
+  private Integer rentalPeriod;
 
   @Column(name = "rental_start_date")
-  private Instant rental_start_date;
-
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
+  private Instant rentalStartDate;
 
   public Integer getId() {
     return id;
   }
 
-  public Integer getRoom_id() {
-    return room_id;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public void setRoom_id(Integer room_id) {
-    this.room_id = room_id;
+  public RoomEntity getRoom() {
+    return room;
   }
 
-  public Integer getTenant_id() {
-    return tenant_id;
+  public void setRoom(RoomEntity room) {
+    this.room = room;
   }
 
-  public void setTenant_id(Integer tenant_id) {
-    this.tenant_id = tenant_id;
+  public UserEntity getTenant() {
+    return tenant;
   }
 
-  public Integer getRental_period() {
-    return rental_period;
+  public void setTenant(UserEntity tenant) {
+    this.tenant = tenant;
   }
 
-  public void setRental_period(Integer rental_period) {
-    this.rental_period = rental_period;
+  public Integer getRentalPeriod() {
+    return rentalPeriod;
   }
 
-  public Instant getRental_start_date() {
-    return rental_start_date;
+  public void setRentalPeriod(Integer rentalPeriod) {
+    this.rentalPeriod = rentalPeriod;
   }
 
-  public void setRental_start_date(Instant rental_start_date) {
-    this.rental_start_date = rental_start_date;
+  public Instant getRentalStartDate() {
+    return rentalStartDate;
+  }
+
+  public void setRentalStartDate(Instant rentalStartDate) {
+    this.rentalStartDate = rentalStartDate;
   }
 }
