@@ -2,6 +2,31 @@ package booking.backend.db.entity;
 
 import javax.persistence.*;
 
+@NamedEntityGraph(
+  name = "review-with-author",
+  attributeNodes = {
+    @NamedAttributeNode("id"),
+    @NamedAttributeNode("ratedEntityId"),
+    @NamedAttributeNode("rating"),
+    @NamedAttributeNode("description"),
+    @NamedAttributeNode(value = "authorId", subgraph = "author")
+  },
+  subgraphs = {
+    @NamedSubgraph(
+      name = "author",
+      attributeNodes = {
+        @NamedAttributeNode("id"),
+        @NamedAttributeNode("username"),
+        @NamedAttributeNode("firstName"),
+        @NamedAttributeNode("lastName"),
+        @NamedAttributeNode("photoPath"),
+        @NamedAttributeNode("role"),
+        @NamedAttributeNode("phoneNumber"),
+        @NamedAttributeNode("email")
+      }
+    )
+  }
+)
 @Table(schema = "booking", name = "reviews")
 @Entity(name = "reviews")
 public class ReviewEntity {
