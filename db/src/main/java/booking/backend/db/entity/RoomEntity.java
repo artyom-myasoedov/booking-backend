@@ -124,7 +124,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
-  private List<PhotoUrlEntity> photoUrls;
+  private List<PhotoEntity> photoUrls;
 
   @OneToMany
   @JoinColumn(
@@ -221,11 +221,11 @@ public class RoomEntity {
     this.reviews = reviews;
   }
 
-  public List<PhotoUrlEntity> getPhotoUrls() {
+  public List<PhotoEntity> getPhotoUrls() {
     return photoUrls;
   }
 
-  public void setPhotoUrls(List<PhotoUrlEntity> photoUrls) {
+  public void setPhotoUrls(List<PhotoEntity> photoUrls) {
     this.photoUrls = photoUrls;
   }
 

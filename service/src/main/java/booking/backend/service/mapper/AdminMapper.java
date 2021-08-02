@@ -6,7 +6,8 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface AdminMapper {
-  AdminDto fromEntity(AdminEntity adminEntity);
+  AdminDto fromEntity(AdminEntity adminEntity) ;
+
   AdminEntity toEntity(AdminDto aminDto);
 //  List<AdminDto> fromEntities(AdminEntity adminEntity);
 }
