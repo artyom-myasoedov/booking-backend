@@ -3,7 +3,6 @@ package booking.backend.rest.api;
 import booking.backend.db.entity.AdminEntity;
 import booking.backend.db.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,4 +33,15 @@ public class AdminController {
   void deleteUser(@PathVariable int id) {
     adminRepository.deleteById(id);
   }
+
+//  @DeleteMapping("/{id}")
+//  void deleteUser(@PathVariable int id, Filter filter) {
+//    adminRepository.deleteById(id);
+//  }
+//
+//  static class Filter {
+//    private List<String> users;
+//    private String search;
+//
+//  }
 }

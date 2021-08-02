@@ -2,11 +2,10 @@ package booking.backend.db.entity;
 
 
 import javax.persistence.*;
-import java.net.URL;
 
 @Entity
 @Table(name = "room_photos", schema = "booking")
-public class PhotoUrlEntity {
+public class PhotoEntity {
 
   @Column(name = "room_photo_id")
   @Id
@@ -16,8 +15,8 @@ public class PhotoUrlEntity {
   @Column(name = "room_id")
   private Integer roomId;
 
-  @Column(name = "photo_url")
-  private URL photoUrl;
+  @Column(name = "photo")
+  private byte[] photo;
 
   public Integer getRoomPhotoId() {
     return roomPhotoId;
@@ -35,11 +34,11 @@ public class PhotoUrlEntity {
     this.roomId = roomId;
   }
 
-  public URL getPhotoUrl() {
-    return photoUrl;
+  public byte[] getPhoto() {
+    return photo;
   }
 
-  public void setPhotoUrl(URL photoUrl) {
-    this.photoUrl = photoUrl;
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
   }
 }

@@ -75,3 +75,11 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202107262310.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: BOK-001-202108022224
+      author: amyasoedov
+      comment: Changed photoUrls to blob
+      changes:
+        - sqlFile:
+            path: BOK-001-202108022224.sql
+            relativeToChangelogFile: true
