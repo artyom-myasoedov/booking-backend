@@ -16,7 +16,7 @@ import java.util.List;
     @NamedAttributeNode(value = "landlord", subgraph = "landlord"),
     @NamedAttributeNode(value = "typesOfRent", subgraph = "typesOfRent"),
     @NamedAttributeNode(value = "reviews", subgraph = "reviews"),
-    @NamedAttributeNode(value = "photoUrls", subgraph = "photo-url"),
+    @NamedAttributeNode(value = "photos", subgraph = "photo"),
     @NamedAttributeNode(value = "equipments", subgraph = "equipment")
   },
   subgraphs = {
@@ -52,11 +52,11 @@ import java.util.List;
       }
     ),
     @NamedSubgraph(
-      name = "photo-url",
+      name = "photo",
       attributeNodes = {
         @NamedAttributeNode("roomPhotoId"),
         @NamedAttributeNode("roomId"),
-        @NamedAttributeNode("photoUrl")
+        @NamedAttributeNode("photo")
       }
     ),
     @NamedSubgraph(
@@ -124,7 +124,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
-  private List<PhotoEntity> photoUrls;
+  private List<PhotoEntity> photos;
 
   @OneToMany
   @JoinColumn(
@@ -221,12 +221,12 @@ public class RoomEntity {
     this.reviews = reviews;
   }
 
-  public List<PhotoEntity> getPhotoUrls() {
-    return photoUrls;
+  public List<PhotoEntity> getPhotos() {
+    return photos;
   }
 
-  public void setPhotoUrls(List<PhotoEntity> photoUrls) {
-    this.photoUrls = photoUrls;
+  public void setPhotos(List<PhotoEntity> photos) {
+    this.photos = photos;
   }
 
   public List<EquipmentEntity> getEquipments() {
