@@ -1,12 +1,12 @@
 package booking.backend.service.model;
 
 public class AdminDto {
-  Integer id;
-  String username;
-  String firstName;
-  String lastName;
-  String password;
-  String photoPath;
+  private Integer id;
+  private String username;
+  private String firstName;
+  private String lastName;
+  private String password;
+  private String photoPath;
 
   public Integer getId() {
     return id;

@@ -5,16 +5,16 @@ import booking.backend.db.entity.BookingEntity;
 import booking.backend.service.model.AdminDto;
 import booking.backend.service.model.BookingDto;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.util.List;
 
 @Mapper
-public interface AdminMapper {
+public interface BookingMapper {
 
-  AdminDto fromEntity(AdminEntity adminEntity);
+  BookingDto fromEntity(BookingEntity adminEntity);
 
-  AdminEntity toEntity(AdminDto aminDto);
+  BookingEntity toEntity(BookingDto bookingDto);
 
-  List<AdminDto> fromEntities(Iterable<AdminEntity> bookingEntities);
+  List<BookingDto> fromEntities(Iterable<BookingEntity> bookingEntities);
 }
