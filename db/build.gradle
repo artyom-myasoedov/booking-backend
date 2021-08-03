@@ -14,7 +14,7 @@ task newMigration {
 
         def path = java.nio.file.Path.of("${project.projectDir}/src/main/resources/db/migration/v1/1.0")
 
-        def id = "PPL-001-${DateTimeFormatter.ofPattern("YYYYMMddHHmm").format(LocalDateTime.now())}"
+        def id = "BOK-001-${DateTimeFormatter.ofPattern("YYYYMMddHHmm").format(LocalDateTime.now())}"
 
         path.resolve("_changelog-cumulative.yaml").append("""
   - changeSet:

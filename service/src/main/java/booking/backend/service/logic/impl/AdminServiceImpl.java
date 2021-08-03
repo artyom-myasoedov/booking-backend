@@ -1,30 +1,52 @@
 package booking.backend.service.logic.impl;
 
+import booking.backend.db.provider.AdminProvider;
+import booking.backend.db.repository.AdminRepository;
+import booking.backend.service.mapper.AdminMapper;
 import booking.backend.service.model.AdminDto;
 import booking.backend.service.logic.AdminService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+  private final AdminMapper adminMapper;
+  private final AdminProvider adminProvider;
+
+  public AdminServiceImpl(AdminMapper adminMapper, AdminProvider adminProvider) {
+    this.adminMapper = adminMapper;
+    this.adminProvider = adminProvider;
+  }
+
   @Override
   public AdminDto createAdmin(AdminDto dto) {
-    return null;
+    return
+      Optional.ofNullable(dto)
+      .map(adminMapper::toEntity)
+      .map(adminProvider::save)
+      .map(adminMapper::fromEntity)
+      .orElseThrow();
   }
 
   @Override
   public AdminDto updateAdmin(AdminDto dto) {
-    return null;
+    return createAdmin(dto);
   }
 
   @Override
   public void deleteAdminById(int id) {
-
+    adminProvider.deleteById(id);
   }
 
   @Override
   public List<AdminDto> find(String search, Integer pageSize, Integer pageNumber) {
     return null;
+  }
+
+  @Override
+  public List<AdminDto> findAll() {
+    return adminMapper.fromEntities(adminProvider.findAll());
   }
 }

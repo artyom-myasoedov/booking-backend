@@ -434,6 +434,139 @@ paths:
               $ref: "#/definitions/Equipment"
         "405":
           description: "Invalid input"
+  /typeOfRent:
+    get:
+      tags:
+        - "typeOfRent"
+      summary: "Find typeOfRent by ID and roomId"
+      description: "Returns a single typeOfRent"
+      operationId: "getTypeOfRent"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "typeOfRentId"
+          in: "query"
+          description: "ID of typeOfRent to return"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "roomId"
+          in: "query"
+          description: "ID of room to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/TypeOfRent"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "TypeOfRent not found"
+    delete:
+      tags:
+        - "typeOfRent"
+      summary: "Deletes a typeOfRent"
+      description: "Deletes a typeOfRent from storage by id"
+      operationId: "deleteTypeOfRent"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "typeOfRentId"
+          in: "path"
+          description: "TypeOfRent id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "roomId"
+          in: "path"
+          description: "Room id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Equipment not found"
+    put:
+      tags:
+        - "typeOfRent"
+      summary: "Update a typeOfRent in the storage with body"
+      description: "Returns updated typeOfRent"
+      operationId: "updateTypeOfRentWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "typeOfRent"
+          in: "body"
+          description: "body of a new typeOfRent to update"
+          required: true
+          schema:
+            $ref: "#/definitions/TypeOfRent"
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/TypeOfRent"
+        "405":
+          description: "Invalid input"
+    post:
+      tags:
+        - "typeOfRent"
+      summary: "Add a typeOfRent in the storage with body"
+      description: "Returns added typeOfRent"
+      operationId: "addTypeOfRentWithBody"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "typeOfRent"
+          in: "body"
+          description: "body of a new typeOfRent to add"
+          required: true
+          schema:
+            $ref: "#/definitions/TypeOfRent"
+      responses:
+        "200":
+          description: "Successfully added"
+          schema:
+            $ref: "#/definitions/TypeOfRent"
+        "405":
+          description: "Invalid input"
+  /typeOfRent/byRoomId:
+      get:
+        tags:
+          - "typeOfRent"
+        summary: "Returns a list of typeOfRent by room id"
+        description: "Returns list of typeOfRent"
+        operationId: "getTypeOfRentByRoomId"
+        consumes:
+          - "application/x-www-form-urlencoded"
+        produces:
+          - "application/json"
+        parameters:
+          - name: "roomId"
+            in: "query"
+            description: "room id"
+            required: true
+            type: "integer"
+        responses:
+          "200":
+            description: "Successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/TypeOfRent"
+          "405":
+            description: "Invalid input"
   /review/{reviewId}:
     get:
       tags:
@@ -939,8 +1072,9 @@ definitions:
         type: "string"
       password:
         type: "string"
-      photoUrl:
+      photo:
         type: "string"
+        format: "byte"
     xml:
       name: "AdminForBack"
   AdminForFront:
@@ -953,8 +1087,9 @@ definitions:
         type: "string"
       lastName:
         type: "string"
-      photoUrl:
+      photo:
         type: "string"
+        format: "byte"
     xml:
       name: "AdminForFront"
   UserForBack:
@@ -977,8 +1112,9 @@ definitions:
         type: "number"
       phone:
         type: "string"
-      photoUrl:
+      photo:
         type: "string"
+        format: "byte"
     xml:
       name: "UserForBack"
   UserForFront:
@@ -997,18 +1133,27 @@ definitions:
         type: "number"
       phone:
         type: "string"
-      photoUrl:
+      photo:
         type: "string"
+        format: "byte"
     xml:
       name: "UserForFront"
   TypeOfRent:
     type: "object"
     properties:
+      id:
+        type: "integer"
+        format: "int64"
+      roomId:
+        type: "integer"
+        format: "int64"
       name:
         type: "string"
       numberOfHours:
         type: "integer"
         format: "int64"
+      price:
+        type: "number"
     xml:
       name: "TypeOfRent"
   Room:
@@ -1041,13 +1186,14 @@ definitions:
         type: "number"
       minRentPeriod:
         type: "integer"
-      photoUrls:
+      photos:
         type: "array"
         xml:
-          name: "photoUrl"
+          name: "photo"
           wrapped: true
         items:
           type: "string"
+          format: "byte"
       typesOfRent:
         type: "array"
         xml:
@@ -1127,9 +1273,8 @@ definitions:
     properties:
       name:
         type: "string"
-      amount:
-        type: "integer"
-        format: "int64"
+      description:
+        type: "string"
     xml:
       name: "Equipment"
   ReviewForBack:
@@ -1141,6 +1286,11 @@ definitions:
       authorId:
         type: "integer"
         format: "int64"
+      targetType:
+        type: "string"
+        enum:
+          - "ROOM"
+          - "USER"
       targetId:
         type: "integer"
         format: "int64"
@@ -1176,7 +1326,11 @@ definitions:
         $ref: "#/definitions/Room"
       tenant:
         $ref: "#/definitions/UserForFront"
-      periodOfBooking:
+      startOfBooking:
         type: "string"
+        format: "date-time"
+      periodOfBooking:
+        type: "integer"
+        format: "int64"
     xml:
       name: "Booking"
