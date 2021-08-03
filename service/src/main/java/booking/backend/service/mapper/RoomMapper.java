@@ -7,7 +7,8 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(uses = {
+@Mapper
+  (uses = {
   TypeOfRentMapper.class,
   EquipmentMapper.class,
   ReviewMapper.class,
@@ -15,13 +16,13 @@ import java.util.List;
 })
 public interface RoomMapper {
 
-  RoomDto fromEntity(RoomEntity entity);
-
-  RoomWithReviewsDto fromEntityWithReviews(RoomEntity entity);
-
-  RoomEntity toEntity(RoomDto dto);
-
-  List<RoomWithReviewsDto> fromEntitiesWithReviews(Iterable<RoomEntity> entities);
-
-  List<RoomDto> fromEntities(Iterable<RoomEntity> entities);
+//  RoomDto fromEntity(RoomEntity entity);
+//
+//  RoomWithReviewsDto fromEntityWithReviews(RoomEntity entity);
+//
+//  RoomEntity toEntity(RoomDto dto);
+//
+//  List<RoomWithReviewsDto> fromEntitiesWithReviews(Iterable<RoomEntity> entities);
+//
+//  List<RoomDto> fromEntities(Iterable<RoomEntity> entities);
 }
