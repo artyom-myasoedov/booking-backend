@@ -56,7 +56,7 @@ import java.util.List;
       attributeNodes = {
         @NamedAttributeNode("roomPhotoId"),
         @NamedAttributeNode("roomId"),
-        @NamedAttributeNode("photoUrl")
+        @NamedAttributeNode("photo")
       }
     ),
     @NamedSubgraph(

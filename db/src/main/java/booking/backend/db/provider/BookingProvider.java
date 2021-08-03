@@ -1,6 +1,5 @@
 package booking.backend.db.provider;
 
-import booking.backend.db.entity.AdminEntity;
 import booking.backend.db.entity.BookingEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,5 +17,4 @@ public interface BookingProvider {
   Optional<BookingEntity> findById(Integer id);
 
   Iterable<BookingEntity> findAll();
-
 }

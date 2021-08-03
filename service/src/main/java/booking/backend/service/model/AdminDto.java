@@ -6,7 +6,7 @@ public class AdminDto {
   private String firstName;
   private String lastName;
   private String password;
-  private String photoPath;
+  private byte[] photoPath;
 
   public Integer getId() {
     return id;
@@ -48,11 +48,11 @@ public class AdminDto {
     this.password = password;
   }
 
-  public String getPhotoPath() {
+  public byte[] getPhotoPath() {
     return photoPath;
   }
 
-  public void setPhotoPath(String photoPath) {
+  public void setPhotoPath(byte[] photoPath) {
     this.photoPath = photoPath;
   }
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
     @NamedAttributeNode("ratedEntityId"),
     @NamedAttributeNode("rating"),
     @NamedAttributeNode("description"),
-    @NamedAttributeNode(value = "authorId", subgraph = "author")
+    @NamedAttributeNode(value = "author", subgraph = "author")
   },
   subgraphs = {
     @NamedSubgraph(
