@@ -23,8 +23,8 @@ public class UserEntity {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "photo_path")
-  private String photoPath;
+  @Column(name = "photo")
+  private byte[] photo;
 
   @Column(name = "phone_number")
   private String phoneNumber;
@@ -75,12 +75,12 @@ public class UserEntity {
     this.password = password;
   }
 
-  public String getPhotoPath() {
-    return photoPath;
+  public byte[] getPhoto() {
+    return photo;
   }
 
-  public void setPhotoPath(String photoPath) {
-    this.photoPath = photoPath;
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
   }
 
   public String getPhoneNumber() {

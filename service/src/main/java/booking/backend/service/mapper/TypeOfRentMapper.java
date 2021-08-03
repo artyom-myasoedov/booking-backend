@@ -1,8 +1,6 @@
 package booking.backend.service.mapper;
 
-import booking.backend.db.entity.EquipmentEntity;
 import booking.backend.db.entity.TypeOfRentEntity;
-import booking.backend.service.model.EquipmentDto;
 import booking.backend.service.model.TypeOfRentDto;
 import org.mapstruct.Mapper;
 
@@ -15,5 +13,5 @@ public interface TypeOfRentMapper {
 
   TypeOfRentEntity toEntity(TypeOfRentDto dto);
 
-  List<TypeOfRentDto> fromEntitiesWithReviews(Iterable<TypeOfRentEntity> entities);
+  List<TypeOfRentDto> fromEntities(Iterable<TypeOfRentEntity> entities);
 }
