@@ -14,15 +14,15 @@ public class BookingEntity {
 
   @ManyToOne
   @JoinColumn(
-    name = "room_id",
-    referencedColumnName = "room_id"
+          name = "room_id",
+          referencedColumnName = "room_id"
   )
   private RoomEntity room;
 
   @ManyToOne
   @JoinColumn(
-    name = "tenant_id",
-    referencedColumnName = "user_id"
+          name = "tenant_id",
+          referencedColumnName = "user_id"
   )
   private UserEntity tenant;
 

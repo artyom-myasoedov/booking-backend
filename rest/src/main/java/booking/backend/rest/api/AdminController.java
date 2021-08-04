@@ -1,7 +1,5 @@
 package booking.backend.rest.api;
 
-import booking.backend.db.entity.AdminEntity;
-import booking.backend.db.repository.AdminRepository;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.model.AdminDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +13,26 @@ import java.util.stream.StreamSupport;
 @RequestMapping("/admin")
 public class AdminController {
   private final AdminService adminService;
+
   @Autowired
   public AdminController(AdminService adminService) {
     this.adminService = adminService;
   }
 
   @GetMapping
-  List<AdminDto> findUsers(){
+  List<AdminDto> findUsers() {
     return StreamSupport
-      .stream(adminService.findAll().spliterator(), false)
-      .collect(Collectors.toList());
+            .stream(adminService.findAll().spliterator(), false)
+            .collect(Collectors.toList());
   }
+
   @PostMapping
-  AdminDto createAdmin(@RequestBody AdminDto admin){
+  AdminDto createAdmin(@RequestBody AdminDto admin) {
     return adminService.createAdmin(admin);
   }
 
   @PutMapping("/{id}")
-  AdminDto updateAdmin(@RequestBody AdminDto admin, @PathVariable Integer id){
+  AdminDto updateAdmin(@RequestBody AdminDto admin, @PathVariable Integer id) {
     admin.setId(id);
     return adminService.updateAdmin(admin);
   }

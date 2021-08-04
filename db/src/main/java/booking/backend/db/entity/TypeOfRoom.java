@@ -17,10 +17,6 @@ public enum TypeOfRoom {
     this.id = id;
   }
 
-  public Integer getId() {
-    return id;
-  }
-
   public static Optional<TypeOfRoom> fromId(Integer id) {
     if (id == null) {
       return Optional.empty();
@@ -33,5 +29,9 @@ public enum TypeOfRoom {
     }
 
     return Optional.empty();
+  }
+
+  public Integer getId() {
+    return id;
   }
 }

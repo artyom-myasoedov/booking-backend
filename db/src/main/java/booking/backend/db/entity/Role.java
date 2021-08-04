@@ -13,10 +13,6 @@ public enum Role {
     this.id = id;
   }
 
-  public Integer getId() {
-    return id;
-  }
-
   public static Optional<Role> fromId(Integer id) {
     if (id == null) {
       return Optional.empty();
@@ -29,5 +25,9 @@ public enum Role {
     }
 
     return Optional.empty();
+  }
+
+  public Integer getId() {
+    return id;
   }
 }

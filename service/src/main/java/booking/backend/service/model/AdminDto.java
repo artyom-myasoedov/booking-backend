@@ -1,12 +1,22 @@
 package booking.backend.service.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AdminDto {
   private Integer id;
+
   private String username;
+
+  @JsonProperty("first_name")
   private String firstName;
+
+  @JsonProperty("last_name")
   private String lastName;
+
   private String password;
-  private String photoPath;
+
+  @JsonProperty("photo_path")
+  private byte[] photoPath;
 
   public Integer getId() {
     return id;
@@ -48,11 +58,11 @@ public class AdminDto {
     this.password = password;
   }
 
-  public String getPhotoPath() {
+  public byte[] getPhotoPath() {
     return photoPath;
   }
 
-  public void setPhotoPath(String photoPath) {
+  public void setPhotoPath(byte[] photoPath) {
     this.photoPath = photoPath;
   }
 }

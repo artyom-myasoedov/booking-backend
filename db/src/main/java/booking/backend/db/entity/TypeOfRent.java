@@ -18,14 +18,6 @@ public enum TypeOfRent {
     this.id = id;
   }
 
-  public Integer getNumberOfHours() {
-    return numberOfHours;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
   public static Optional<TypeOfRent> fromId(Integer id) {
     if (id == null) {
       return Optional.empty();
@@ -38,5 +30,13 @@ public enum TypeOfRent {
     }
 
     return Optional.empty();
+  }
+
+  public Integer getNumberOfHours() {
+    return numberOfHours;
+  }
+
+  public Integer getId() {
+    return id;
   }
 }

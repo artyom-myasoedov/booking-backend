@@ -12,10 +12,6 @@ public enum ReviewTarget {
     this.id = id;
   }
 
-  public Integer getId() {
-    return id;
-  }
-
   public static Optional<ReviewTarget> fromId(Integer id) {
     if (id == null) {
       return Optional.empty();
@@ -28,5 +24,9 @@ public enum ReviewTarget {
     }
 
     return Optional.empty();
+  }
+
+  public Integer getId() {
+    return id;
   }
 }

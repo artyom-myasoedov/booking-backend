@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EntityScan(basePackages = {
-  "booking.backend.db.entity",
-  "booking.backend.db.converter"
+        "booking.backend.db.entity",
+        "booking.backend.db.converter"
 })
 @EnableJpaRepositories(basePackages = "booking.backend.db.repository")
 @EnableTransactionManagement
