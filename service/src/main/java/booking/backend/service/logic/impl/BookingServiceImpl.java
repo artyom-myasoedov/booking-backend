@@ -2,9 +2,7 @@ package booking.backend.service.logic.impl;
 
 import booking.backend.db.provider.BookingProvider;
 import booking.backend.service.logic.BookingService;
-import booking.backend.service.mapper.AdminMapper;
 import booking.backend.service.mapper.BookingMapper;
-import booking.backend.service.model.AdminDto;
 import booking.backend.service.model.BookingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +25,11 @@ public class BookingServiceImpl implements BookingService {
   @Override
   public BookingDto createBooking(BookingDto bookingDto) {
     return
-      Optional.ofNullable(bookingDto)
-        .map(bookingMapper::toEntity)
-        .map(bookingProvider::save)
-        .map(bookingMapper::fromEntity)
-        .orElseThrow();
+            Optional.ofNullable(bookingDto)
+                    .map(bookingMapper::toEntity)
+                    .map(bookingProvider::save)
+                    .map(bookingMapper::fromEntity)
+                    .orElseThrow();
   }
 
   @Override

@@ -15,10 +15,6 @@ public enum RoomStatus {
     this.id = id;
   }
 
-  public Integer getId() {
-    return id;
-  }
-
   public static Optional<RoomStatus> fromId(Integer id) {
     if (id == null) {
       return Optional.empty();
@@ -31,6 +27,10 @@ public enum RoomStatus {
     }
 
     return Optional.empty();
+  }
+
+  public Integer getId() {
+    return id;
   }
 
 }

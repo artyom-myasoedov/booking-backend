@@ -1,18 +1,18 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.2'
-    id 'java'
+  id 'org.springframework.boot' version '2.5.2'
+  id 'java'
 }
 
 allprojects {
 
-    apply plugin: 'java'
+  apply plugin: 'java'
 
-    group 'booking-team'
-    version '1.0-SNAPSHOT'
+  group 'booking-team'
+  version '1.0-SNAPSHOT'
 
-    repositories {
-        mavenCentral()
-    }
+  repositories {
+    mavenCentral()
+  }
 
 //    dependencies {
 //        implementation("booking.backend.commons:commons")
@@ -20,6 +20,6 @@ allprojects {
 }
 
 dependencies {
-    implementation(project(':rest'))
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.2'
+  implementation(project(':rest'))
+  implementation 'org.springframework.boot:spring-boot-starter-web:2.5.2'
 }

@@ -11,13 +11,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-
 public class AdminProviderImpl implements AdminProvider {
 
   private final AdminRepository adminRepository;
 
   @Autowired
-
   public AdminProviderImpl(AdminRepository adminRepository) {
     this.adminRepository = adminRepository;
   }

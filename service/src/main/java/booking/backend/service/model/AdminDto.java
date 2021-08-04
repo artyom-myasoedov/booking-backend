@@ -1,11 +1,21 @@
 package booking.backend.service.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AdminDto {
   private Integer id;
+
   private String username;
+
+  @JsonProperty("first_name")
   private String firstName;
+
+  @JsonProperty("last_name")
   private String lastName;
+
   private String password;
+
+  @JsonProperty("photo_path")
   private byte[] photoPath;
 
   public Integer getId() {

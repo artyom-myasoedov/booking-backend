@@ -424,7 +424,7 @@ paths:
         - "application/x-www-form-urlencoded"
       produces:
         - "application/json"
-      parameters: []
+      parameters: [ ]
       responses:
         "200":
           description: "Successful operation"
@@ -542,31 +542,31 @@ paths:
         "405":
           description: "Invalid input"
   /typeOfRent/byRoomId:
-      get:
-        tags:
-          - "typeOfRent"
-        summary: "Returns a list of typeOfRent by room id"
-        description: "Returns list of typeOfRent"
-        operationId: "getTypeOfRentByRoomId"
-        consumes:
-          - "application/x-www-form-urlencoded"
-        produces:
-          - "application/json"
-        parameters:
-          - name: "roomId"
-            in: "query"
-            description: "room id"
-            required: true
-            type: "integer"
-        responses:
-          "200":
-            description: "Successful operation"
-            schema:
-              type: "array"
-              items:
-                $ref: "#/definitions/TypeOfRent"
-          "405":
-            description: "Invalid input"
+    get:
+      tags:
+        - "typeOfRent"
+      summary: "Returns a list of typeOfRent by room id"
+      description: "Returns list of typeOfRent"
+      operationId: "getTypeOfRentByRoomId"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "roomId"
+          in: "query"
+          description: "room id"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/TypeOfRent"
+        "405":
+          description: "Invalid input"
   /review/{reviewId}:
     get:
       tags:

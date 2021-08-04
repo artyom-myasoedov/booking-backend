@@ -4,5 +4,5 @@ import booking.backend.service.logic.EquipmentService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EquipmentServiceImpl implements EquipmentService{
+public class EquipmentServiceImpl implements EquipmentService {
 }

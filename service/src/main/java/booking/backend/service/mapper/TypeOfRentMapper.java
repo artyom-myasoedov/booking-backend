@@ -1,8 +1,6 @@
 package booking.backend.service.mapper;
 
-import booking.backend.db.entity.EquipmentEntity;
 import booking.backend.db.entity.TypeOfRentEntity;
-import booking.backend.service.model.EquipmentDto;
 import booking.backend.service.model.TypeOfRentDto;
 import org.mapstruct.Mapper;
 

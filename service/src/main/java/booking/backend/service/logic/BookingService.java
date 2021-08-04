@@ -1,6 +1,5 @@
 package booking.backend.service.logic;
 
-import booking.backend.service.model.AdminDto;
 import booking.backend.service.model.BookingDto;
 
 import java.util.List;

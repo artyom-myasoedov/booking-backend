@@ -66,13 +66,13 @@ ALTER TABLE booking.types_of_rent
     DROP COLUMN price;
 
 ALTER TABLE booking.types_of_rent
-RENAME COLUMN type_of_rent TO name_of_rent_type;
+    RENAME COLUMN type_of_rent TO name_of_rent_type;
 
 CREATE TABLE booking.rooms_types_of_rent
 (
-    room_id INTEGER NOT NULL REFERENCES booking.rooms (room_id) ON DELETE CASCADE,
+    room_id         INTEGER NOT NULL REFERENCES booking.rooms (room_id) ON DELETE CASCADE,
     type_of_rent_id INTEGER NOT NULL REFERENCES booking.types_of_rent (type_of_rent_id) ON DELETE CASCADE,
-    price INTEGER NOT NULL,
+    price           INTEGER NOT NULL,
     PRIMARY KEY (room_id, type_of_rent_id)
 );
 
