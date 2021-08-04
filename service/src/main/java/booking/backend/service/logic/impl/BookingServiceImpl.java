@@ -5,6 +5,7 @@ import booking.backend.service.logic.BookingService;
 import booking.backend.service.mapper.BookingMapper;
 import booking.backend.service.model.BookingDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,17 +39,23 @@ public class BookingServiceImpl implements BookingService {
   }
 
   @Override
-  public void deleteAdminById(Integer id) {
-    bookingProvider.deleteById(id);
-  }
-
-  @Override
-  public List<BookingDto> find(String search, Integer pageSize, Integer pageNumber) {
+  public BookingDto findById(Integer id) {
     return null;
   }
 
   @Override
-  public List<BookingDto> findAll(Iterable<BookingDto> bookings) {
+  public void deleteBookingById(Integer id) {
+    bookingProvider.deleteById(id);
+  }
+
+//  @Override
+  public List<BookingDto> find(String search, Integer pageSize, Integer pageNumber) {
+    return null;
+//    return bookingProvider.findBookings(null, null);
+  }
+
+  @Override
+  public List<BookingDto> findAll() {
     return bookingMapper.fromEntities(bookingProvider.findAll());
   }
 }

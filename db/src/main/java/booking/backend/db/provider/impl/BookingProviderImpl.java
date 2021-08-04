@@ -21,8 +21,11 @@ public class BookingProviderImpl implements BookingProvider {
   }
 
   @Override
-  public Page<BookingEntity> findUsers(String search, Pageable pageable) {
-    return null;
+  public Page<BookingEntity> findBookings(String search, Pageable pageable) {
+    if (search == null) {
+      return bookingRepository.findAll(pageable);
+    }
+    return bookingRepository.findBookings(search, pageable);
   }
 
   @Override

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface BookingProvider {
 
-  Page<BookingEntity> findUsers(String search, Pageable pageable);
+  Page<BookingEntity> findBookings(String search, Pageable pageable);
 
   BookingEntity save(BookingEntity bookingEntity);
 

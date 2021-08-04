@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface AdminProvider {
 
-  Page<AdminEntity> findUsers(String search, Pageable pageable);
+  Page<AdminEntity> findAdmins(String search, Pageable pageable);
 
   AdminEntity save(AdminEntity userEntity);
 

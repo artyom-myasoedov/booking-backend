@@ -9,9 +9,11 @@ public interface BookingService {
 
   BookingDto updateBooking(BookingDto bookingDto);
 
-  void deleteAdminById(Integer id);
+  BookingDto findById(Integer id);
+
+  void deleteBookingById(Integer id);
 
   List<BookingDto> find(String search, Integer pageSize, Integer pageNumber);
 
-  List<BookingDto> findAll(Iterable<BookingDto> bookings);
+  List<BookingDto> findAll();
 }
