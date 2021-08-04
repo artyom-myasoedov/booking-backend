@@ -1,8 +1,12 @@
 package booking.backend.rest.api;
 
+import booking.backend.db.entity.AdminEntity;
+import booking.backend.db.repository.AdminRepository;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.model.AdminDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,25 +24,26 @@ public class AdminController {
   }
 
   @GetMapping
-  List<AdminDto> findUsers() {
+  List<AdminDto> findAdmins(){
     return StreamSupport
-            .stream(adminService.findAll().spliterator(), false)
-            .collect(Collectors.toList());
+      .stream(adminService.findAll().spliterator(), false)
+      .collect(Collectors.toList());
   }
 
-  @PostMapping
-  AdminDto createAdmin(@RequestBody AdminDto admin) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.CREATED)
+  AdminDto addAdmin(@RequestBody AdminDto admin){
     return adminService.createAdmin(admin);
   }
 
-  @PutMapping("/{id}")
-  AdminDto updateAdmin(@RequestBody AdminDto admin, @PathVariable Integer id) {
-    admin.setId(id);
+  @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.OK)
+  AdminDto updateAdmin(@RequestBody AdminDto admin){
     return adminService.updateAdmin(admin);
   }
 
   @DeleteMapping("/{id}")
-  void deleteUser(@PathVariable int id) {
+  void deleteById(@PathVariable int id) {
     adminService.deleteAdminById(id);
   }
 
