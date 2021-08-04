@@ -13,5 +13,5 @@ public interface TypeOfRentMapper {
 
   TypeOfRentEntity toEntity(TypeOfRentDto dto);
 
-  List<TypeOfRentDto> fromEntitiesWithReviews(Iterable<TypeOfRentEntity> entities);
+  List<TypeOfRentDto> fromEntities(Iterable<TypeOfRentEntity> entities);
 }

@@ -13,5 +13,5 @@ public interface EquipmentMapper {
 
   EquipmentEntity toEntity(EquipmentDto dto);
 
-  List<EquipmentDto> fromEntitiesWithReviews(Iterable<EquipmentEntity> entities);
+  List<EquipmentDto> fromEntities(Iterable<EquipmentEntity> entities);
 }

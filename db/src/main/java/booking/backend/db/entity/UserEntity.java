@@ -24,7 +24,7 @@ public class UserEntity {
   private String password;
 
   @Column(name = "photo")
-  private byte[] photoPath;
+  private byte[] photo;
 
   @Column(name = "phone_number")
   private String phoneNumber;
@@ -75,12 +75,12 @@ public class UserEntity {
     this.password = password;
   }
 
-  public byte[] getPhotoPath() {
-    return photoPath;
+  public byte[] getPhoto() {
+    return photo;
   }
 
-  public void setPhotoPath(byte[] photoPath) {
-    this.photoPath = photoPath;
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
   }
 
   public String getPhoneNumber() {
