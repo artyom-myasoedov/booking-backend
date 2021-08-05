@@ -1,7 +1,15 @@
 package booking.backend.service.logic.impl;
 
+import booking.backend.db.repository.EquipmentRepository;
+import booking.backend.db.repository.RoomRepository;
 import booking.backend.service.logic.EquipmentService;
+import booking.backend.service.mapper.EquipmentMapper;
+import booking.backend.service.mapper.RoomMapper;
+import booking.backend.service.model.EquipmentDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EquipmentServiceImpl implements EquipmentService{

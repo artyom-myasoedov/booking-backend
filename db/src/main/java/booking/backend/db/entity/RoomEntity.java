@@ -88,8 +88,8 @@ public class RoomEntity {
 
   @ManyToOne
   @JoinColumn(
-          name = "landlord_id",
-          referencedColumnName = "user_id"
+    name = "landlord_id",
+    referencedColumnName = "user_id"
   )
   private UserEntity landlord;
 
@@ -107,29 +107,29 @@ public class RoomEntity {
 
   @OneToMany
   @JoinColumn(
-          name = "room_id",
-          referencedColumnName = "room_id"
+    name = "room_id",
+    referencedColumnName = "room_id"
   )
   private List<TypeOfRentEntity> typesOfRent;
 
   @OneToMany
   @JoinColumn(
-          name = "rated_entity_id",
-          referencedColumnName = "room_id"
+    name = "rated_entity_id",
+    referencedColumnName = "room_id"
   )
   private List<ReviewEntity> reviews;
 
   @OneToMany
   @JoinColumn(
-          name = "room_id",
-          referencedColumnName = "room_id"
+    name = "room_id",
+    referencedColumnName = "room_id"
   )
-  private List<PhotoEntity> photoUrls;
+  private List<PhotoEntity> photos;
 
   @OneToMany
   @JoinColumn(
-          name = "room_id",
-          referencedColumnName = "room_id"
+    name = "room_id",
+    referencedColumnName = "room_id"
   )
   private List<EquipmentEntity> equipments;
 
@@ -221,12 +221,12 @@ public class RoomEntity {
     this.reviews = reviews;
   }
 
-  public List<PhotoEntity> getPhotoUrls() {
-    return photoUrls;
+  public List<PhotoEntity> getPhotos() {
+    return photos;
   }
 
-  public void setPhotoUrls(List<PhotoEntity> photoUrls) {
-    this.photoUrls = photoUrls;
+  public void setPhotos(List<PhotoEntity> photos) {
+    this.photos = photos;
   }
 
   public List<EquipmentEntity> getEquipments() {
