@@ -1,8 +1,8 @@
 package booking.backend.service.logic;
 
+import booking.backend.service.model.EquipmentCreateDto;
 import booking.backend.service.model.EquipmentDto;
-
-import java.util.List;
+import booking.backend.service.model.PageDto;
 
 public interface EquipmentService {
 
@@ -10,10 +10,10 @@ public interface EquipmentService {
 
   void deleteById(Integer equipmentId);
 
-  List<EquipmentDto> findByRoomId(Integer roomId);
+  PageDto<EquipmentDto> findByRoomId(Integer roomId, Integer pageSize, Integer pageNumber);
 
   EquipmentDto updateEquipment(EquipmentDto equipment);
 
-  EquipmentDto addEquipment(EquipmentDto equipment);
+  EquipmentDto addEquipment(EquipmentCreateDto equipment);
 
 }

@@ -22,15 +22,15 @@ public class TypeOfRentController {
 
   @GetMapping
   public TypeOfRentDto getTypeOfRent(
-    @RequestParam Integer typeOfRentId,
-    @RequestParam Integer roomId) {
+    @RequestParam(name = "type_of_rent_id") Integer typeOfRentId,
+    @RequestParam(name = "room_id") Integer roomId) {
     return typeOfRentService.findById(typeOfRentId, roomId);
   }
 
   @DeleteMapping
   public void deleteTypeOfRent(
-    @RequestParam Integer typeOfRentId,
-    @RequestParam Integer roomId) {
+    @RequestParam(name = "type_of_rent_id") Integer typeOfRentId,
+    @RequestParam(name = "room_id") Integer roomId) {
     typeOfRentService.deleteById(typeOfRentId, roomId);
   }
 
