@@ -1,35 +1,15 @@
 package booking.backend.service.model;
 
 
-public class EquipmentDto {
+public class EquipmentDto extends EquipmentCreateDto {
 
-  private Integer roomId;
+  private Integer equipmentId;
 
-  private String equipmentName;
-
-  private String description;
-
-  public Integer getRoomId() {
-    return roomId;
+  public Integer getEquipmentId() {
+    return equipmentId;
   }
 
-  public void setRoomId(Integer roomId) {
-    this.roomId = roomId;
-  }
-
-  public String getEquipmentName() {
-    return equipmentName;
-  }
-
-  public void setEquipmentName(String equipmentName) {
-    this.equipmentName = equipmentName;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
+  public void setEquipmentId(Integer equipmentId) {
+    this.equipmentId = equipmentId;
   }
 }

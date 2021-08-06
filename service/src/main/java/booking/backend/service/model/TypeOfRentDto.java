@@ -6,18 +6,18 @@ import java.math.BigDecimal;
 
 public class TypeOfRentDto {
 
-  private Integer room_id;
+  private Integer roomId;
 
   private TypeOfRent typeOfRent;
 
   private BigDecimal price;
 
-  public Integer getRoom_id() {
-    return room_id;
+  public Integer getRoomId() {
+    return roomId;
   }
 
-  public void setRoom_id(Integer room_id) {
-    this.room_id = room_id;
+  public void setRoomId(Integer roomId) {
+    this.roomId = roomId;
   }
 
   public TypeOfRent getTypeOfRent() {

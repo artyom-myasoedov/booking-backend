@@ -15,7 +15,7 @@ allprojects {
   }
 
 //    dependencies {
-//        implementation("booking.backend.commons:commons")
+//        implementation("booking.backend:commons")
 //    }
 }
 

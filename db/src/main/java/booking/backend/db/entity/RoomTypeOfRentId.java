@@ -11,6 +11,15 @@ public class RoomTypeOfRentId implements Serializable {
   @Column(name = "room_id")
   private Integer roomId;
 
+  public RoomTypeOfRentId(TypeOfRent typeOfRentId, Integer roomId) {
+    this.typeOfRentId = typeOfRentId;
+    this.roomId = roomId;
+  }
+
+  public RoomTypeOfRentId() {
+
+  }
+
   public TypeOfRent getTypeOfRentId() {
     return typeOfRentId;
   }

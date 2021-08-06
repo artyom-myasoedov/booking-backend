@@ -1,51 +1,77 @@
 package booking.backend.service.logic.impl;
 
-import booking.backend.db.repository.EquipmentRepository;
-import booking.backend.db.repository.RoomRepository;
+import booking.backend.db.provider.EquipmentProvider;
 import booking.backend.service.logic.EquipmentService;
 import booking.backend.service.mapper.EquipmentMapper;
-import booking.backend.service.mapper.RoomMapper;
+import booking.backend.service.model.EquipmentCreateDto;
 import booking.backend.service.model.EquipmentDto;
+import booking.backend.service.model.ImmutablePageDto;
+import booking.backend.service.model.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
-public class EquipmentServiceImpl implements EquipmentService{
+@Transactional
+public class EquipmentServiceImpl implements EquipmentService {
 
   private final EquipmentMapper equipmentMapper;
 
-  private final EquipmentRepository equipmentRepository;
+  private final EquipmentProvider equipmentProvider;
 
   @Autowired
-  public EquipmentServiceImpl(EquipmentMapper equipmentMapper, EquipmentRepository equipmentRepository) {
+  public EquipmentServiceImpl(EquipmentMapper equipmentMapper, EquipmentProvider equipmentRepository) {
     this.equipmentMapper = equipmentMapper;
-    this.equipmentRepository = equipmentRepository;
+    this.equipmentProvider = equipmentRepository;
   }
 
   @Override
   public EquipmentDto findById(Integer equipmentId) {
-    return null;
+    return equipmentProvider.findById(equipmentId)
+      .map(equipmentMapper::fromEntity)
+      .orElse(null);
   }
 
   @Override
   public void deleteById(Integer equipmentId) {
-
+    equipmentProvider.deleteById(equipmentId);
   }
 
   @Override
-  public List<EquipmentDto> findByRoomId(Integer roomId) {
-    return null;
+  public PageDto<EquipmentDto> findByRoomId(Integer roomId, Integer pageSize, Integer pageNumber) {
+    var values = equipmentProvider
+      .findByRoomId(roomId,
+        Pageable.ofSize(pageSize).withPage(pageNumber)).map(equipmentMapper::fromEntity);
+
+    return ImmutablePageDto.<EquipmentDto>builder()
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
   }
 
   @Override
   public EquipmentDto updateEquipment(EquipmentDto equipment) {
-    return null;
+    var equipmentEntity = equipmentProvider.findById(equipment.getEquipmentId())
+      .orElseThrow(() -> new IllegalArgumentException("Equipment not found"));
+    //() -> new EntityNotFoundException(equipment.getEquipmentId(), "Equipment")
+
+    return Optional.ofNullable(equipment)
+      .map(equipmentMapper::toEntity)
+      .map(equipmentProvider::save)
+      .map(equipmentMapper::fromEntity)
+      .orElseThrow();
   }
 
   @Override
-  public EquipmentDto addEquipment(EquipmentDto equipment) {
-    return null;
+  public EquipmentDto addEquipment(EquipmentCreateDto equipment) {
+    return Optional.ofNullable(equipment)
+      .map(equipmentMapper::toEntity)
+      .map(equipmentProvider::save)
+      .map(equipmentMapper::fromEntity)
+      .orElseThrow();
   }
 }

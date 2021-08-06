@@ -404,13 +404,28 @@ paths:
           description: "room id"
           required: true
           type: "integer"
+        - name: "pageSize"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "pageNumber"
+          in: "query"
+          required: false
+          type: "integer"
       responses:
         "200":
           description: "Successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Equipment"
+            type: "object"
+            properties:
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Equipment"
+              pageNumber:
+                type: "integer"
+              totalPages:
+                type: "integer"
         "405":
           description: "Invalid input"
   /equipment/getAllEquipments:
@@ -429,9 +444,16 @@ paths:
         "200":
           description: "Successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Equipment"
+            type: "object"
+            properties:
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Equipment"
+              pageNumber:
+                type: "integer"
+              totalPages:
+                type: "integer"
         "405":
           description: "Invalid input"
   /photo/{photoId}:
@@ -1149,13 +1171,166 @@ paths:
           description: "landlord id"
           required: true
           type: "integer"
+        - name: "pageSize"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "pageNumber"
+          in: "query"
+          required: false
+          type: "integer"
       responses:
         "200":
           description: "Successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Room"
+            type: "object"
+            properties:
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RoomWithoutReviews"
+              pageNumber:
+                type: "integer"
+              totalPages:
+                type: "integer"
+        "405":
+          description: "Invalid input"
+  /room/byCriteria:
+    get:
+      tags:
+        - "room"
+      summary: "Returns a rooms by criteria"
+      description: "Returns list of rooms"
+      operationId: "getRoomByCriteria"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "minSquare"
+          in: "query"
+          description: "Min square of room"
+          required: false
+          type: "integer"
+        - name: "maxSquare"
+          in: "query"
+          description: "Max square of room"
+          required: false
+          type: "integer"
+        - name: "minNumberOfPeople"
+          in: "query"
+          description: "Min number of people in room"
+          required: false
+          type: "integer"
+        - name: "maxNumberOfPeople"
+          in: "query"
+          description: "Max number of people in room"
+          required: false
+          type: "integer"
+        - name: "minRentalPeriod"
+          in: "query"
+          description: "Min rental period in hours"
+          required: false
+          type: "integer"
+        - name: "typesOfRent"
+          in: "query"
+          description: "Types of rent"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+            enum:
+              - "BY_HOUR"
+              - "BY_DAY"
+              - "BY_WEEK"
+              - "BY_MONTH"
+        - name: "typesOfRoom"
+          in: "query"
+          description: "Types of room"
+          required: false
+          type: "array"
+          items:
+            type: "string"
+            enum:
+              - "CLASS"
+              - "THEATRE"
+              - "ROUND_TABLE"
+              - "CONVERSATION"
+        - name: "minPrice"
+          in: "query"
+          description: "Min price"
+          required: false
+          type: "number"
+        - name: "maxPrice"
+          in: "query"
+          description: "Max price"
+          required: false
+          type: "number"
+        - name: "addressLike"
+          in: "query"
+          description: "String which contained in founded address"
+          required: false
+          type: "string"
+        - name: "landlordUsernameLike"
+          in: "query"
+          description: "String which contained in founded landlord username"
+          required: false
+          type: "string"
+        - name: "minRating"
+          in: "query"
+          description: "Min rating"
+          required: false
+          type: "number"
+        - name: "startOfBooking"
+          in: "query"
+          description: "Date of start booking"
+          required: false
+          type: "string"
+          format: "date-time"
+        - name: "endOfBooking"
+          in: "query"
+          description: "Date of end booking"
+          required: false
+          type: "string"
+          format: "date-time"
+        - name: "sortOrder"
+          in: "query"
+          required: false
+          type: "string"
+          enum:
+            - "ASC"
+            - "DESC"
+        - name: "sortBy"
+          in: "query"
+          required: false
+          type: "string"
+          enum:
+            - "rating"
+            - "square"
+            - "capacity"
+            - "landlordRating"
+        - name: "pageSize"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "pageNumber"
+          in: "query"
+          required: false
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "object"
+            properties:
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RoomWithoutReviews"
+              pageNumber:
+                type: "integer"
+              totalPages:
+                type: "integer"
         "405":
           description: "Invalid input"
   /room/getAllrooms:
@@ -1169,14 +1344,29 @@ paths:
         - "application/x-www-form-urlencoded"
       produces:
         - "application/json"
-      parameters: [ ]
+      parameters:
+        - name: "pageSize"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "pageNumber"
+          in: "query"
+          required: false
+          type: "integer"
       responses:
         "200":
           description: "Successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Room"
+            type: "object"
+            properties:
+              items:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RoomWithoutReviews"
+              pageNumber:
+                type: "integer"
+              totalPages:
+                type: "integer"
         "405":
           description: "Invalid input"
 definitions:
@@ -1337,17 +1527,19 @@ definitions:
   RoomWithoutReviews:
     type: "object"
     properties:
-      id:
+      roomId:
         type: "integer"
         format: "int64"
-      size:
+      square:
         type: "integer"
         format: "int64"
       landlord:
         $ref: "#/definitions/UserForFront"
       typeOfRoom:
         type: "string"
-      numberOfPeople:
+      rating:
+        type: "number"
+      capacity:
         type: "integer"
         format: "int64"
       status:
@@ -1388,6 +1580,12 @@ definitions:
   Equipment:
     type: "object"
     properties:
+      roomId:
+        type: "integer"
+        format: "int64"
+      equipmentId:
+        type: "integer"
+        format: "int64"
       name:
         type: "string"
       description:

@@ -1,52 +1,69 @@
 package booking.backend.service.logic.impl;
 
-import booking.backend.db.repository.PhotoRepository;
-import booking.backend.db.repository.RoomRepository;
+import booking.backend.db.provider.PhotoProvider;
 import booking.backend.service.logic.PhotoService;
 import booking.backend.service.mapper.PhotoMapper;
-import booking.backend.service.mapper.RoomMapper;
 import booking.backend.service.model.PhotoCreateDto;
 import booking.backend.service.model.PhotoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
+@Transactional
 public class PhotoServiceImpl implements PhotoService {
 
   private final PhotoMapper photoMapper;
 
-  private final PhotoRepository photoRepository;
+  private final PhotoProvider photoProvider;
 
   @Autowired
-  public PhotoServiceImpl(PhotoMapper photoMapper, PhotoRepository photoRepository) {
+  public PhotoServiceImpl(PhotoMapper photoMapper, PhotoProvider photoProvider) {
     this.photoMapper = photoMapper;
-    this.photoRepository = photoRepository;
+    this.photoProvider = photoProvider;
   }
 
   @Override
   public List<PhotoDto> findByRoomId(Integer roomId) {
-    return null;
+    return photoMapper.fromEntities(
+      photoProvider.findByRoomId(roomId));
   }
 
   @Override
   public PhotoDto findById(Integer photoId) {
-    return null;
+    return photoProvider.findById(photoId)
+      .map(photoMapper::fromEntity)
+      .orElse(null);
   }
 
   @Override
   public void deleteById(Integer photoId) {
-
+    photoProvider.deleteById(photoId);
   }
 
   @Override
   public PhotoDto updatePhoto(PhotoDto photo) {
-    return null;
+    var photoEntity = photoProvider.findById(photo.getRoomPhotoId())
+      .orElseThrow(() -> new IllegalArgumentException("Photo not found"));
+    //() -> new EntityNotFoundException(equipment.getEquipmentId(), "Equipment")
+
+    return Optional.of(photo)
+      .map(photoMapper::toEntity)
+      .map(photoProvider::save)
+      .map(photoMapper::fromEntity)
+      .orElseThrow();
   }
 
   @Override
   public PhotoDto addPhoto(PhotoCreateDto photo) {
-    return null;
+    return Optional.ofNullable(photo)
+      .map(photoMapper::toEntity)
+      .map(photoProvider::save)
+      .map(photoMapper::fromEntity)
+      .orElseThrow();
   }
 }
