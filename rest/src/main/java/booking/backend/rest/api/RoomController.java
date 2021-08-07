@@ -51,14 +51,17 @@ public class RoomController {
   @GetMapping("/byLandlordId")
   public PageDto<RoomDto> findByLandlordId(
     @RequestParam Integer landlordId,
-    @RequestParam Integer pageSize,
-    @RequestParam Integer pageNumber) {
+    @RequestParam(defaultValue = "10") Integer pageSize,
+    @RequestParam(defaultValue = "0") Integer pageNumber) {
     return roomService.findByLandlordId(landlordId, pageSize, pageNumber);
   }
 
   @GetMapping("/getAllRooms")
-  public PageDto<RoomDto> findAll() {
-    return roomService.findAll();
+  public PageDto<RoomDto> findAll(
+    @RequestParam(defaultValue = "10") Integer pageSize,
+    @RequestParam(defaultValue = "0") Integer pageNumber
+  ) {
+    return roomService.findAll(pageSize, pageNumber);
   }
 
   @GetMapping("/byCriteria")

@@ -16,7 +16,7 @@ public interface RoomProvider {
 
   void deleteById(Integer roomId);
 
-  Page<RoomEntity> findAll();
+  Page<RoomEntity> findAll(Pageable pageable);
 
   RoomEntity save(RoomEntity roomEntity);
 

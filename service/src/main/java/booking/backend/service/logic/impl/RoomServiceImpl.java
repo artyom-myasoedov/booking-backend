@@ -77,8 +77,16 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
-  public PageDto<RoomDto> findAll() {
-    return null;
+  public PageDto<RoomDto> findAll(Integer pageSize, Integer pageNumber) {
+    var values = roomProvider
+      .findAll(
+        Pageable.ofSize(pageSize).withPage(pageNumber)).map(roomMapper::fromEntity);
+
+    return ImmutablePageDto.<RoomDto>builder()
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
   }
 
   @Override

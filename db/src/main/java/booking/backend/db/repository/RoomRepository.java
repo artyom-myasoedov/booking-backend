@@ -13,5 +13,13 @@ import java.util.Optional;
 @Repository
 public interface RoomRepository extends CrudRepository<RoomEntity, Integer>, RoomCustomRepository {
 
+  Optional<RoomEntity> findById(Integer roomId);
+
+  Page<RoomEntity> findByLandlord_Id(Integer id, Pageable pageable);
+
+  Page<RoomEntity> findAll(Pageable pageable);
+
+
+
 
 }

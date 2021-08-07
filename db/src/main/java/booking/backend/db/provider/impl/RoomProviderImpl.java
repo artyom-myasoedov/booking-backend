@@ -35,8 +35,8 @@ public class RoomProviderImpl implements RoomProvider {
   }
 
   @Override
-  public Page<RoomEntity> findAll() {
-    return null;
+  public Page<RoomEntity> findAll(Pageable pageable) {
+    return roomRepository.findAll(pageable);
   }
 
   @Override
@@ -45,8 +45,8 @@ public class RoomProviderImpl implements RoomProvider {
   }
 
   @Override
-  public Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable withPage) {
-    return null;
+  public Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable pageable) {
+    return roomRepository.findByLandlord_Id(landlordId, pageable);
   }
 
   @Override

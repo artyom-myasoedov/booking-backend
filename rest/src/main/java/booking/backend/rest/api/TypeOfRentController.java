@@ -22,16 +22,16 @@ public class TypeOfRentController {
 
   @GetMapping
   public TypeOfRentDto getTypeOfRent(
-    @RequestParam(name = "type_of_rent_id") Integer typeOfRentId,
-    @RequestParam(name = "room_id") Integer roomId) {
-    return typeOfRentService.findById(typeOfRentId, roomId);
+    @RequestParam Integer typeOfRent,
+    @RequestParam Integer roomId) {
+    return typeOfRentService.findById(typeOfRent, roomId);
   }
 
   @DeleteMapping
   public void deleteTypeOfRent(
-    @RequestParam(name = "type_of_rent_id") Integer typeOfRentId,
-    @RequestParam(name = "room_id") Integer roomId) {
-    typeOfRentService.deleteById(typeOfRentId, roomId);
+    @RequestParam Integer typeOfRent,
+    @RequestParam Integer roomId) {
+    typeOfRentService.deleteById(typeOfRent, roomId);
   }
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

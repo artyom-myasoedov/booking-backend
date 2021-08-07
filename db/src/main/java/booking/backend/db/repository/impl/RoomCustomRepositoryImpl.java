@@ -11,12 +11,29 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class RoomCustomRepositoryImpl implements RoomCustomRepository {
 
   @PersistenceContext
   private EntityManager entityManager;
 
+
+  @Override
+  public Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable) {
+    return null;
+  }
+
+  @Override
+  public Optional<RoomEntity> findByRoomId(Integer roomId) {
+
+    return null;
+  }
+
+  @Override
+  public Page<RoomEntity> findAllRooms(Pageable pageable) {
+    return null;
+  }
 
   @Override
   public Page<RoomEntity> findByCriteria(
