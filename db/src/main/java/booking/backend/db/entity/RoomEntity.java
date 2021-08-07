@@ -49,7 +49,7 @@ import java.util.Set;
         @NamedAttributeNode("username"),
         @NamedAttributeNode("firstName"),
         @NamedAttributeNode("lastName"),
-        @NamedAttributeNode("photoPath"),
+        @NamedAttributeNode("photo"),
         @NamedAttributeNode("phoneNumber"),
         @NamedAttributeNode("email")
       }
