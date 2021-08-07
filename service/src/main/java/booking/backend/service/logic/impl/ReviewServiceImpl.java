@@ -38,6 +38,11 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
+  public ReviewDto findById(Integer id) {
+    return null;
+  }
+
+  @Override
   public List<ReviewDto> find(String search, Integer pageSize, Integer pageNumber) {
     return null;
   }

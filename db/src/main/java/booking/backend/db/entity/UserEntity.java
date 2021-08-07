@@ -1,5 +1,8 @@
 package booking.backend.db.entity;
 
+
+import booking.backend.commons.Role;
+
 import javax.persistence.*;
 
 @Table(schema = "booking", name = "users")

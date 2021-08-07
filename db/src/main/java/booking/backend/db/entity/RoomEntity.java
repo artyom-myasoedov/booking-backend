@@ -1,8 +1,5 @@
 package booking.backend.db.entity;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +46,7 @@ import java.util.Set;
         @NamedAttributeNode("username"),
         @NamedAttributeNode("firstName"),
         @NamedAttributeNode("lastName"),
-        @NamedAttributeNode("photoPath"),
+        @NamedAttributeNode("photo"),
         @NamedAttributeNode("phoneNumber"),
         @NamedAttributeNode("email")
       }

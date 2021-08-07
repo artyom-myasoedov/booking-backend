@@ -19,7 +19,7 @@ import javax.persistence.*;
                                 @NamedAttributeNode("username"),
                                 @NamedAttributeNode("firstName"),
                                 @NamedAttributeNode("lastName"),
-                                @NamedAttributeNode("photoPath"),
+                                @NamedAttributeNode("photo"),
                                 @NamedAttributeNode("role"),
                                 @NamedAttributeNode("phoneNumber"),
                                 @NamedAttributeNode("email")

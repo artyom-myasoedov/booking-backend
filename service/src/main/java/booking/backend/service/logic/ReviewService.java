@@ -12,6 +12,8 @@ public interface ReviewService {
 
   void deleteReviewById(int id);
 
+  ReviewDto findById(Integer id);
+
   List<ReviewDto> find(String search, Integer pageSize, Integer pageNumber);
 
   List<ReviewDto> findAll();

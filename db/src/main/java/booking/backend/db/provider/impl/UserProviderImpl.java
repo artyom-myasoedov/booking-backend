@@ -3,6 +3,8 @@ package booking.backend.db.provider.impl;
 import booking.backend.db.entity.UserEntity;
 import booking.backend.db.provider.UserProvider;
 import booking.backend.db.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 @Component
 public class UserProviderImpl implements UserProvider {
+  private static final Logger logger = LoggerFactory.getLogger(UserProviderImpl.class);
+
   private final UserRepository userRepository;
 
   @Autowired
