@@ -11,6 +11,8 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
+import java.util.List;
+
 @Mapper
   (uses = {
     TypeOfRentMapper.class,

@@ -7,16 +7,16 @@ allprojects {
 
   apply plugin: 'java'
 
-  group 'booking-team'
+  group 'booking.backend'
   version '1.0-SNAPSHOT'
 
   repositories {
     mavenCentral()
   }
 
-//    dependencies {
-//        implementation("booking.backend:commons")
-//    }
+  dependencies {
+    implementation("booking.backend.commons:commons")
+  }
 }
 
 dependencies {

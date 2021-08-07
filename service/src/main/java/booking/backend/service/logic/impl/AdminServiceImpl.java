@@ -4,6 +4,8 @@ import booking.backend.db.provider.AdminProvider;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.mapper.AdminMapper;
 import booking.backend.service.model.AdminDto;
+import booking.backend.service.model.ImmutablePageDto;
+import booking.backend.service.model.PageDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -41,19 +43,20 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
-  public List<AdminDto> find(String search, Integer pageSize, Integer pageNumber) {
-//    var values =  adminProvider.findAdmins(
-//      search,
-//      Pageable.ofSize(pageSize).
-//        withPage(pageNumber)
-//      )
-//      .map(AdminMapper::fromEntity);
-//    return ImmutablePageDto.<UserDto>builder()
-//      .pageNumber(pageNumber)
-//      .totalPages(values.getTotalPages())
-//      .items(values.getContent())
-//      .build();
-    return null;
+  public PageDto<AdminDto> find(String search, Integer pageSize, Integer pageNumber) {
+    var values = adminProvider.findAdmins(
+            search,
+            Pageable
+                    .ofSize(pageSize)
+                    .withPage(pageNumber)
+    )
+            .map(adminMapper::fromEntity);
+
+    return ImmutablePageDto.<AdminDto>builder()
+            .pageNumber(pageNumber)
+            .totalPages(values.getTotalPages())
+            .items(values.getContent())
+            .build();
   }
 
   @Override

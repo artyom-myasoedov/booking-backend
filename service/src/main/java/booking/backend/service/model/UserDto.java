@@ -1,6 +1,7 @@
 package booking.backend.service.model;
 
-import booking.backend.db.entity.Role;
+
+import booking.backend.commons.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDto {
@@ -17,7 +18,7 @@ public class UserDto {
   private String lastName;
 
   @JsonProperty("photo")
-  private byte[] photoPath;
+  private byte[] photo;
 
   @JsonProperty("phone_number")
   private String phoneNumber;
@@ -60,12 +61,12 @@ public class UserDto {
     this.lastName = lastName;
   }
 
-  public byte[] getPhotoPath() {
-    return photoPath;
+  public byte[] getPhoto() {
+    return photo;
   }
 
-  public void setPhotoPath(byte[] photoPath) {
-    this.photoPath = photoPath;
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
   }
 
   public String getPhoneNumber() {
