@@ -29,6 +29,14 @@ public class RoomCreateDto {
 
   private List<PhotoDto> photos;
 
+  public List<TypeOfRentDto> getTypesOfRent() {
+    return typesOfRent;
+  }
+
+  public void setTypesOfRent(List<TypeOfRentDto> typesOfRent) {
+    this.typesOfRent = typesOfRent;
+  }
+
   public Integer getSquare() {
     return square;
   }
@@ -91,14 +99,6 @@ public class RoomCreateDto {
 
   public void setEquipments(List<EquipmentDto> equipments) {
     this.equipments = equipments;
-  }
-
-  public List<TypeOfRentDto> getTypesOfRent() {
-    return typesOfRent;
-  }
-
-  public void setTypesOfRent(List<TypeOfRentDto> typesOfRent) {
-    this.typesOfRent = typesOfRent;
   }
 
   public List<PhotoDto> getPhotos() {
