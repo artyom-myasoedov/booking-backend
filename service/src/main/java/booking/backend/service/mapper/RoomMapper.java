@@ -11,27 +11,23 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-import java.util.List;
-
 @Mapper
   (uses = {
-    TypeOfRentMapper.class,
     EquipmentMapper.class,
     ReviewMapper.class,
     UserMapper.class,
-    PhotoMapper.class
+    PhotoMapper.class,
+    TypeOfRentMapper.class
   })
 public interface RoomMapper {
 
   @Named("without-reviews")
-  @Mapping(target = "typesOfRent", source = "entity.typesOfRent")
   RoomDto fromEntity(RoomEntity entity);
 
   @Named("with-reviews")
   RoomWithReviewsDto fromEntityWithReviews(RoomEntity entity);
 
   @Mapping(target = "reviews", ignore = true)
-  @Mapping(target = "typesOfRent", source = "typesOfRent")
   RoomEntity toEntity(RoomDto dto);
 
   @Mapping(target = "id", ignore = true)

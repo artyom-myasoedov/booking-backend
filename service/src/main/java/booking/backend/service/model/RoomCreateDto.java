@@ -4,7 +4,6 @@ import booking.backend.db.entity.TypeOfRoom;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-import java.util.Set;
 
 public class RoomCreateDto {
 
@@ -26,15 +25,15 @@ public class RoomCreateDto {
 
   private List<EquipmentDto> equipments;
 
-  private Set<TypeOfRentDto> typesOfRent;
+  private List<TypeOfRentDto> typesOfRent;
 
   private List<PhotoDto> photos;
 
-  public Set<TypeOfRentDto> getTypesOfRent() {
+  public List<TypeOfRentDto> getTypesOfRent() {
     return typesOfRent;
   }
 
-  public void setTypesOfRent(Set<TypeOfRentDto> typesOfRent) {
+  public void setTypesOfRent(List<TypeOfRentDto> typesOfRent) {
     this.typesOfRent = typesOfRent;
   }
 

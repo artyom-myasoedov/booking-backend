@@ -4,7 +4,6 @@ package booking.backend.db.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @NamedEntityGraph(
   name = "room-with-reviews",
@@ -117,7 +116,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
-  private Set<TypeOfRentEntity> typesOfRent;
+  private List<TypeOfRentEntity> typesOfRent;
 
   @OneToMany
   @JoinColumn(
@@ -212,11 +211,11 @@ public class RoomEntity {
     this.minRentalPeriod = minRentalPeriod;
   }
 
-  public Set<TypeOfRentEntity> getTypeOfRents() {
+  public List<TypeOfRentEntity> getTypesOfRent() {
     return typesOfRent;
   }
 
-  public void setTypeOfRents(Set<TypeOfRentEntity> typeOfRents) {
+  public void setTypesOfRent(List<TypeOfRentEntity> typeOfRents) {
     this.typesOfRent = typeOfRents;
   }
 
