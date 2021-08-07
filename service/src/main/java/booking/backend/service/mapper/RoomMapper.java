@@ -11,15 +11,13 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-import java.util.List;
-
 @Mapper
   (uses = {
-    TypeOfRentMapper.class,
     EquipmentMapper.class,
     ReviewMapper.class,
     UserMapper.class,
-    PhotoMapper.class
+    PhotoMapper.class,
+    TypeOfRentMapper.class
   })
 public interface RoomMapper {
 
