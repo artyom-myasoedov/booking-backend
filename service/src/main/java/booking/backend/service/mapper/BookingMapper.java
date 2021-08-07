@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper(uses = {UserMapper.class, RoomMapper.class})
 public interface BookingMapper {
 
-  @Mapping(target = "room.id", source = "room.id")
-  @Mapping(target = "tenant.id", source = "tenant.id")
-  BookingDto fromEntity(BookingEntity adminEntity);
+//  @Mapping(target = "room.id", source = "room.id")
+//  @Mapping(target = "tenant.id", source = "tenant.id")
+  BookingDto fromEntity(BookingEntity bookingEntity);
 
   BookingEntity toEntity(BookingDto bookingDto);
 
@@ -22,7 +22,7 @@ public interface BookingMapper {
 //  @Mapping(source = "room.id", target = "room.id")
 //  @Mapping(source = "tenant.id", target = "tenant.id")
 
-  @Mapping(source = "room.id", target = "room.id")
-  @Mapping(source = "tenant.id", target = "tenant.id")
+//  @Mapping(source = "room.id", target = "room.id")
+//  @Mapping(source = "tenant.id", target = "tenant.id")
   BookingEntity toEntity(BookingCreateDto bookingCreateDto);
 }
