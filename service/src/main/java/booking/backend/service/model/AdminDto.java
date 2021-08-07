@@ -15,8 +15,8 @@ public class AdminDto {
 
   private String password;
 
-  @JsonProperty("photo_path")
-  private byte[] photoPath;
+  @JsonProperty("photo")
+  private byte[] photo;
 
   public Integer getId() {
     return id;
@@ -58,11 +58,11 @@ public class AdminDto {
     this.password = password;
   }
 
-  public byte[] getPhotoPath() {
-    return photoPath;
+  public byte[] getPhoto() {
+    return photo;
   }
 
-  public void setPhotoPath(byte[] photoPath) {
-    this.photoPath = photoPath;
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
   }
 }

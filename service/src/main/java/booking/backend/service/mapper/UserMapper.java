@@ -1,9 +1,10 @@
 package booking.backend.service.mapper;
 
 import booking.backend.db.entity.UserEntity;
+import booking.backend.service.model.UserCreateDto;
 import booking.backend.service.model.UserDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -12,8 +13,9 @@ public interface UserMapper {
 
   UserDto fromEntity(UserEntity userEntity);
 
-  @Mapping(target = "password", ignore = true)
-  UserEntity toEntity(UserDto userDto);
+  void toEntity(UserDto dto, @MappingTarget UserEntity original);
+
+  UserEntity toEntity(UserCreateDto dto);
 
   List<UserDto> fromEntities(Iterable<UserEntity> userEntities);
 }

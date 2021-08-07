@@ -1,9 +1,12 @@
 package booking.backend.db.converter;
 
-import booking.backend.db.entity.Role;
+
+import booking.backend.commons.Role;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
+@Converter(autoApply = true)
 public class RoleConverter implements AttributeConverter<Role, Integer> {
   @Override
   public Integer convertToDatabaseColumn(Role attribute) {

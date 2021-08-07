@@ -1,6 +1,7 @@
 package booking.backend.service.logic;
 
 import booking.backend.service.model.AdminDto;
+import booking.backend.service.model.PageDto;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface AdminService {
 
   void deleteAdminById(int id);
 
-  List<AdminDto> find(String search, Integer pageSize, Integer pageNumber);
+  PageDto<AdminDto> find(String search, Integer pageSize, Integer pageNumber);
 
   List<AdminDto> findAll();
 }

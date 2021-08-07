@@ -1,4 +1,4 @@
-package booking.backend.db.entity;
+package booking.backend.commons;
 
 import java.util.Optional;
 
@@ -7,9 +7,9 @@ public enum Role {
   LANDLORD(1),
   CLIENT(2);
 
-  private final Integer id;
+  private final int id;
 
-  Role(Integer id) {
+  Role(int id) {
     this.id = id;
   }
 
@@ -18,8 +18,8 @@ public enum Role {
       return Optional.empty();
     }
 
-    for (var value : Role.values()) {
-      if (value.id.equals(id)) {
+    for (var value: Role.values()) {
+      if (value.id == id) {
         return Optional.of(value);
       }
     }
@@ -27,7 +27,7 @@ public enum Role {
     return Optional.empty();
   }
 
-  public Integer getId() {
+  public int getId() {
     return id;
   }
 }
