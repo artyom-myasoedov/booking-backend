@@ -4,6 +4,7 @@ import booking.backend.service.logic.UserService;
 import booking.backend.service.model.PageDto;
 import booking.backend.service.model.UserCreateDto;
 import booking.backend.service.model.UserDto;
+import booking.backend.service.model.UserUpdateDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +34,8 @@ public class UserController {
     return userService.createUser(user);
   }
 
-  @PutMapping("/{id}")
-  UserDto updateUser(@RequestBody UserDto user, @PathVariable int id) {
-    user.setId(id);
+  @PutMapping
+  UserDto updateUser(@RequestBody UserUpdateDto user) {
     return userService.updateUser(user);
   }
 

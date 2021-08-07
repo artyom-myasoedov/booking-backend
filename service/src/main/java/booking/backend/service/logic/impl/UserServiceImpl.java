@@ -4,10 +4,7 @@ import booking.backend.db.provider.UserProvider;
 import booking.backend.service.exceptions.EntityNotFoundException;
 import booking.backend.service.logic.UserService;
 import booking.backend.service.mapper.UserMapper;
-import booking.backend.service.model.ImmutablePageDto;
-import booking.backend.service.model.PageDto;
-import booking.backend.service.model.UserCreateDto;
-import booking.backend.service.model.UserDto;
+import booking.backend.service.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,8 +23,8 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   public UserServiceImpl(
-          UserProvider userProvider,
-          UserMapper userMapper
+    UserProvider userProvider,
+    UserMapper userMapper
   ) {
     this.userProvider = userProvider;
     this.userMapper = userMapper;
@@ -36,22 +33,20 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDto createUser(@Valid UserCreateDto userDto) {
     return Optional.ofNullable(userDto)
-            .map(userMapper::toEntity)
-            .map(userProvider::save)
-            .map(userMapper::fromEntity)
-            .orElseThrow();
+      .map(userMapper::toEntity)
+      .map(userProvider::save)
+      .map(userMapper::fromEntity)
+      .orElseThrow();
   }
 
   @Override
   @Transactional
-  public UserDto updateUser(UserDto user) {
+  public UserDto updateUser(UserUpdateDto user) {
     var userEntity = userProvider.findById(user.getId())
-            .orElseThrow(() -> new EntityNotFoundException(user.getId(), "User"));
-
+      .orElseThrow(() -> new EntityNotFoundException(user.getId(), "User"));
     userMapper.toEntity(user, userEntity);
 
     return userMapper.fromEntity(userProvider.save(userEntity));
-
   }
 
   @Override
@@ -62,18 +57,18 @@ public class UserServiceImpl implements UserService {
   @Override
   public PageDto<UserDto> find(String search, Integer pageSize, Integer pageNumber) {
     var values = userProvider.findUsers(
-            search,
-            Pageable
-                    .ofSize(pageSize)
-                    .withPage(pageNumber)
-    )
-            .map(userMapper::fromEntity);
+        search,
+        Pageable
+          .ofSize(pageSize)
+          .withPage(pageNumber)
+      )
+      .map(userMapper::fromEntity);
 
     return ImmutablePageDto.<UserDto>builder()
-            .pageNumber(pageNumber)
-            .totalPages(values.getTotalPages())
-            .items(values.getContent())
-            .build();
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
   }
 
   @Override
