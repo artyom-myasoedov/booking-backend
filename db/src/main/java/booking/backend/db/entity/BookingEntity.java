@@ -27,7 +27,7 @@ public class BookingEntity {
   private UserEntity tenant;
 
   @Column(name = "rental_period")
-  private Integer rentalPeriod;
+  private Integer periodOfBooking;
 
   @Column(name = "rental_start_date")
   private Instant rentalStartDate;
@@ -56,19 +56,19 @@ public class BookingEntity {
     this.tenant = tenant;
   }
 
-  public Integer getRentalPeriod() {
-    return rentalPeriod;
-  }
-
-  public void setRentalPeriod(Integer rentalPeriod) {
-    this.rentalPeriod = rentalPeriod;
-  }
-
   public Instant getRentalStartDate() {
     return rentalStartDate;
   }
 
   public void setRentalStartDate(Instant rentalStartDate) {
     this.rentalStartDate = rentalStartDate;
+  }
+
+  public Integer getPeriodOfBooking() {
+    return periodOfBooking;
+  }
+
+  public void setPeriodOfBooking(Integer periodOfBooking) {
+    this.periodOfBooking = periodOfBooking;
   }
 }

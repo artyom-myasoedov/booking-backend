@@ -1,5 +1,6 @@
 package booking.backend.db.provider.impl;
 
+import booking.backend.db.entity.AdminEntity;
 import booking.backend.db.entity.BookingEntity;
 import booking.backend.db.provider.BookingProvider;
 import booking.backend.db.repository.BookingRepository;
@@ -21,11 +22,11 @@ public class BookingProviderImpl implements BookingProvider {
   }
 
   @Override
-  public Page<BookingEntity> findBookings(String search, Pageable pageable) {
+  public Page<BookingEntity> findByUserName(String search, Pageable pageable) {
     if (search == null) {
       return bookingRepository.findAll(pageable);
     }
-    return bookingRepository.findBookings(search, pageable);
+    return bookingRepository.findBookingEntitiesByTenantUsername(search, pageable);
   }
 
   @Override
@@ -46,5 +47,15 @@ public class BookingProviderImpl implements BookingProvider {
   @Override
   public Iterable<BookingEntity> findAll() {
     return bookingRepository.findAll();
+  }
+
+  @Override
+  public Page<BookingEntity> findByRoomId(Integer id, Pageable pageable) {
+    return bookingRepository.findBookingEntitiesByRoomId(id, pageable);
+  }
+
+  @Override
+  public Page<BookingEntity> findByTenantId(Integer id, Pageable page) {
+    return bookingRepository.findBookingEntitiesByTenantId(id, page);
   }
 }

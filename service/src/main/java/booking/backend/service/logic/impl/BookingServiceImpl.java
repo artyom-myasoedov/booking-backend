@@ -3,9 +3,10 @@ package booking.backend.service.logic.impl;
 import booking.backend.db.provider.BookingProvider;
 import booking.backend.service.logic.BookingService;
 import booking.backend.service.mapper.BookingMapper;
-import booking.backend.service.model.BookingDto;
+import booking.backend.service.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class BookingServiceImpl implements BookingService {
   }
 
   @Override
-  public BookingDto createBooking(BookingDto bookingDto) {
+  public BookingDto createBooking(BookingCreateDto bookingDto) {
     return
             Optional.ofNullable(bookingDto)
                     .map(bookingMapper::toEntity)
@@ -35,12 +36,22 @@ public class BookingServiceImpl implements BookingService {
 
   @Override
   public BookingDto updateBooking(BookingDto bookingDto) {
-    return createBooking(bookingDto);
+    var booking = bookingProvider.findById(bookingDto.getId())
+      .orElseThrow(() -> new IllegalArgumentException("Booking not found"));
+    //() -> new EntityNotFoundException(equipment.getEquipmentId(), "Equipment")
+
+    return Optional.of(bookingDto)
+      .map(bookingMapper::toEntity)
+      .map(bookingProvider::save)
+      .map(bookingMapper::fromEntity)
+      .orElseThrow();
   }
 
   @Override
   public BookingDto findById(Integer id) {
-    return null;
+    return bookingProvider.findById(id)
+      .map(bookingMapper::fromEntity)
+      .orElse(null);
   }
 
   @Override
@@ -48,14 +59,61 @@ public class BookingServiceImpl implements BookingService {
     bookingProvider.deleteById(id);
   }
 
-//  @Override
-  public List<BookingDto> find(String search, Integer pageSize, Integer pageNumber) {
-    return null;
-//    return bookingProvider.findBookings(null, null);
+  @Override
+  public PageDto<BookingDto> find(String search, Integer pageSize, Integer pageNumber) {
+    var values =  bookingProvider.findByUserName(
+      search,
+      Pageable
+        .ofSize(pageSize)
+        .withPage(pageNumber)
+    )
+      .map(bookingMapper::fromEntity);
+
+    return ImmutablePageDto.<BookingDto>builder()
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
   }
 
   @Override
   public List<BookingDto> findAll() {
     return bookingMapper.fromEntities(bookingProvider.findAll());
+  }
+
+  @Override
+  public PageDto<BookingDto> findByRoomId(Integer id, Integer pageSize, Integer pageNumber) {
+    var values =  bookingProvider.findByRoomId(
+      id,
+      Pageable
+        .ofSize(pageSize)
+        .withPage(pageNumber)
+    )
+      .map(bookingMapper::fromEntity);
+
+    return ImmutablePageDto.<BookingDto>builder()
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
+//    return bookingMapper.fromEntities(bookingProvider.findByRoomId(id));
+  }
+
+  @Override
+  public PageDto<BookingDto> findByTenantId(Integer id, Integer pageSize, Integer pageNumber) {
+    var values =  bookingProvider.findByTenantId(
+      id,
+      Pageable
+        .ofSize(pageSize)
+        .withPage(pageNumber)
+    )
+      .map(bookingMapper::fromEntity);
+
+    return ImmutablePageDto.<BookingDto>builder()
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
+//    return bookingMapper.fromEntities(bookingProvider.findByTenantId(id, pageSize, pageNumber));
   }
 }
