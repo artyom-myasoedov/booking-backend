@@ -4,6 +4,7 @@ import booking.backend.db.entity.BookingEntity;
 import booking.backend.service.model.BookingCreateDto;
 import booking.backend.service.model.BookingDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public interface BookingMapper {
 
 
+  @Mapping(target = "room", expression = "java(roomMapper.fromEntity(adminEntity.getRoom()))")
   BookingDto fromEntity(BookingEntity adminEntity);
 
   BookingEntity toEntity(BookingDto bookingDto);
