@@ -1,9 +1,8 @@
 package booking.backend.db.entity;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -100,6 +99,9 @@ public class RoomEntity {
 
   @Column(name = "capacity")
   private Integer capacity;
+
+  @Column(name = "room_rating")
+  private BigDecimal rating;
 
   @Column(name = "address")
   private String address;
@@ -240,5 +242,13 @@ public class RoomEntity {
 
   public void setEquipments(List<EquipmentEntity> equipments) {
     this.equipments = equipments;
+  }
+
+  public BigDecimal getRating() {
+    return rating;
+  }
+
+  public void setRating(BigDecimal rating) {
+    this.rating = rating;
   }
 }

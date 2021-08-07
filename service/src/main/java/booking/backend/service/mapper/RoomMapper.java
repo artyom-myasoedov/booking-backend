@@ -24,12 +24,14 @@ import java.util.List;
 public interface RoomMapper {
 
   @Named("without-reviews")
+  @Mapping(target = "typesOfRent", source = "entity.typesOfRent")
   RoomDto fromEntity(RoomEntity entity);
 
   @Named("with-reviews")
   RoomWithReviewsDto fromEntityWithReviews(RoomEntity entity);
 
   @Mapping(target = "reviews", ignore = true)
+  @Mapping(target = "typesOfRent", source = "typesOfRent")
   RoomEntity toEntity(RoomDto dto);
 
   @Mapping(target = "id", ignore = true)

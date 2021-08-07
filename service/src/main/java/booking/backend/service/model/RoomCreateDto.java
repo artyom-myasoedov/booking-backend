@@ -4,6 +4,7 @@ import booking.backend.db.entity.TypeOfRoom;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Set;
 
 public class RoomCreateDto {
 
@@ -25,9 +26,17 @@ public class RoomCreateDto {
 
   private List<EquipmentDto> equipments;
 
-  private List<TypeOfRentDto> typesOfRent;
+  private Set<TypeOfRentDto> typesOfRent;
 
   private List<PhotoDto> photos;
+
+  public Set<TypeOfRentDto> getTypesOfRent() {
+    return typesOfRent;
+  }
+
+  public void setTypesOfRent(Set<TypeOfRentDto> typesOfRent) {
+    this.typesOfRent = typesOfRent;
+  }
 
   public Integer getSquare() {
     return square;
@@ -91,14 +100,6 @@ public class RoomCreateDto {
 
   public void setEquipments(List<EquipmentDto> equipments) {
     this.equipments = equipments;
-  }
-
-  public List<TypeOfRentDto> getTypesOfRent() {
-    return typesOfRent;
-  }
-
-  public void setTypesOfRent(List<TypeOfRentDto> typesOfRent) {
-    this.typesOfRent = typesOfRent;
   }
 
   public List<PhotoDto> getPhotos() {
