@@ -1,13 +1,18 @@
 package booking.backend.rest.api;
 
 
+import booking.backend.db.entity.TypeOfRent;
+import booking.backend.db.entity.TypeOfRoom;
 import booking.backend.service.logic.RoomService;
+import booking.backend.service.model.PageDto;
 import booking.backend.service.model.RoomCreateDto;
 import booking.backend.service.model.RoomDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -44,14 +49,47 @@ public class RoomController {
   }
 
   @GetMapping("/byLandlordId")
-  public List<RoomDto> findByLandlordId(@RequestParam Integer landlordId) {
-    return roomService.findByLandlordId(landlordId);
+  public PageDto<RoomDto> findByLandlordId(
+    @RequestParam Integer landlordId,
+    @RequestParam Integer pageSize,
+    @RequestParam Integer pageNumber) {
+    return roomService.findByLandlordId(landlordId, pageSize, pageNumber);
   }
 
   @GetMapping("/getAllRooms")
-  public List<RoomDto> findAll() {
+  public PageDto<RoomDto> findAll() {
     return roomService.findAll();
   }
 
-  //TODO запрос на список комнат со сложными критериями выбора
+  @GetMapping("/byCriteria")
+  @ResponseStatus(HttpStatus.OK)
+  public PageDto<RoomDto> findByCriteria(
+    @RequestParam(defaultValue = "0") Integer minSquare,
+    @RequestParam(defaultValue = "99999999") Integer maxSquare,
+    @RequestParam(defaultValue = "0") Integer minNumberOfPeople,
+    @RequestParam(defaultValue = "99999999") Integer maxNumberOfPeople,
+    @RequestParam(defaultValue = "0") Integer minRentalPeriod,
+    @RequestParam(defaultValue = "BY_HOUR,BY_DAY,BY_WEEK,BY_MONTH") List<TypeOfRent> typesOfRent,
+    @RequestParam(defaultValue = "CLASS,THEATRE,ROUND_TABLE,CONVERSATION") List<TypeOfRoom> typesOfRoom,
+    @RequestParam(defaultValue = "0") BigDecimal minPrice,
+    @RequestParam(defaultValue = "99999999") BigDecimal maxPrice,
+    @RequestParam(defaultValue = "") String addressLike,
+    @RequestParam(defaultValue = "") String landlordUsernameLike,
+    @RequestParam(defaultValue = "0") Double minRating,
+    @RequestParam(defaultValue = "") String startOfBooking,
+    @RequestParam(defaultValue = "") String endOfBooking,
+    @RequestParam(defaultValue = "ASC") String sortOrder,
+    @RequestParam(defaultValue = "rating") String sortBy,
+    @RequestParam(defaultValue = "10") Integer pageSize,
+    @RequestParam(defaultValue = "0") Integer pageNumber
+  ) {
+
+    return roomService.findByCriteria(
+      minSquare, maxSquare, minNumberOfPeople,
+      maxNumberOfPeople, minRentalPeriod, typesOfRent,
+      typesOfRoom, minPrice, maxPrice,
+      addressLike, landlordUsernameLike, minRating,
+      startOfBooking, endOfBooking, sortOrder,
+      sortBy, pageSize, pageNumber);
+  }
 }

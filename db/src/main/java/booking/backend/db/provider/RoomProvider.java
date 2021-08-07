@@ -1,34 +1,32 @@
-package booking.backend.service.logic;
+package booking.backend.db.provider;
 
-
+import booking.backend.db.entity.RoomEntity;
 import booking.backend.db.entity.TypeOfRent;
 import booking.backend.db.entity.TypeOfRoom;
-import booking.backend.service.model.PageDto;
-import booking.backend.service.model.RoomCreateDto;
-import booking.backend.service.model.RoomDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-public interface RoomService {
+public interface RoomProvider {
 
-  RoomDto findById(Integer roomId);
+  Optional<RoomEntity> findById(Integer roomId);
 
   void deleteById(Integer roomId);
 
-  RoomDto addRoom(RoomCreateDto room);
+  Page<RoomEntity> findAll();
 
-  RoomDto updateRoom(RoomDto room);
+  RoomEntity save(RoomEntity roomEntity);
 
-  PageDto<RoomDto> findByLandlordId(Integer landlordId, Integer pageSize, Integer pageNumber);
+  Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable withPage);
 
-  PageDto<RoomDto> findAll();
-
-  PageDto<RoomDto> findByCriteria(
+  Page<RoomEntity> findByCriteria(
     Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
     Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
     List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,
     String addressLike, String landlordUsernameLike, Double minRating,
     String startOfBooking, String endOfBooking, String sortOrder,
-    String sortBy, Integer pageSize, Integer pageNumber);
+    String sortBy, Pageable pageable);
 }

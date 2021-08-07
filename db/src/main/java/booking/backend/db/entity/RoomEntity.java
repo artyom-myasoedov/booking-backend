@@ -1,7 +1,11 @@
 package booking.backend.db.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NamedEntityGraph(
   name = "room-with-reviews",
@@ -34,7 +38,7 @@ import java.util.List;
         @NamedAttributeNode("ratedEntityId"),
         @NamedAttributeNode("rating"),
         @NamedAttributeNode("description"),
-        @NamedAttributeNode("authorId"),
+        @NamedAttributeNode("author"),
         @NamedAttributeNode("reviewTargetId")
       }
     ),
@@ -46,7 +50,6 @@ import java.util.List;
         @NamedAttributeNode("firstName"),
         @NamedAttributeNode("lastName"),
         @NamedAttributeNode("photoPath"),
-        @NamedAttributeNode("role"),
         @NamedAttributeNode("phoneNumber"),
         @NamedAttributeNode("email")
       }
@@ -62,7 +65,9 @@ import java.util.List;
     @NamedSubgraph(
       name = "equipment",
       attributeNodes = {
-        @NamedAttributeNode("id"),
+        @NamedAttributeNode("equipmentId"),
+        @NamedAttributeNode("equipmentName"),
+        @NamedAttributeNode("roomId"),
         @NamedAttributeNode("description")
       }
     )
@@ -110,7 +115,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
-  private List<TypeOfRentEntity> typesOfRent;
+  private Set<TypeOfRentEntity> typesOfRent;
 
   @OneToMany
   @JoinColumn(
@@ -205,11 +210,11 @@ public class RoomEntity {
     this.minRentalPeriod = minRentalPeriod;
   }
 
-  public List<TypeOfRentEntity> getTypeOfRents() {
+  public Set<TypeOfRentEntity> getTypeOfRents() {
     return typesOfRent;
   }
 
-  public void setTypeOfRents(List<TypeOfRentEntity> typeOfRents) {
+  public void setTypeOfRents(Set<TypeOfRentEntity> typeOfRents) {
     this.typesOfRent = typeOfRents;
   }
 
