@@ -3,14 +3,14 @@ package booking.backend.service.logic.impl;
 import booking.backend.db.provider.AdminProvider;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.mapper.AdminMapper;
-import booking.backend.service.model.AdminDto;
-import booking.backend.service.model.ImmutablePageDto;
-import booking.backend.service.model.PageDto;
+import booking.backend.service.model.*;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,7 +23,7 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
-  public AdminDto createAdmin(AdminDto dto) {
+  public AdminDto createAdmin(AdminCreateDto dto) {
     return
             Optional.ofNullable(dto)
                     .map(adminMapper::toEntity)
@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
-  public AdminDto updateAdmin(AdminDto dto) {
+  public AdminDto updateAdmin(AdminCreateDto dto) {
     return createAdmin(dto);
   }
 
@@ -44,19 +44,27 @@ public class AdminServiceImpl implements AdminService {
 
   @Override
   public PageDto<AdminDto> find(String search, Integer pageSize, Integer pageNumber) {
-    var values = adminProvider.findAdmins(
-            search,
-            Pageable
-                    .ofSize(pageSize)
-                    .withPage(pageNumber)
-    )
-            .map(adminMapper::fromEntity);
+    var values = adminProvider
+      .findByUsername(
+        search,
+        Pageable
+          .ofSize(pageSize)
+          .withPage(pageNumber)
+      )
+      .map(adminMapper::fromEntity);
 
     return ImmutablePageDto.<AdminDto>builder()
-            .pageNumber(pageNumber)
-            .totalPages(values.getTotalPages())
-            .items(values.getContent())
-            .build();
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
+  }
+
+  @Override
+  public AdminDto findById(Integer id) {
+    return adminProvider.findById(id)
+      .map(adminMapper::fromEntity)
+      .orElse(null);
   }
 
   @Override
