@@ -1,5 +1,8 @@
 package booking.backend.db.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -115,6 +118,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
+  @Fetch(value = FetchMode.SUBSELECT)
   private Set<TypeOfRentEntity> typesOfRent;
 
   @OneToMany
@@ -122,6 +126,7 @@ public class RoomEntity {
     name = "rated_entity_id",
     referencedColumnName = "room_id"
   )
+  @Fetch(value = FetchMode.SUBSELECT)
   private List<ReviewEntity> reviews;
 
   @OneToMany
@@ -129,6 +134,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
+  @Fetch(value = FetchMode.SUBSELECT)
   private List<PhotoEntity> photos;
 
   @OneToMany
@@ -136,7 +142,7 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
-
+  @Fetch(value = FetchMode.)
   private List<EquipmentEntity> equipments;
 
   public BigDecimal getRating() {
