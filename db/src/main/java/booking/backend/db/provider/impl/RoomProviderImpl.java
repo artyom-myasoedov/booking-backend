@@ -26,7 +26,7 @@ public class RoomProviderImpl implements RoomProvider {
 
   @Override
   public Optional<RoomEntity> findById(Integer roomId) {
-    return roomRepository.findById(roomId);
+    return roomRepository.findByRoomId(roomId);
   }
 
   @Override
@@ -35,8 +35,8 @@ public class RoomProviderImpl implements RoomProvider {
   }
 
   @Override
-  public Page<RoomEntity> findAll() {
-    return null;
+  public Page<RoomEntity> findAll(Pageable pageable) {
+    return roomRepository.findAllRooms(pageable);
   }
 
   @Override
@@ -45,8 +45,8 @@ public class RoomProviderImpl implements RoomProvider {
   }
 
   @Override
-  public Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable withPage) {
-    return null;
+  public Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable pageable) {
+    return roomRepository.findByLandlordId(landlordId, pageable);
   }
 
   @Override

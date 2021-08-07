@@ -22,7 +22,7 @@ public interface RoomService {
 
   PageDto<RoomDto> findByLandlordId(Integer landlordId, Integer pageSize, Integer pageNumber);
 
-  PageDto<RoomDto> findAll();
+  PageDto<RoomDto> findAll(Integer pageSize, Integer pageNumber);
 
   PageDto<RoomDto> findByCriteria(
     Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,

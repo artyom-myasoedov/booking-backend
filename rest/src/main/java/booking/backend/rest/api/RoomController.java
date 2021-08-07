@@ -57,8 +57,11 @@ public class RoomController {
   }
 
   @GetMapping("/getAllRooms")
-  public PageDto<RoomDto> findAll() {
-    return roomService.findAll();
+  public PageDto<RoomDto> findAll(
+    @RequestParam Integer pageSize,
+    @RequestParam Integer pageNumber
+  ) {
+    return roomService.findAll(pageSize, pageNumber);
   }
 
   @GetMapping("/byCriteria")

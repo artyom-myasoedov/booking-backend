@@ -1,17 +1,20 @@
 package booking.backend.service.model;
 
 import booking.backend.db.entity.TypeOfRoom;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class RoomCreateDto {
 
+  @JsonProperty("size")
   private Integer square;
 
   private TypeOfRoom typeOfRoom;
 
   private UserDto landlord;
 
+  @JsonProperty("numberOfPeople")
   private Integer capacity;
 
   private String address;

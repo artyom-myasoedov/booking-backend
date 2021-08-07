@@ -1,9 +1,7 @@
 package booking.backend.db.entity;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -110,6 +108,8 @@ public class RoomEntity {
   @Column(name = "min_rental_period")
   private Integer minRentalPeriod;
 
+  @Column(name = "room_rating")
+  private BigDecimal rating;
   @OneToMany
   @JoinColumn(
     name = "room_id",
@@ -136,7 +136,24 @@ public class RoomEntity {
     name = "room_id",
     referencedColumnName = "room_id"
   )
+
   private List<EquipmentEntity> equipments;
+
+  public BigDecimal getRating() {
+    return rating;
+  }
+
+  public void setRating(BigDecimal rating) {
+    this.rating = rating;
+  }
+
+  public Set<TypeOfRentEntity> getTypesOfRent() {
+    return typesOfRent;
+  }
+
+  public void setTypesOfRent(Set<TypeOfRentEntity> typesOfRent) {
+    this.typesOfRent = typesOfRent;
+  }
 
   public Integer getId() {
     return id;
@@ -208,14 +225,6 @@ public class RoomEntity {
 
   public void setMinRentalPeriod(Integer minRentalPeriod) {
     this.minRentalPeriod = minRentalPeriod;
-  }
-
-  public Set<TypeOfRentEntity> getTypeOfRents() {
-    return typesOfRent;
-  }
-
-  public void setTypeOfRents(Set<TypeOfRentEntity> typeOfRents) {
-    this.typesOfRent = typeOfRents;
   }
 
   public List<ReviewEntity> getReviews() {

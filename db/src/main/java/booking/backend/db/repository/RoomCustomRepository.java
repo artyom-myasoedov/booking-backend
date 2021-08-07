@@ -8,10 +8,17 @@ import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public interface RoomCustomRepository {
 
-    Page<RoomEntity> findByCriteria(
+  Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable);
+
+  Optional<RoomEntity> findByRoomId(Integer roomId);
+
+  Page<RoomEntity> findAllRooms(Pageable pageable);
+
+  Page<RoomEntity> findByCriteria(
       Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
       Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
       List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,

@@ -3,7 +3,9 @@ package booking.backend.db.converter;
 import booking.backend.db.entity.TypeOfRoom;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
+@Converter(autoApply = true)
 public class TypeOfRoomConverter implements AttributeConverter<TypeOfRoom, Integer> {
   @Override
   public Integer convertToDatabaseColumn(TypeOfRoom attribute) {

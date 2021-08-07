@@ -111,11 +111,11 @@ databaseChangeLog:
             path: BOK-001-202108041730.sql
             relativeToChangelogFile: true
 
-#  - changeSet:
-#      id: BOK-001-202108062159
-#      author: amyasoedov
-#      comment: Update room
-#      changes:
-#        - sqlFile:
-#            path: BOK-001-202108062159.sql
-#            relativeToChangelogFile: true
+  - changeSet:
+      id: BOK-001-202108062159
+      author: amyasoedov
+      comment: Update room
+      changes:
+        - sqlFile:
+            path: BOK-001-202108062159.sql
+            relativeToChangelogFile: true
