@@ -119,3 +119,12 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202108062159.sql
             relativeToChangelogFile: true
+
+  - changeSet:
+      id: BOK-001-202108080202
+      author: ismetanin
+      comment: Add unique key for reviews
+      changes:
+        - sqlFile:
+            path: BOK-001-202108080202.sql
+            relativeToChangelogFile: true

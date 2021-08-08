@@ -2,31 +2,6 @@ package booking.backend.db.entity;
 
 import javax.persistence.*;
 
-@NamedEntityGraph(
-        name = "review-with-author",
-        attributeNodes = {
-                @NamedAttributeNode("id"),
-                @NamedAttributeNode("ratedEntityId"),
-                @NamedAttributeNode("rating"),
-                @NamedAttributeNode("description"),
-                @NamedAttributeNode(value = "author", subgraph = "author")
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "author",
-                        attributeNodes = {
-                                @NamedAttributeNode("id"),
-                                @NamedAttributeNode("username"),
-                                @NamedAttributeNode("firstName"),
-                                @NamedAttributeNode("lastName"),
-                                @NamedAttributeNode("photo"),
-                                @NamedAttributeNode("role"),
-                                @NamedAttributeNode("phoneNumber"),
-                                @NamedAttributeNode("email")
-                        }
-                )
-        }
-)
 @Table(schema = "booking", name = "reviews")
 @Entity(name = "reviews")
 public class ReviewEntity {
@@ -45,14 +20,8 @@ public class ReviewEntity {
   @Column(name = "description")
   private String description;
 
-  @ManyToOne
-  @JoinColumn(
-          name = "author_id",
-          referencedColumnName = "user_id",
-          insertable = false,
-          updatable = false
-  )
-  private UserEntity author;
+  @Column(name = "author_id")
+  private Integer authorId;
 
   @Column(name = "review_target_id")
   private ReviewTarget reviewTarget;
@@ -89,12 +58,12 @@ public class ReviewEntity {
     this.description = description;
   }
 
-  public UserEntity getAuthor() {
-    return author;
+  public Integer getAuthorId() {
+    return authorId;
   }
 
-  public void setAuthor(UserEntity author) {
-    this.author = author;
+  public void setAuthorId(Integer authorId) {
+    this.authorId = authorId;
   }
 
   public ReviewTarget getReviewTarget() {

@@ -1,5 +1,6 @@
 package booking.backend.db.repository;
 
+import booking.backend.commons.Role;
 import booking.backend.db.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 
   boolean existsByUsernameIgnoreCase(String value);
 
-  boolean existsByIdIsNotAndUsernameIgnoreCase(int id, String username);
+  boolean existsByIdAndRole(Integer id, Role role);
+
+  boolean existsByIdIsNotAndUsernameIgnoreCase(Integer id, String username);
 }

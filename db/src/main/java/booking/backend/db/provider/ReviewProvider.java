@@ -1,8 +1,10 @@
 package booking.backend.db.provider;
 
 import booking.backend.db.entity.ReviewEntity;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 
 import java.util.Optional;
 
@@ -17,4 +19,13 @@ public interface ReviewProvider {
   Iterable<ReviewEntity> findAll();
 
   void deleteById(Integer id);
+
+  Integer countIdenticalTuplesOfPrimaryKey(Integer authorId,
+                                           Integer ratedEntityId,
+                                           Integer reviewTargetId);
+
+  Integer countIdenticalTuplesOfPrimaryKeyAccountingCurrentTuple(Integer id,
+                                                                 Integer authorId,
+                                                                 Integer ratedEntityId,
+                                                                 Integer reviewTargetId);
 }

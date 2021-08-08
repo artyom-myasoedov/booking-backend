@@ -11,36 +11,31 @@ public class UserCreateDto {
   @UsernameUnique
   @Pattern(regexp = "^[a-zA-Z\\d]{5,32}$", message = "username.invalid")
   @NotNull(message = "username.is-null")
-  @JsonProperty("username")
   private String username;
 
   @NotBlank(message = "password.is-blank")
   @Length(min= 12, message = "password.too-short")
   @Length(max= 60, message = "password.too-long")
-  @JsonProperty("password")
   private String password;
 
   @NotBlank(message = "firstName.is-blank")
   @Size(min = 1, max = 45, message = "firstName.out-of-range")
-  @JsonProperty("first_name")
   private String firstName;
 
-  @Size(min = 1, max = 45, message = "lastName.out-of-range")
   @NotBlank(message = "lastName.is-blank")
-  @JsonProperty("last_name")
+  @Size(min = 1, max = 45, message = "lastName.out-of-range")
   private String lastName;
 
   @NotNull(message = "role.is-null")
-  @JsonProperty("role")
   private Role role;
 
-  @JsonProperty("photo")
   private byte[] photo;
 
-  @JsonProperty("phone_number")
+  @NotBlank(message = "phoneNumber.is-blank")
   private String phoneNumber;
 
-  @JsonProperty("email")
+  @NotBlank(message = "email.is-blank")
+  @Pattern(regexp = "^.+@.+\\..+$", message = "email.invalid")
   private String email;
 
   public String getUsername() {

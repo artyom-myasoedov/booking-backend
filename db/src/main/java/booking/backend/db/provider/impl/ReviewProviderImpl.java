@@ -35,7 +35,7 @@ public class ReviewProviderImpl implements ReviewProvider {
 
   @Override
   public Optional<ReviewEntity> findById(Integer id) {
-    return Optional.empty();
+    return reviewRepository.findById(id);
   }
 
   @Override
@@ -46,5 +46,18 @@ public class ReviewProviderImpl implements ReviewProvider {
   @Override
   public void deleteById(Integer id) {
     reviewRepository.deleteById(id);
+  }
+
+  @Override
+  public Integer countIdenticalTuplesOfPrimaryKey(Integer authorId, Integer ratedEntityId, Integer reviewTargetId) {
+    return reviewRepository.checkIdentityForPrimaryKey(ratedEntityId, authorId, reviewTargetId);
+  }
+
+  @Override
+  public Integer countIdenticalTuplesOfPrimaryKeyAccountingCurrentTuple(Integer id,
+                                                                        Integer authorId,
+                                                                        Integer ratedEntityId,
+                                                                        Integer reviewTargetId) {
+    return reviewRepository.checkIdentityForPrimaryKeyAccountingCurrentTuple(id, ratedEntityId, authorId, reviewTargetId);
   }
 }

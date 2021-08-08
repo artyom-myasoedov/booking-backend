@@ -1,8 +1,9 @@
-package booking.backend.service.validation;
+package booking.backend.service.validation.validator;
 
 import booking.backend.db.provider.UserProvider;
 import booking.backend.service.model.UserDto;
 import booking.backend.service.model.UserUpdateDto;
+import booking.backend.service.validation.UsernameUnique;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

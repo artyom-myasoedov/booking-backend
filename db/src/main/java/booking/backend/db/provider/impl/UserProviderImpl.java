@@ -1,5 +1,6 @@
 package booking.backend.db.provider.impl;
 
+import booking.backend.commons.Role;
 import booking.backend.db.entity.UserEntity;
 import booking.backend.db.provider.UserProvider;
 import booking.backend.db.repository.UserRepository;
@@ -42,11 +43,6 @@ public class UserProviderImpl implements UserProvider {
   }
 
   @Override
-  public Iterable<UserEntity> findAll() {
-    return userRepository.findAll();
-  }
-
-  @Override
   public void deleteById(int id) {
     userRepository.deleteById(id);
   }
@@ -57,7 +53,12 @@ public class UserProviderImpl implements UserProvider {
   }
 
   @Override
-  public boolean isUsernameExists(int id, String username) {
+  public boolean isUsernameExists(Integer id, String username) {
     return userRepository.existsByIdIsNotAndUsernameIgnoreCase(id, username);
+  }
+
+  @Override
+  public boolean isRoleIdentical(Integer id, Role role) {
+    return userRepository.existsByIdAndRole(id, role);
   }
 }

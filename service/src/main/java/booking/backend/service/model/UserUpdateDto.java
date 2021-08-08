@@ -1,55 +1,53 @@
 package booking.backend.service.model;
 
 import booking.backend.commons.Role;
+import booking.backend.service.validation.RoleIdentical;
 import booking.backend.service.validation.UsernameUnique;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
 
 @UsernameUnique
+@RoleIdentical
 public class UserUpdateDto {
   @NotNull(message = "id.is-null")
-  @JsonProperty("user_id")
-  private Integer userId;
+  private Integer id;
 
   @Pattern(regexp = "^[a-zA-Z\\d]{5,32}$", message = "username.invalid")
   @NotNull(message = "username.is-null")
-  @JsonProperty("username")
   private String username;
 
+  @NotBlank(message = "password.is-blank")
   @Length(min = 12, message = "password.too-short")
   @Length(max = 60, message = "password.too-long")
-  @JsonProperty("password")
   private String password;
 
+  @NotBlank(message = "firstName.is-blank")
   @Size(min = 1, max = 45, message = "firstName.out-of-range")
-  @JsonProperty("first_name")
   private String firstName;
 
+  @NotBlank(message = "lastName.is-blank")
   @Size(min = 1, max = 45, message = "lastName.out-of-range")
-  @JsonProperty("last_name")
   private String lastName;
 
-  @JsonProperty("role")
+  @NotNull(message = "role.is-null")
   private Role role;
 
-  @JsonProperty("photo")
   private byte[] photo;
 
-  @JsonProperty("phone_number")
+  @NotBlank(message = "phoneNumber.is-blank")
   private String phoneNumber;
 
+  @NotBlank(message = "email.is-blank")
   @Pattern(regexp = "^.+@.+\\..+$", message = "email.invalid")
-  @JsonProperty("email")
   private String email;
 
   public Integer getId() {
-    return userId;
+    return id;
   }
 
   public void setId(Integer userId) {
-    this.userId = userId;
+    this.id = userId;
   }
 
   public String getUsername() {

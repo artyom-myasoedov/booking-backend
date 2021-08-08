@@ -11,7 +11,6 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-
   UserDto fromEntity(UserEntity userEntity);
 
   void toEntity(UserUpdateDto dto, @MappingTarget UserEntity original);

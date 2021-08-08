@@ -18,6 +18,11 @@ public class UserController {
     this.userService = userService;
   }
 
+  @GetMapping("/{id}")
+  UserDto getUser(@PathVariable int id) {
+    return userService.findById(id);
+  }
+
   @GetMapping
   PageDto<UserDto> findUsers(
           @RequestParam(required = false) String search,

@@ -1,32 +1,22 @@
 package booking.backend.service.model;
 
-
 import booking.backend.commons.Role;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDto {
-  @JsonProperty("user_id")
   private Integer id;
 
-  @JsonProperty("username")
   private String username;
 
-  @JsonProperty("first_name")
   private String firstName;
 
-  @JsonProperty("last_name")
   private String lastName;
 
-  @JsonProperty("photo")
   private byte[] photo;
 
-  @JsonProperty("phone_number")
   private String phoneNumber;
 
-  @JsonProperty("email")
   private String email;
 
-  @JsonProperty("role")
   private Role role;
 
   public Integer getId() {

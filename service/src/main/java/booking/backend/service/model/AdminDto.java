@@ -7,15 +7,12 @@ public class AdminDto {
 
   private String username;
 
-  @JsonProperty("first_name")
   private String firstName;
 
-  @JsonProperty("last_name")
   private String lastName;
 
   private String password;
 
-  @JsonProperty("photo")
   private byte[] photo;
 
   public Integer getId() {

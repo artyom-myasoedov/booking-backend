@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void deleteUserById(int id) {
+  public void deleteUserById(Integer id) {
     userProvider.deleteById(id);
   }
 
@@ -72,7 +71,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<UserDto> findAll() {
-    return userMapper.fromEntities(userProvider.findAll());
+  public UserDto findById(Integer id) {
+    return userProvider.findById(id)
+      .map(userMapper::fromEntity)
+      .orElse(null);
   }
 }

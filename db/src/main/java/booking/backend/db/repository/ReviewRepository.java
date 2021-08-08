@@ -17,4 +17,28 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Integer>, 
                   + "WHERE description like CONCAT('%', lower(?1), '%') "
   )
   Page<ReviewEntity> findReviews(String search, Pageable pageable);
+
+  @Query(
+    ""
+      + "SELECT COUNT(u) "
+      + "FROM reviews u "
+      + "WHERE rated_entity_id = ?1 "
+      + "AND author_id = ?2 "
+      + "AND review_target_id = ?3 "
+  )
+  Integer checkIdentityForPrimaryKey(Integer ratedEntityId, Integer authorId, Integer reviewTargetId);
+
+  @Query(
+    ""
+      + "SELECT COUNT(u) "
+      + "FROM reviews u "
+      + "WHERE review_id <> ?1 "
+      + "AND rated_entity_id = ?2 "
+      + "AND author_id = ?3 "
+      + "AND review_target_id = ?4 "
+  )
+  Integer checkIdentityForPrimaryKeyAccountingCurrentTuple(Integer id,
+                                                        Integer ratedEntityId,
+                                                        Integer authorId,
+                                                        Integer reviewTargetId);
 }
