@@ -143,13 +143,11 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
 //    rooms = entityManager
 //      .createQuery("select distinct r " +
 //        "from rooms r " +
-//        "left join bookings b " +
-//       // "where b.rentalStartDate >= :ending " +
-//        //"AND UNIX_TIMESTEP(b.rentalStartDate) + b.periodOfBooking * 3600 <= :starting " +
+//        "where count(select ) " +
 //        "where r in :rooms", RoomEntity.class)
 //      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
-//      //.setParameter("starting", startOfBooking.getEpochSecond())
-//      //.setParameter("ending", endOfBooking.getEpochSecond())
+//      .setParameter("starting", startOfBooking.getEpochSecond())
+//      .setParameter("ending", endOfBooking.getEpochSecond())
 //      .setParameter("rooms", rooms2)
 //      .getResultList();
 
