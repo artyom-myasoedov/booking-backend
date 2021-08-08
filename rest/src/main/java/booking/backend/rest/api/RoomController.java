@@ -66,7 +66,6 @@ public class RoomController {
   }
 
   @GetMapping("/getAllRooms")
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findAll(
     @RequestParam(defaultValue = "rating") String sortBy,
     @RequestParam(defaultValue = "ASC") String sortOrder,
@@ -78,7 +77,6 @@ public class RoomController {
 
   @GetMapping("/byCriteria")
   @ResponseStatus(HttpStatus.OK)
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findByCriteria(
     @RequestParam(defaultValue = "0") Integer minSquare,
     @RequestParam(defaultValue = "99999999") Integer maxSquare,
