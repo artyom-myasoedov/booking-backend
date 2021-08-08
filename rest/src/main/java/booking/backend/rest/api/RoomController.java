@@ -35,7 +35,6 @@ public class RoomController {
   }
 
   @DeleteMapping("/{roomId}")
-  @Secured({"ROLE_LANDLORD", "ROLE_ADMIN"})
   public void deleteById(@PathVariable Integer roomId) {
     roomService.deleteById(roomId);
   }

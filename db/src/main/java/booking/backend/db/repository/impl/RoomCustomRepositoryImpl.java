@@ -150,7 +150,7 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
         "where " +
         "(select count(b) from bookings b " +
         "where b.room.id = r.id " +
-        "AND b.rentalStartDate) = 0 " +
+        "AND b.rentalStartDate ) = 0 " +
         "AND r in :rooms", RoomEntity.class)
       .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
       .setParameter("starting", startOfBooking)
