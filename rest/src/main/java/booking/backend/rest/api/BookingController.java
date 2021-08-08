@@ -6,6 +6,7 @@ import booking.backend.service.model.BookingDto;
 import booking.backend.service.model.PageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class BookingController {
     this.bookingService = bookingService;
   }
   @GetMapping("/bookings")
+  @Secured({"ROLE_ADMIN"})
   PageDto<BookingDto> findBookings(
     @RequestParam(required = false) String search,
     @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize,
@@ -26,11 +28,13 @@ public class BookingController {
   }
 
   @GetMapping("/{id}")
+  @Secured({"ROLE_ADMIN"})
   BookingDto findById(@PathVariable Integer id){
     return bookingService.findById(id);
   }
 
   @GetMapping("/byRoomId/{id}")
+  @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
   PageDto<BookingDto> findByRoomId(
     @PathVariable Integer id,
     @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize,
@@ -40,6 +44,7 @@ public class BookingController {
   }
 
   @GetMapping("/byTenantId/{id}")
+  @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
   PageDto<BookingDto> findByTenantId(
     @PathVariable Integer id,
     @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize,
@@ -50,17 +55,20 @@ public class BookingController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   BookingDto addBooking(@RequestBody BookingCreateDto bookingDto){
     return bookingService.createBooking(bookingDto);
   }
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
+  @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
   BookingDto updateBooking(@RequestBody BookingDto bookingDto){
     return bookingService.updateBooking(bookingDto);
   }
 
   @DeleteMapping("/{id}")
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   void deleteBooking(@PathVariable int id) {
     bookingService.deleteBookingById( id);
   }

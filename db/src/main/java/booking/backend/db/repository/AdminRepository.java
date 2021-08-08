@@ -10,13 +10,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
-//  @Query(
-//    ""
-//      + "SELECT u "
-//      + "FROM admins u "
-//      + "WHERE LOWER(first_name) like CONCAT('%', lower(?1), '%') "
-//      + "OR LOWER(last_name) like CONCAT('%', lower(?1),'%')"
-//  )
-//  Page<AdminEntity> findAdmins(String search, Pageable pageable);
+
   Page<AdminEntity>getAllByUsernameIsContaining(String search, Pageable pageable);
+
+  boolean existsByUsernameIgnoreCase(String value);
+
+  @Query(
+    ""
+      + "SELECT COUNT(u) "
+      + "FROM admins u "
+      + "WHERE LOWER(username) = LOWER(?2) "
+      + "AND user_id <> ?1"
+  )
+  Integer countUniqueForUpdate(Integer id, String username);
 }

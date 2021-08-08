@@ -9,7 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class AdminCreateDto {
+public class AdminUpdateDto {
+  @NotNull(message = "id.is-null")
+  private Integer id;
 
   @UsernameUnique
   @Pattern(regexp = "^[a-zA-Z\\d]{5,32}$", message = "username.invalid")
@@ -66,11 +68,19 @@ public class AdminCreateDto {
     this.password = password;
   }
 
-  public byte[] getPhotoPath() {
+  public byte[] getPhoto() {
     return photo;
   }
 
-  public void setPhotoPath(byte[] photoPath) {
-    this.photo = photoPath;
+  public void setPhoto(byte[] photo) {
+    this.photo = photo;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 }

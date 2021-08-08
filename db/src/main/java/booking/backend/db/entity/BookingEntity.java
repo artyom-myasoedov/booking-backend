@@ -32,6 +32,9 @@ public class BookingEntity {
   @Column(name = "rental_start_date")
   private Instant rentalStartDate;
 
+  @Column(name = "rental_end_date")
+  private Instant rentalEndDate;
+
   public Integer getId() {
     return id;
   }
@@ -70,5 +73,13 @@ public class BookingEntity {
 
   public void setPeriodOfBooking(Integer periodOfBooking) {
     this.periodOfBooking = periodOfBooking;
+  }
+
+  public Instant getRentalEndDate() {
+    return rentalEndDate;
+  }
+
+  public void setRentalEndDate(Instant rentalEndDate) {
+    this.rentalEndDate = rentalEndDate;
   }
 }

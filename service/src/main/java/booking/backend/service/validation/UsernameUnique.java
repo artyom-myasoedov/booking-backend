@@ -1,5 +1,7 @@
 package booking.backend.service.validation;
 
+import booking.backend.service.validation.validator.AdminUsernameUniqueForUpdate;
+import booking.backend.service.validation.validator.StringAdminUsernameUnique;
 import booking.backend.service.validation.validator.StringUsernameUnique;
 import booking.backend.service.validation.validator.UsernameUniqueForUpdate;
 
@@ -11,7 +13,13 @@ import java.lang.annotation.*;
 @Documented
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {StringUsernameUnique.class, UsernameUniqueForUpdate.class})
+@Constraint(
+  validatedBy = {
+    StringUsernameUnique.class,
+    UsernameUniqueForUpdate.class,
+    StringAdminUsernameUnique.class,
+    AdminUsernameUniqueForUpdate.class
+  })
 public @interface UsernameUnique {
 
   String message() default "username.already-exists";
