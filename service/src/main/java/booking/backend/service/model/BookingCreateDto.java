@@ -1,21 +1,21 @@
 package booking.backend.service.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.Instant;
 
-public class BookingDto {
-  private Integer id;
+public class BookingCreateDto {
+  @JsonProperty("room")
   private RoomDto room;
+
+  @JsonProperty("tenant")
   private UserDto tenant;
+
+  @JsonProperty("periodOfRent")
   private Integer periodOfBooking;
+
+  @JsonProperty("rentalStartDate")
   private Instant rentalStartDate;
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
 
   public RoomDto getRoom() {
     return room;

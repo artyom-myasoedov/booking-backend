@@ -8,11 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface BookingRepository extends JpaRepository<BookingEntity, Integer> {
-  @Query(
-    ""
-      + "SELECT u "
-      + "FROM bookings u "
-      + "WHERE LOWER(room_id) like '?1'"
-  )
-  Page<BookingEntity> findBookings(String search, Pageable pageable);
+//  @Query(
+//    ""
+//      + "SELECT u "
+//      + "FROM bookings u "
+//      + "WHERE LOWER(room_id) like '?1'"
+//  )
+  Page<BookingEntity> findBookingEntitiesByTenantUsername(String search, Pageable pageable);
+
+  Page<BookingEntity> findBookingEntitiesByRoomId(Integer id, Pageable page);
+
+  Page<BookingEntity> findBookingEntitiesByTenantId(Integer id, Pageable page);
 }

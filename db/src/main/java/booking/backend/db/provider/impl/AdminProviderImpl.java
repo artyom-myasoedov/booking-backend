@@ -21,11 +21,11 @@ public class AdminProviderImpl implements AdminProvider {
   }
 
   @Override
-  public Page<AdminEntity> findAdmins(String search, Pageable pageable) {
+  public Page<AdminEntity> findByUsername(String search, Pageable pageable) {
     if (search == null) {
       return adminRepository.findAll(pageable);
     }
-    return adminRepository.findAdmins(search, pageable);
+    return adminRepository.getAllByUsernameIsContaining(search, pageable);
   }
 
   @Override
