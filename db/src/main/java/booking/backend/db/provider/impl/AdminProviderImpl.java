@@ -47,4 +47,14 @@ public class AdminProviderImpl implements AdminProvider {
   public void deleteById(Integer id) {
     adminRepository.deleteById(id);
   }
+
+  @Override
+  public boolean isUsernameUnique(String value) {
+    return !adminRepository.existsByUsernameIgnoreCase(value);
+  }
+
+  @Override
+  public boolean isUsernameUnique(Integer id, String username) {
+    return adminRepository.countUniqueForUpdate(id, username) == 0;
+  }
 }

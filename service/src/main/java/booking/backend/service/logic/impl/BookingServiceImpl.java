@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class BookingServiceImpl implements BookingService {
   private final BookingMapper bookingMapper;
 
@@ -38,7 +40,6 @@ public class BookingServiceImpl implements BookingService {
   public BookingDto updateBooking(BookingDto bookingDto) {
     var booking = bookingProvider.findById(bookingDto.getId())
       .orElseThrow(() -> new IllegalArgumentException("Booking not found"));
-    //() -> new EntityNotFoundException(equipment.getEquipmentId(), "Equipment")
 
     return Optional.of(bookingDto)
       .map(bookingMapper::toEntity)
@@ -96,7 +97,6 @@ public class BookingServiceImpl implements BookingService {
       .totalPages(values.getTotalPages())
       .items(values.getContent())
       .build();
-//    return bookingMapper.fromEntities(bookingProvider.findByRoomId(id));
   }
 
   @Override
@@ -114,6 +114,5 @@ public class BookingServiceImpl implements BookingService {
       .totalPages(values.getTotalPages())
       .items(values.getContent())
       .build();
-//    return bookingMapper.fromEntities(bookingProvider.findByTenantId(id, pageSize, pageNumber));
   }
 }

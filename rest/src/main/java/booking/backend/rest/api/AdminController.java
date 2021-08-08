@@ -3,6 +3,7 @@ package booking.backend.rest.api;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.model.AdminCreateDto;
 import booking.backend.service.model.AdminDto;
+import booking.backend.service.model.AdminUpdateDto;
 import booking.backend.service.model.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class AdminController {
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  AdminDto updateAdmin(@RequestBody AdminCreateDto admin){
+  AdminDto updateAdmin(@RequestBody AdminUpdateDto admin){
     return adminService.updateAdmin(admin);
   }
 
@@ -50,14 +51,4 @@ public class AdminController {
     adminService.deleteAdminById(id);
   }
 
-//  @DeleteMapping("/{id}")
-//  void deleteUser(@PathVariable int id, Filter filter) {
-//    adminRepository.deleteById(id);
-//  }
-//
-//  static class Filter {
-//    private List<String> users;
-//    private String search;
-//
-//  }
 }

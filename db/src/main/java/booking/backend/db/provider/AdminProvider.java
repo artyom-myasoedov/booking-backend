@@ -17,4 +17,8 @@ public interface AdminProvider {
   Iterable<AdminEntity> findAll();
 
   void deleteById(Integer id);
+
+  boolean isUsernameUnique(String value);
+
+  boolean isUsernameUnique(Integer id, String username);
 }
