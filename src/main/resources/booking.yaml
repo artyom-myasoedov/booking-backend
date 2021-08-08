@@ -1308,7 +1308,6 @@ paths:
             - "rating"
             - "square"
             - "capacity"
-            - "landlordRating"
         - name: "pageSize"
           in: "query"
           required: false

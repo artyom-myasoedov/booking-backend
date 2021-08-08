@@ -9,9 +9,12 @@ import booking.backend.service.model.RoomCreateDto;
 import booking.backend.service.model.RoomDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,45 +29,56 @@ public class RoomController {
   }
 
   @GetMapping("/{roomId}")
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public RoomDto findById(@PathVariable Integer roomId) {
     return roomService.findById(roomId);
   }
 
   @DeleteMapping("/{roomId}")
+  @Secured({"ROLE_LANDLORD", "ROLE_ADMIN"})
   public void deleteById(@PathVariable Integer roomId) {
     roomService.deleteById(roomId);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
+  @Secured("ROLE_LANDLORD")
   public RoomDto addRoom(@RequestBody RoomCreateDto room) {
     return roomService.addRoom(room);
   }
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
+  @Secured("ROLE_LANDLORD")
   public RoomDto updateRoom(@RequestBody RoomDto room) {
     return roomService.updateRoom(room);
   }
 
   @GetMapping("/byLandlordId")
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findByLandlordId(
     @RequestParam Integer landlordId,
+    @RequestParam(defaultValue = "rating") String sortBy,
+    @RequestParam(defaultValue = "ASC") String sortOrder,
     @RequestParam(defaultValue = "10") Integer pageSize,
     @RequestParam(defaultValue = "0") Integer pageNumber) {
-    return roomService.findByLandlordId(landlordId, pageSize, pageNumber);
+    return roomService.findByLandlordId(landlordId, sortBy, sortOrder, pageSize, pageNumber);
   }
 
   @GetMapping("/getAllRooms")
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findAll(
+    @RequestParam(defaultValue = "rating") String sortBy,
+    @RequestParam(defaultValue = "ASC") String sortOrder,
     @RequestParam(defaultValue = "10") Integer pageSize,
     @RequestParam(defaultValue = "0") Integer pageNumber
   ) {
-    return roomService.findAll(pageSize, pageNumber);
+    return roomService.findAll(sortBy, sortOrder, pageSize, pageNumber);
   }
 
   @GetMapping("/byCriteria")
   @ResponseStatus(HttpStatus.OK)
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findByCriteria(
     @RequestParam(defaultValue = "0") Integer minSquare,
     @RequestParam(defaultValue = "99999999") Integer maxSquare,
@@ -77,9 +91,9 @@ public class RoomController {
     @RequestParam(defaultValue = "99999999") BigDecimal maxPrice,
     @RequestParam(defaultValue = "") String addressLike,
     @RequestParam(defaultValue = "") String landlordUsernameLike,
-    @RequestParam(defaultValue = "0") Double minRating,
-    @RequestParam(defaultValue = "") String startOfBooking,
-    @RequestParam(defaultValue = "") String endOfBooking,
+    @RequestParam(defaultValue = "0") BigDecimal minRating,
+    @RequestParam(defaultValue = "") Instant startOfBooking,
+    @RequestParam(defaultValue = "") Instant endOfBooking,
     @RequestParam(defaultValue = "ASC") String sortOrder,
     @RequestParam(defaultValue = "rating") String sortBy,
     @RequestParam(defaultValue = "10") Integer pageSize,

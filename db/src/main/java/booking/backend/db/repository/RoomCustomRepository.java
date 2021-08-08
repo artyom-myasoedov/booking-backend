@@ -7,23 +7,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
 public interface RoomCustomRepository {
 
-  Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable);
+  Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable, String sortBy, String sortOrder);
 
-  Optional<RoomEntity> findByRoomId(Integer roomId);
-
-  Page<RoomEntity> findAllRooms(Pageable pageable);
+  Page<RoomEntity> findAllRooms(Pageable pageable, String sortBy, String sortOrder);
 
   Page<RoomEntity> findByCriteria(
-      Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
-      Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
-      List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,
-      String addressLike, String landlordUsernameLike, Double minRating,
-      String startOfBooking, String endOfBooking, String sortOrder,
-      String sortBy, Pageable pageable);
+    Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
+    Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
+    List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,
+    String addressLike, String landlordUsernameLike, BigDecimal minRating,
+    Instant startOfBooking, Instant endOfBooking, String sortOrder,
+    String sortBy, Pageable pageable);
 
 }

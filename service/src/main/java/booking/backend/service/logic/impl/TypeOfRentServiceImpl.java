@@ -8,12 +8,14 @@ import booking.backend.service.model.TypeOfRentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
+@Validated
 public class TypeOfRentServiceImpl implements TypeOfRentService {
 
   private final TypeOfRentMapper typeOfRentMapper;
