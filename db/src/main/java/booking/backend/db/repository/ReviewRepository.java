@@ -1,6 +1,6 @@
 package booking.backend.db.repository;
 
-import booking.backend.db.entity.ReviewEntity;
+import booking.backend.db.entity.ReviewDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,14 +9,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<ReviewEntity, Integer>, JpaSpecificationExecutor<ReviewEntity> {
+public interface ReviewRepository extends JpaRepository<ReviewDto, Integer>, JpaSpecificationExecutor<ReviewDto> {
   @Query(
-          ""
-                  + "SELECT u "
-                  + "FROM reviews u "
-                  + "WHERE description like CONCAT('%', lower(?1), '%') "
+    ""
+      + "SELECT u "
+      + "FROM reviews u "
+      + "WHERE description like CONCAT('%', lower(?1), '%') "
   )
-  Page<ReviewEntity> findReviews(String search, Pageable pageable);
+  Page<ReviewDto> findReviews(String search, Pageable pageable);
 
   @Query(
     ""
@@ -38,7 +38,7 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Integer>, 
       + "AND review_target_id = ?4 "
   )
   Integer checkIdentityForPrimaryKeyAccountingCurrentTuple(Integer id,
-                                                        Integer ratedEntityId,
-                                                        Integer authorId,
-                                                        Integer reviewTargetId);
+                                                           Integer ratedEntityId,
+                                                           Integer authorId,
+                                                           Integer reviewTargetId);
 }

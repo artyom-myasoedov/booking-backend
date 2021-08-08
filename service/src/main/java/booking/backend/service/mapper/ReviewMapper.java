@@ -1,8 +1,7 @@
 package booking.backend.service.mapper;
 
-import booking.backend.db.entity.ReviewEntity;
+import booking.backend.db.entity.ReviewDto;
 import booking.backend.service.model.ReviewCreateDto;
-import booking.backend.service.model.ReviewDto;
 import booking.backend.service.model.ReviewUpdateDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -12,11 +11,11 @@ import java.util.List;
 @Mapper
 public interface ReviewMapper {
 
-  ReviewDto fromEntity(ReviewEntity reviewEntity);
+  booking.backend.service.model.ReviewDto fromEntity(ReviewDto reviewDto);
 
-  ReviewEntity toEntity(ReviewCreateDto reviewDto);
+  ReviewDto toEntity(ReviewCreateDto reviewDto);
 
-  void toEntity(ReviewUpdateDto dto, @MappingTarget ReviewEntity original);
+  void toEntity(ReviewUpdateDto dto, @MappingTarget ReviewDto original);
 
-  List<ReviewDto> fromEntities(Iterable<ReviewEntity> reviewEntities);
+  List<booking.backend.service.model.ReviewDto> fromEntities(Iterable<ReviewDto> reviewEntities);
 }

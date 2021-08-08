@@ -74,4 +74,35 @@ public class ReviewServiceImpl implements ReviewService {
       .items(values.getContent())
       .build();
   }
+
+  @Override
+  public PageDto<ReviewDto> findByCriteria(Integer ratedEntityId,
+                                         Integer authorId,
+                                         Integer reviewTargetId,
+                                         Integer minRating,
+                                         Integer maxRating,
+                                         String sortOrder,
+                                         String sortBy,
+                                         Integer pageSize,
+                                         Integer pageNumber) {
+    var values = reviewProvider.findByCriteria(
+        ratedEntityId,
+        authorId,
+        reviewTargetId,
+        minRating,
+        maxRating,
+        sortOrder,
+        sortBy,
+        Pageable
+          .ofSize(pageSize)
+          .withPage(pageNumber)
+      )
+      .map(reviewMapper::fromEntity);
+
+    return ImmutablePageDto.<ReviewDto>builder()
+      .pageNumber(pageNumber)
+      .totalPages(values.getTotalPages())
+      .items(values.getContent())
+      .build();
+  }
 }

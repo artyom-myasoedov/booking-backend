@@ -1,7 +1,6 @@
 package booking.backend.service.validation.validator;
 
 import booking.backend.db.provider.UserProvider;
-import booking.backend.service.model.UserDto;
 import booking.backend.service.model.UserUpdateDto;
 import booking.backend.service.validation.UsernameUnique;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,6 @@ public class UsernameUniqueForUpdate implements ConstraintValidator<UsernameUniq
       return true;
     }
 
-    return !provider.isUsernameExists(value.getId(), value.getUsername());
+    return provider.isUsernameUnique(value.getId(), value.getUsername());
   }
 }

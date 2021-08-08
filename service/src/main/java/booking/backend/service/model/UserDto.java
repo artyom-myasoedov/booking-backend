@@ -2,6 +2,8 @@ package booking.backend.service.model;
 
 import booking.backend.commons.Role;
 
+import java.math.BigDecimal;
+
 public class UserDto {
   private Integer id;
 
@@ -18,6 +20,8 @@ public class UserDto {
   private String email;
 
   private Role role;
+
+  private BigDecimal userRating;
 
   public Integer getId() {
     return id;
@@ -81,5 +85,13 @@ public class UserDto {
 
   public void setRole(Role role) {
     this.role = role;
+  }
+
+  public BigDecimal getUserRating() {
+    return userRating;
+  }
+
+  public void setUserRating(BigDecimal userRating) {
+    this.userRating = userRating;
   }
 }

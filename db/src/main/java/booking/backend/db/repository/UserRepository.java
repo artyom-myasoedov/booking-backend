@@ -23,5 +23,14 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 
   boolean existsByIdAndRole(Integer id, Role role);
 
-  boolean existsByIdIsNotAndUsernameIgnoreCase(Integer id, String username);
+  @Query(
+    ""
+      + "SELECT COUNT(u) "
+      + "FROM users u "
+      + "WHERE LOWER(username) = LOWER(?2) "
+      + "AND user_id <> ?1"
+  )
+  Integer countUniqueForUpdate(Integer id, String username);
+
+  UserEntity findByUsernameEqualsIgnoreCase(String username);
 }

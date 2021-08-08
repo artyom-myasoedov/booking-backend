@@ -48,13 +48,13 @@ public class UserProviderImpl implements UserProvider {
   }
 
   @Override
-  public boolean isUsernameExists(String value) {
+  public boolean isUsernameUnique(String value) {
     return userRepository.existsByUsernameIgnoreCase(value);
   }
 
   @Override
-  public boolean isUsernameExists(Integer id, String username) {
-    return userRepository.existsByIdIsNotAndUsernameIgnoreCase(id, username);
+  public boolean isUsernameUnique(Integer id, String username) {
+    return userRepository.countUniqueForUpdate(id, username) == 0;
   }
 
   @Override

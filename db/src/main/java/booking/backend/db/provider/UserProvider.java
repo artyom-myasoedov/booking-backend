@@ -17,9 +17,9 @@ public interface UserProvider {
 
   void deleteById(int id);
 
-  boolean isUsernameExists(String value);
+  boolean isUsernameUnique(String value);
 
-  boolean isUsernameExists(Integer id, String username);
+  boolean isUsernameUnique(Integer id, String username);
 
   boolean isRoleIdentical(Integer id, Role role);
 }
