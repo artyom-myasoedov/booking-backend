@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,17 +52,21 @@ public class RoomController {
   @GetMapping("/byLandlordId")
   public PageDto<RoomDto> findByLandlordId(
     @RequestParam Integer landlordId,
+    @RequestParam(defaultValue = "ASC") String sortOrder,
+    @RequestParam(defaultValue = "rating") String sortBy,
     @RequestParam(defaultValue = "10") Integer pageSize,
     @RequestParam(defaultValue = "0") Integer pageNumber) {
-    return roomService.findByLandlordId(landlordId, pageSize, pageNumber);
+    return roomService.findByLandlordId(landlordId, sortBy, sortOrder, pageSize, pageNumber);
   }
 
   @GetMapping("/getAllRooms")
   public PageDto<RoomDto> findAll(
+    @RequestParam(defaultValue = "ASC") String sortOrder,
+    @RequestParam(defaultValue = "rating") String sortBy,
     @RequestParam(defaultValue = "10") Integer pageSize,
     @RequestParam(defaultValue = "0") Integer pageNumber
   ) {
-    return roomService.findAll(pageSize, pageNumber);
+    return roomService.findAll(sortBy, sortOrder, pageSize, pageNumber);
   }
 
   @GetMapping("/byCriteria")
@@ -78,9 +83,9 @@ public class RoomController {
     @RequestParam(defaultValue = "99999999") BigDecimal maxPrice,
     @RequestParam(defaultValue = "") String addressLike,
     @RequestParam(defaultValue = "") String landlordUsernameLike,
-    @RequestParam(defaultValue = "0") Double minRating,
-    @RequestParam(defaultValue = "") String startOfBooking,
-    @RequestParam(defaultValue = "") String endOfBooking,
+    @RequestParam(defaultValue = "0") BigDecimal minRating,
+    @RequestParam(defaultValue = "") Instant startOfBooking,
+    @RequestParam(defaultValue = "") Instant endOfBooking,
     @RequestParam(defaultValue = "ASC") String sortOrder,
     @RequestParam(defaultValue = "rating") String sortBy,
     @RequestParam(defaultValue = "10") Integer pageSize,

@@ -4,14 +4,17 @@ import booking.backend.db.entity.RoomEntity;
 import booking.backend.db.entity.TypeOfRent;
 import booking.backend.db.entity.TypeOfRoom;
 import booking.backend.db.repository.RoomCustomRepository;
+import org.hibernate.annotations.QueryHints;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
+
 
 public class RoomCustomRepositoryImpl implements RoomCustomRepository {
 
@@ -20,19 +23,72 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
 
 
   @Override
-  public Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable) {
-    return null;
+  public Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable, String sortBy, String sortOrder) {
+    List<RoomEntity> rooms = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "left join fetch r.landlord l " +
+        "left join fetch r.equipments " +
+        "where l.id = :lId", RoomEntity.class)
+      .setParameter("lId", landlordId)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .getResultList();
+
+    List<RoomEntity> rooms2 = getRooms(rooms, "typesOfRent ");
+
+    rooms = getRooms(rooms2, "reviews ");
+
+    rooms2 = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "left join fetch r.photos " +
+        "where r in :rooms " +
+        "order by r." + sortBy + " " + sortOrder, RoomEntity.class)
+      .setParameter("rooms", rooms)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .getResultList();
+
+
+    return new PageImpl<>(rooms2, pageable, rooms2.size());
+  }
+
+  private List<RoomEntity> getRooms(List<RoomEntity> rooms, String s) {
+    return entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "left join fetch r." + s +
+        " where r in :rooms", RoomEntity.class)
+      .setParameter("rooms", rooms)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .getResultList();
   }
 
   @Override
-  public Optional<RoomEntity> findByRoomId(Integer roomId) {
+  public Page<RoomEntity> findAllRooms(Pageable pageable, String sortBy, String sortOrder) {
+    List<RoomEntity> rooms = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "left join fetch r.landlord " +
+        "left join fetch r.equipments ", RoomEntity.class)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .getResultList();
 
-    return null;
-  }
+    List<RoomEntity> rooms2 = getRooms(rooms, "typesOfRent ");
 
-  @Override
-  public Page<RoomEntity> findAllRooms(Pageable pageable) {
-    return null;
+    rooms = getRooms(rooms2, "reviews ");
+
+    rooms2 = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "left join fetch r.photos " +
+        "where r in :rooms " +
+        "order by r." + sortBy + " " + sortOrder, RoomEntity.class)
+      .setParameter("rooms", rooms)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .getResultList();
+
+
+    return new PageImpl<>(rooms2, pageable, rooms2.size());
   }
 
   @Override
@@ -40,9 +96,64 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
     Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
     Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
     List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,
-    String addressLike, String landlordUsernameLike, Double minRating,
-    String startOfBooking, String endOfBooking, String sortOrder,
+    String addressLike, String landlordUsernameLike, BigDecimal minRating,
+    Instant startOfBooking, Instant endOfBooking, String sortOrder,
     String sortBy, Pageable pageable) {
-    return null;
+
+    List<RoomEntity> rooms = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "left join fetch r.landlord l " +
+        "left join fetch r.equipments e " +
+        "where r.square between :minSquare AND :maxSquare " +
+        "AND r.capacity between :minCapacity AND :maxCapacity " +
+        "AND r.minRentalPeriod >= :minRentalPeriod " +
+        "AND r.typeOfRoom in :typesOfRoom " +
+        "AND r.rating >= :minRating " +
+        "AND r.address like concat('%', :addresLike, '%') " +
+        "AND l.username like concat('%', :username, '%') " +
+        "", RoomEntity.class)
+      .setParameter("minSquare", minSquare)
+      .setParameter("maxSquare", maxSquare)
+      .setParameter("minCapacity", minNumberOfPeople)
+      .setParameter("maxCapacity", maxNumberOfPeople)
+      .setParameter("minRentalPeriod", minRentalPeriod)
+      .setParameter("typesOfRoom", typesOfRoom)
+      .setParameter("minRating", minRating)
+      .setParameter("addresLike", addressLike)
+      .setParameter("username", landlordUsernameLike)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .getResultList();
+
+    List<RoomEntity> rooms2 = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "" +
+        "join fetch r.typesOfRent t " +
+        "where  t.typeOfRent in :typesOfRent " +
+        "AND t.price between :minPrice AND :maxPrice " +
+        "AND r in :rooms", RoomEntity.class)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .setParameter("typesOfRent", typesOfRent)
+      .setParameter("minPrice", minPrice)
+      .setParameter("maxPrice", maxPrice)
+      .setParameter("rooms", rooms)
+      .getResultList();
+
+//    rooms = entityManager
+//      .createQuery("select distinct r " +
+//        "from rooms r " +
+//        "left join bookings b " +
+//       // "where b.rentalStartDate >= :ending " +
+//        //"AND UNIX_TIMESTEP(b.rentalStartDate) + b.periodOfBooking * 3600 <= :starting " +
+//        "where r in :rooms", RoomEntity.class)
+//      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+//      //.setParameter("starting", startOfBooking.getEpochSecond())
+//      //.setParameter("ending", endOfBooking.getEpochSecond())
+//      .setParameter("rooms", rooms2)
+//      .getResultList();
+
+
+    return new PageImpl<>(rooms, pageable, rooms.size());
   }
 }

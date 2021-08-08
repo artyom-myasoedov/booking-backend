@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,10 +65,10 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
-  public PageDto<RoomDto> findByLandlordId(Integer landlordId, Integer pageSize, Integer pageNumber) {
+  public PageDto<RoomDto> findByLandlordId(Integer landlordId, String sortBy, String SortOrder, Integer pageSize, Integer pageNumber) {
     var values = roomProvider
       .findByLandlord_Id(landlordId,
-        Pageable.ofSize(pageSize).withPage(pageNumber)).map(roomMapper::fromEntity);
+        Pageable.ofSize(pageSize).withPage(pageNumber), sortBy, SortOrder).map(roomMapper::fromEntity);
 
     return ImmutablePageDto.<RoomDto>builder()
       .pageNumber(pageNumber)
@@ -77,10 +78,10 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
-  public PageDto<RoomDto> findAll(Integer pageSize, Integer pageNumber) {
+  public PageDto<RoomDto> findAll(String sortBy, String SortOrder, Integer pageSize, Integer pageNumber) {
     var values = roomProvider
       .findAll(
-        Pageable.ofSize(pageSize).withPage(pageNumber)).map(roomMapper::fromEntity);
+        Pageable.ofSize(pageSize).withPage(pageNumber), sortBy, SortOrder).map(roomMapper::fromEntity);
 
     return ImmutablePageDto.<RoomDto>builder()
       .pageNumber(pageNumber)
@@ -94,8 +95,8 @@ public class RoomServiceImpl implements RoomService {
     Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
     Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
     List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,
-    String addressLike, String landlordUsernameLike, Double minRating,
-    String startOfBooking, String endOfBooking, String sortOrder,
+    String addressLike, String landlordUsernameLike, BigDecimal minRating,
+    Instant startOfBooking, Instant endOfBooking, String sortOrder,
     String sortBy, Integer pageSize, Integer pageNumber) {
 
 

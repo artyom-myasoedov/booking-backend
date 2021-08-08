@@ -15,9 +15,6 @@ public interface RoomRepository extends CrudRepository<RoomEntity, Integer>, Roo
 
   Optional<RoomEntity> findById(Integer roomId);
 
-  Page<RoomEntity> findByLandlord_Id(Integer id, Pageable pageable);
-
-  Page<RoomEntity> findAll(Pageable pageable);
 
 
 

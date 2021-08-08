@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +36,8 @@ public class RoomProviderImpl implements RoomProvider {
   }
 
   @Override
-  public Page<RoomEntity> findAll(Pageable pageable) {
-    return roomRepository.findAll(pageable);
+  public Page<RoomEntity> findAll(Pageable pageable, String sortBy, String sortOrder) {
+    return roomRepository.findAllRooms(pageable, sortBy, sortOrder);
   }
 
   @Override
@@ -45,8 +46,8 @@ public class RoomProviderImpl implements RoomProvider {
   }
 
   @Override
-  public Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable pageable) {
-    return roomRepository.findByLandlord_Id(landlordId, pageable);
+  public Page<RoomEntity> findByLandlord_Id(Integer landlordId, Pageable pageable, String sortBy, String sortOrder) {
+    return roomRepository.findByLandlordId(landlordId, pageable, sortBy, sortOrder);
   }
 
   @Override
@@ -54,8 +55,8 @@ public class RoomProviderImpl implements RoomProvider {
     Integer minSquare, Integer maxSquare, Integer minNumberOfPeople,
     Integer maxNumberOfPeople, Integer minRentalPeriod, List<TypeOfRent> typesOfRent,
     List<TypeOfRoom> typesOfRoom, BigDecimal minPrice, BigDecimal maxPrice,
-    String addressLike, String landlordUsernameLike, Double minRating,
-    String startOfBooking, String endOfBooking, String sortOrder,
+    String addressLike, String landlordUsernameLike, BigDecimal minRating,
+    Instant startOfBooking, Instant endOfBooking, String sortOrder,
     String sortBy, Pageable pageable) {
     return roomRepository.findByCriteria(
       minSquare, maxSquare, minNumberOfPeople,
