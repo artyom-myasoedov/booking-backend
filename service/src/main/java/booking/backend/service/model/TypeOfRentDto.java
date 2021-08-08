@@ -8,10 +8,8 @@ import java.math.BigDecimal;
 
 public class TypeOfRentDto {
 
-  @JsonProperty("roomId")
   private Integer roomId;
 
-  @JsonProperty("name")
   private TypeOfRent typeOfRent;
 
   private BigDecimal price;
@@ -24,10 +22,12 @@ public class TypeOfRentDto {
     this.roomId = roomId;
   }
 
+  @JsonIgnore
   public TypeOfRent getTypeOfRent() {
     return typeOfRent;
   }
 
+  @JsonProperty("name")
   public void setTypeOfRent(TypeOfRent typeOfRent) {
     this.typeOfRent = typeOfRent;
   }
@@ -40,4 +40,18 @@ public class TypeOfRentDto {
     this.price = price;
   }
 
+  @JsonProperty("id")
+  public Integer getId() {
+    return typeOfRent.getId();
+  }
+
+  @JsonProperty("numberOfHours")
+  public Integer getNumberOfHours() {
+    return typeOfRent.getNumberOfHours();
+  }
+
+  @JsonProperty("name")
+  public String getName() {
+    return typeOfRent.toString();
+  }
 }

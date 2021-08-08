@@ -1,31 +1,26 @@
 package booking.backend.service.model;
 
 import booking.backend.db.entity.ReviewTarget;
-import booking.backend.db.entity.UserEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import booking.backend.service.validation.ReviewIdentical;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
-public class ReviewDto {
-  private Integer id;
-
+@ReviewIdentical
+public class ReviewCreateDto {
+  @NotNull(message = "ratedEntityId.is-null")
   private Integer ratedEntityId;
 
+  @NotNull(message = "rating.is-null")
   private Integer rating;
 
+  @NotNull(message = "description.is-null")
   private String description;
 
+  @NotNull(message = "authorId.is-null")
   private Integer authorId;
 
+  @NotNull(message = "reviewTarget.is-null")
   private ReviewTarget reviewTarget;
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
 
   public Integer getRatedEntityId() {
     return ratedEntityId;

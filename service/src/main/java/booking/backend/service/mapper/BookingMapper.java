@@ -12,6 +12,7 @@ import java.util.List;
 public interface BookingMapper {
 
 
+  @Mapping(target = "room", expression = "java(roomMapper.fromEntity(adminEntity.getRoom()))")
   BookingDto fromEntity(BookingEntity adminEntity);
 
   BookingEntity toEntity(BookingDto bookingDto);

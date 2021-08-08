@@ -1,22 +1,29 @@
-package booking.backend.service.model;
+package booking.backend.db.entity;
 
-import booking.backend.db.entity.ReviewTarget;
-import booking.backend.db.entity.UserEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-
+@Table(schema = "booking", name = "reviews")
+@Entity(name = "reviews")
 public class ReviewDto {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "review_id")
   private Integer id;
 
+  @Column(name = "rated_entity_id")
   private Integer ratedEntityId;
 
+  @Column(name = "rating")
   private Integer rating;
 
+  @Column(name = "description")
   private String description;
 
+  @Column(name = "author_id")
   private Integer authorId;
 
+  @Column(name = "review_target_id")
   private ReviewTarget reviewTarget;
 
   public Integer getId() {

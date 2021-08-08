@@ -1,5 +1,6 @@
 package booking.backend.db.provider;
 
+import booking.backend.commons.Role;
 import booking.backend.db.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,11 +15,11 @@ public interface UserProvider {
 
   Optional<UserEntity> findById(int id);
 
-  Iterable<UserEntity> findAll();
-
   void deleteById(int id);
 
-  boolean isUsernameExists(String value);
+  boolean isUsernameUnique(String value);
 
-  boolean isUsernameExists(int id, String username);
+  boolean isUsernameUnique(Integer id, String username);
+
+  boolean isRoleIdentical(Integer id, Role role);
 }
