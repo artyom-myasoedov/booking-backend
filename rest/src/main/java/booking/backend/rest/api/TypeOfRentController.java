@@ -5,6 +5,7 @@ import booking.backend.service.model.TypeOfRentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class TypeOfRentController {
   }
 
   @DeleteMapping
+  @Secured("ROLE_LANDLORD")
   public void deleteTypeOfRent(
     @RequestParam Integer typeOfRent,
     @RequestParam Integer roomId) {
@@ -36,12 +38,14 @@ public class TypeOfRentController {
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
+  @Secured("ROLE_LANDLORD")
   public TypeOfRentDto updateTypeOfRent(@RequestBody TypeOfRentDto typeOfRent) {
     return typeOfRentService.updateTypeOfRent(typeOfRent);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
+  @Secured("ROLE_LANDLORD")
   public TypeOfRentDto addTypeOfRent(@RequestBody TypeOfRentDto typeOfRent) {
     return typeOfRentService.addTypeOfRent(typeOfRent);
   }
