@@ -1,6 +1,7 @@
 package booking.backend.db.provider;
 
 import booking.backend.db.entity.AdminEntity;
+import booking.backend.db.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,13 +9,13 @@ import java.util.Optional;
 
 public interface AdminProvider {
 
-  Page<AdminEntity> findByUsername(String search, Pageable pageable);
+  Page<UserEntity> findByUsername(String search, Pageable pageable);
 
-  AdminEntity save(AdminEntity userEntity);
+  UserEntity save(UserEntity userEntity);
 
-  Optional<AdminEntity> findById(Integer id);
+  Optional<UserEntity> findById(Integer id);
 
-  Iterable<AdminEntity> findAll();
+  Iterable<UserEntity> findAll();
 
   void deleteById(Integer id);
 

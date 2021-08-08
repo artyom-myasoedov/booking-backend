@@ -12,11 +12,11 @@ import javax.validation.ConstraintValidatorContext;
 
 public class AdminUsernameUniqueForUpdate implements ConstraintValidator<UsernameUnique, AdminUpdateDto> {
 
-  private final AdminProvider provider;
+  private final UserProvider provider;
 
   @Autowired
 
-  public AdminUsernameUniqueForUpdate(AdminProvider provider) {
+  public AdminUsernameUniqueForUpdate(UserProvider provider) {
     this.provider = provider;
   }
 
