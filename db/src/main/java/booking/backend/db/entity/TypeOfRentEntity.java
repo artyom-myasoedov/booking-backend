@@ -16,6 +16,10 @@ public class TypeOfRentEntity {
   @EmbeddedId
   private RoomTypeOfRentId id;
 
+  @Column(name = "type_of_rent_id", insertable = false, updatable = false)
+  private TypeOfRent typeOfRent;
+
+
   public BigDecimal getPrice() {
     return price;
   }
@@ -30,5 +34,13 @@ public class TypeOfRentEntity {
 
   public void setId(RoomTypeOfRentId id) {
     this.id = id;
+  }
+
+  public TypeOfRent getTypeOfRent() {
+    return typeOfRent;
+  }
+
+  public void setTypeOfRent(TypeOfRent typeOfRent) {
+    this.typeOfRent = typeOfRent;
   }
 }

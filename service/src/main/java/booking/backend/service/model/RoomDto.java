@@ -3,16 +3,22 @@ package booking.backend.service.model;
 import booking.backend.db.entity.RoomStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class RoomDto extends RoomCreateDto {
 
 
+  @NotNull(message = "id.is-null")
   private Integer id;
 
   @JsonProperty("status")
+  @NotNull(message = "roomStatus.is-null")
   private RoomStatus roomStatus;
 
+  @NotNull(message = "rating.is-null")
+  @Min(value = 0, message = "rating.is-negative")
   private BigDecimal rating;
 
   public Integer getId() {
