@@ -14,8 +14,8 @@ import javax.validation.ConstraintViolationException;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class PlannerExceptionHandlers {
-  private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PlannerExceptionHandlers.class);
+public class BookingExceptionHandlers {
+  private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(BookingExceptionHandlers.class);
 
 
   @ExceptionHandler(ConstraintViolationException.class)

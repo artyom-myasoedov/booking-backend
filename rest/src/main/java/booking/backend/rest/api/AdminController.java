@@ -1,20 +1,13 @@
 package booking.backend.rest.api;
 
-import booking.backend.db.entity.AdminEntity;
-import booking.backend.db.repository.AdminRepository;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.model.AdminCreateDto;
 import booking.backend.service.model.AdminDto;
 import booking.backend.service.model.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/admin")

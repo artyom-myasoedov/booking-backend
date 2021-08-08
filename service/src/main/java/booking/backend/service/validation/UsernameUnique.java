@@ -1,6 +1,7 @@
 package booking.backend.service.validation;
 
 import booking.backend.service.validation.validator.StringUsernameUnique;
+import booking.backend.service.validation.validator.UsernameUniqueForUpdate;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
