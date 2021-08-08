@@ -67,4 +67,9 @@ public class RoomProviderImpl implements RoomProvider {
       sortBy, pageable
     );
   }
+
+  @Override
+  public boolean isRoomExists(Integer roomId) {
+    return roomRepository.existsById(roomId);
+  }
 }

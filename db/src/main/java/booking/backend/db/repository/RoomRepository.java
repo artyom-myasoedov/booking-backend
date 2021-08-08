@@ -15,6 +15,8 @@ public interface RoomRepository extends CrudRepository<RoomEntity, Integer>, Roo
 
   Optional<RoomEntity> findById(Integer roomId);
 
+  boolean existsById(Integer roomId);
+
 
 
 

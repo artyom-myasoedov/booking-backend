@@ -30,4 +30,6 @@ public interface RoomProvider {
     String addressLike, String landlordUsernameLike, BigDecimal minRating,
     Instant startOfBooking, Instant endOfBooking, String sortOrder,
     String sortBy, Pageable pageable);
+
+  boolean isRoomExists(Integer roomId);
 }
