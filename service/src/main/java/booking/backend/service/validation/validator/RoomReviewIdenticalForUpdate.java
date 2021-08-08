@@ -1,36 +1,34 @@
 package booking.backend.service.validation.validator;
 
-import booking.backend.db.provider.ReviewProvider;
-import booking.backend.service.model.ReviewUpdateDto;
+import booking.backend.db.provider.RoomReviewProvider;
+import booking.backend.service.model.RoomReviewUpdateDto;
 import booking.backend.service.validation.ReviewIdentical;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ReviewIdenticalForUpdate implements ConstraintValidator<ReviewIdentical, ReviewUpdateDto> {
+public class RoomReviewIdenticalForUpdate implements ConstraintValidator<ReviewIdentical, RoomReviewUpdateDto> {
 
-  private final ReviewProvider provider;
+  private final RoomReviewProvider provider;
 
   @Autowired
-  public ReviewIdenticalForUpdate(ReviewProvider provider) {
+  public RoomReviewIdenticalForUpdate(RoomReviewProvider provider) {
     this.provider = provider;
   }
 
   @Override
-  public boolean isValid(ReviewUpdateDto value, ConstraintValidatorContext context) {
+  public boolean isValid(RoomReviewUpdateDto value, ConstraintValidatorContext context) {
     if (value == null ||
       value.getId() == null ||
       value.getAuthorId() == null ||
-      value.getRatedEntityId() == null ||
-      value.getReviewTarget() == null) {
+      value.getRoomId() == null) {
       return true;
     }
 
     return provider.countIdenticalTuplesOfPrimaryKeyAccountingCurrentTuple(
       value.getId(),
       value.getAuthorId(),
-      value.getRatedEntityId(),
-      value.getReviewTarget().getId()) == 0;
+      value.getRoomId()) == 0;
   }
 }

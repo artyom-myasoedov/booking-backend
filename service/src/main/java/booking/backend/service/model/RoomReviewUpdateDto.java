@@ -1,14 +1,16 @@
 package booking.backend.service.model;
 
-import booking.backend.db.entity.ReviewTarget;
 import booking.backend.service.validation.ReviewIdentical;
 
 import javax.validation.constraints.NotNull;
 
 @ReviewIdentical
-public class ReviewCreateDto {
-  @NotNull(message = "ratedEntityId.is-null")
-  private Integer ratedEntityId;
+public class RoomReviewUpdateDto {
+  @NotNull(message = "id.is-null")
+  private Integer id;
+
+  @NotNull(message = "roomId.is-null")
+  private Integer roomId;
 
   @NotNull(message = "rating.is-null")
   private Integer rating;
@@ -19,15 +21,20 @@ public class ReviewCreateDto {
   @NotNull(message = "authorId.is-null")
   private Integer authorId;
 
-  @NotNull(message = "reviewTarget.is-null")
-  private ReviewTarget reviewTarget;
-
-  public Integer getRatedEntityId() {
-    return ratedEntityId;
+  public Integer getId() {
+    return id;
   }
 
-  public void setRatedEntityId(Integer ratedEntityId) {
-    this.ratedEntityId = ratedEntityId;
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getRoomId() {
+    return roomId;
+  }
+
+  public void setRoomId(Integer roomId) {
+    this.roomId = roomId;
   }
 
   public Integer getRating() {
@@ -52,13 +59,5 @@ public class ReviewCreateDto {
 
   public void setAuthorId(Integer authorId) {
     this.authorId = authorId;
-  }
-
-  public ReviewTarget getReviewTarget() {
-    return reviewTarget;
-  }
-
-  public void setReviewTarget(ReviewTarget reviewTarget) {
-    this.reviewTarget = reviewTarget;
   }
 }

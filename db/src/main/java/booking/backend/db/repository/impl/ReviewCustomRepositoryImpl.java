@@ -1,6 +1,6 @@
 package booking.backend.db.repository.impl;
 
-import booking.backend.db.entity.ReviewEntity;
+import booking.backend.db.entity.RoomReviewEntity;
 import booking.backend.db.repository.ReviewCustomRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,15 +15,15 @@ public class ReviewCustomRepositoryImpl implements ReviewCustomRepository {
   private EntityManager entityManager;
 
   @Override
-  public Page<ReviewEntity> findByCriteria(Integer ratedEntityId,
-                                           Integer authorId,
-                                           Integer reviewTargetId,
-                                           Integer minRating,
-                                           Integer maxRating,
-                                           String sortOrder,
-                                           String sortBy,
-                                           Pageable pageable) {
-   List<ReviewEntity> reviews = null;
+  public Page<RoomReviewEntity> findByCriteria(Integer ratedEntityId,
+                                               Integer authorId,
+                                               Integer reviewTargetId,
+                                               Integer minRating,
+                                               Integer maxRating,
+                                               String sortOrder,
+                                               String sortBy,
+                                               Pageable pageable) {
+   List<RoomReviewEntity> reviews = null;
 
     return Page.empty();
   }

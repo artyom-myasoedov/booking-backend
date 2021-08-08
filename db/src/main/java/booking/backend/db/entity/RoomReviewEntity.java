@@ -1,23 +1,27 @@
-package booking.backend.service.model;
+package booking.backend.db.entity;
 
-import booking.backend.db.entity.ReviewTarget;
-import booking.backend.db.entity.UserEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.*;
 
-import javax.persistence.Column;
+@Table(schema = "booking", name = "room_reviews")
+@Entity(name = "room_reviews")
+public class RoomReviewEntity {
 
-public class ReviewDto {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "review_id")
   private Integer id;
 
-  private Integer ratedEntityId;
+  @Column(name = "room_id")
+  private Integer roomId;
 
+  @Column(name = "rating")
   private Integer rating;
 
+  @Column(name = "description")
   private String description;
 
+  @Column(name = "author_id")
   private Integer authorId;
-
-  private ReviewTarget reviewTarget;
 
   public Integer getId() {
     return id;
@@ -27,12 +31,12 @@ public class ReviewDto {
     this.id = id;
   }
 
-  public Integer getRatedEntityId() {
-    return ratedEntityId;
+  public Integer getRoomId() {
+    return roomId;
   }
 
-  public void setRatedEntityId(Integer ratedEntityId) {
-    this.ratedEntityId = ratedEntityId;
+  public void setRoomId(Integer roomId) {
+    this.roomId = roomId;
   }
 
   public Integer getRating() {
@@ -57,13 +61,5 @@ public class ReviewDto {
 
   public void setAuthorId(Integer authorId) {
     this.authorId = authorId;
-  }
-
-  public ReviewTarget getReviewTarget() {
-    return reviewTarget;
-  }
-
-  public void setReviewTarget(ReviewTarget reviewTarget) {
-    this.reviewTarget = reviewTarget;
   }
 }

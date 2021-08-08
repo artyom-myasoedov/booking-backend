@@ -146,3 +146,12 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202108081917.sql
             relativeToChangelogFile: true
+
+  - changeSet:
+      id: BOK-001-202108090053
+      author: ismetanin
+      comment: Add room_review and user_review
+      changes:
+        - sqlFile:
+            path: BOK-001-202108090053.sql
+            relativeToChangelogFile: true
