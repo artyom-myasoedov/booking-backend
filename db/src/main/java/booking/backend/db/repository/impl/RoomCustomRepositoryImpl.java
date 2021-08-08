@@ -140,16 +140,23 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
       .setParameter("rooms", rooms)
       .getResultList();
 
-//    rooms = entityManager
-//      .createQuery("select distinct r " +
-//        "from rooms r " +
-//        "where count(select ) " +
-//        "where r in :rooms", RoomEntity.class)
-//      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
-//      .setParameter("starting", startOfBooking.getEpochSecond())
-//      .setParameter("ending", endOfBooking.getEpochSecond())
-//      .setParameter("rooms", rooms2)
-//      .getResultList();
+    startOfBooking = startOfBooking == null ? Instant.now() : startOfBooking;
+    endOfBooking = endOfBooking == null ? Instant.now().plusSeconds(10) : endOfBooking;
+
+
+    rooms = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "where " +
+        "(select count(b) from bookings b " +
+        "where b.room.id = r.id " +
+        "AND b.rentalStartDate) = 0 " +
+        "AND r in :rooms", RoomEntity.class)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .setParameter("starting", startOfBooking)
+      .setParameter("ending", endOfBooking)
+      .setParameter("rooms", rooms2)
+      .getResultList();
 
 
     return new PageImpl<>(rooms, pageable, rooms.size());
