@@ -1,13 +1,14 @@
-package booking.backend.service.validation;
+package booking.backend.service.validation.validator;
 
 import booking.backend.db.provider.UserProvider;
-import booking.backend.service.model.UserDto;
+import booking.backend.service.model.UserUpdateDto;
+import booking.backend.service.validation.UsernameUnique;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UsernameUniqueForUpdate implements ConstraintValidator<UsernameUnique, UserDto> {
+public class UsernameUniqueForUpdate implements ConstraintValidator<UsernameUnique, UserUpdateDto> {
 
   private final UserProvider provider;
 
@@ -17,11 +18,11 @@ public class UsernameUniqueForUpdate implements ConstraintValidator<UsernameUniq
   }
 
   @Override
-  public boolean isValid(UserDto value, ConstraintValidatorContext context) {
+  public boolean isValid(UserUpdateDto value, ConstraintValidatorContext context) {
     if (value == null || value.getId() == null || value.getUsername() == null) {
       return true;
     }
 
-    return !provider.isUsernameExists(value.getId(), value.getUsername());
+    return provider.isUsernameUnique(value.getId(), value.getUsername());
   }
 }

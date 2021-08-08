@@ -1,20 +1,28 @@
 package booking.backend.service.logic;
 
-import booking.backend.service.model.ReviewDto;
+import booking.backend.service.model.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 public interface ReviewService {
-  
-  ReviewDto createReview(ReviewDto dto);
 
-  ReviewDto updateReview(ReviewDto dto);
+  ReviewDto createReview(@Valid ReviewCreateDto dto);
 
-  void deleteReviewById(int id);
+  ReviewDto updateReview(@Valid ReviewUpdateDto dto);
+
+  void deleteReviewById(Integer id);
 
   ReviewDto findById(Integer id);
 
-  List<ReviewDto> find(String search, Integer pageSize, Integer pageNumber);
+  PageDto<ReviewDto> find(String search, Integer pageSize, Integer pageNumber);
 
-  List<ReviewDto> findAll();
+  PageDto<ReviewDto> findByCriteria(Integer ratedEntityId,
+                                  Integer authorId,
+                                  Integer reviewTargetId,
+                                  Integer minRating,
+                                  Integer maxRating,
+                                  String sortOrder,
+                                  String sortBy,
+                                  Integer pageSize,
+                                  Integer pageNumber);
 }

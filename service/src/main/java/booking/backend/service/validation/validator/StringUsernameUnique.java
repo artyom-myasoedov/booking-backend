@@ -22,6 +22,6 @@ public class StringUsernameUnique implements ConstraintValidator<UsernameUnique,
       return true;
     }
 
-    return !userProvider.isUsernameExists(value);
+    return !userProvider.isUsernameUnique(value);
   }
 }

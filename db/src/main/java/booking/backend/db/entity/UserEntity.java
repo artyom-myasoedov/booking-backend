@@ -4,6 +4,7 @@ package booking.backend.db.entity;
 import booking.backend.commons.Role;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(schema = "booking", name = "users")
 @Entity(name = "users")
@@ -37,6 +38,9 @@ public class UserEntity {
 
   @Column(name = "role_id")
   private Role role;
+
+  @Column(name = "user_rating")
+  private BigDecimal userRating;
 
   public Integer getId() {
     return id;
@@ -108,6 +112,14 @@ public class UserEntity {
 
   public void setRole(Role role) {
     this.role = role;
+  }
+
+  public BigDecimal getUserRating() {
+    return userRating;
+  }
+
+  public void setUserRating(BigDecimal userRating) {
+    this.userRating = userRating;
   }
 }
 

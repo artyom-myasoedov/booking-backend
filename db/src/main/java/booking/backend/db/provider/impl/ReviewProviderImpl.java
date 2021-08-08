@@ -1,6 +1,6 @@
 package booking.backend.db.provider.impl;
 
-import booking.backend.db.entity.ReviewEntity;
+import booking.backend.db.entity.ReviewDto;
 import booking.backend.db.provider.ReviewProvider;
 import booking.backend.db.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ReviewProviderImpl implements ReviewProvider {
   }
 
   @Override
-  public Page<ReviewEntity> findReviews(String search, Pageable pageable) {
+  public Page<ReviewDto> findReviews(String search, Pageable pageable) {
     if (search == null) {
       return reviewRepository.findAll(pageable);
     }
@@ -29,22 +29,47 @@ public class ReviewProviderImpl implements ReviewProvider {
   }
 
   @Override
-  public ReviewEntity save(ReviewEntity reviewEntity) {
-    return reviewRepository.save(reviewEntity);
+  public ReviewDto save(ReviewDto reviewDto) {
+    return reviewRepository.save(reviewDto);
   }
 
   @Override
-  public Optional<ReviewEntity> findById(Integer id) {
-    return Optional.empty();
+  public Optional<ReviewDto> findById(Integer id) {
+    return reviewRepository.findById(id);
   }
 
   @Override
-  public Iterable<ReviewEntity> findAll() {
+  public Iterable<ReviewDto> findAll() {
     return reviewRepository.findAll();
   }
 
   @Override
   public void deleteById(Integer id) {
     reviewRepository.deleteById(id);
+  }
+
+  @Override
+  public Integer countIdenticalTuplesOfPrimaryKey(Integer authorId, Integer ratedEntityId, Integer reviewTargetId) {
+    return reviewRepository.checkIdentityForPrimaryKey(ratedEntityId, authorId, reviewTargetId);
+  }
+
+  @Override
+  public Integer countIdenticalTuplesOfPrimaryKeyAccountingCurrentTuple(Integer id,
+                                                                        Integer authorId,
+                                                                        Integer ratedEntityId,
+                                                                        Integer reviewTargetId) {
+    return reviewRepository.checkIdentityForPrimaryKeyAccountingCurrentTuple(id, ratedEntityId, authorId, reviewTargetId);
+  }
+
+  @Override
+  public Page<ReviewDto> findByCriteria(Integer ratedEntityId,
+                                        Integer authorId,
+                                        Integer reviewTargetId,
+                                        Integer minRating,
+                                        Integer maxRating,
+                                        String sortOrder,
+                                        String sortBy,
+                                        Pageable pageable) {
+    return null;
   }
 }
