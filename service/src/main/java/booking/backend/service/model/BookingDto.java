@@ -8,6 +8,7 @@ public class BookingDto {
   private UserDto tenant;
   private Integer periodOfBooking;
   private Instant rentalStartDate;
+  private Instant rentalEndDate;
 
   public Integer getId() {
     return id;
@@ -47,5 +48,13 @@ public class BookingDto {
 
   public void setPeriodOfBooking(Integer periodOfBooking) {
     this.periodOfBooking = periodOfBooking;
+  }
+
+  public Instant getRentalEndDate() {
+    return rentalEndDate;
+  }
+
+  public void setRentalEndDate(Instant rentalEndDate) {
+    this.rentalEndDate = rentalEndDate;
   }
 }

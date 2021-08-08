@@ -1,5 +1,6 @@
 package booking.backend.db.provider.impl;
 
+import booking.backend.db.EndDate;
 import booking.backend.db.entity.AdminEntity;
 import booking.backend.db.entity.BookingEntity;
 import booking.backend.db.provider.BookingProvider;
@@ -31,6 +32,8 @@ public class BookingProviderImpl implements BookingProvider {
 
   @Override
   public BookingEntity save(BookingEntity bookingEntity) {
+    bookingEntity.setRentalEndDate(EndDate.calculate(bookingEntity.getRentalStartDate(),
+                                                      bookingEntity.getPeriodOfBooking()));
     return bookingRepository.save(bookingEntity);
   }
 
