@@ -1,6 +1,6 @@
 package booking.backend.db.provider;
 
-import booking.backend.db.entity.ReviewDto;
+import booking.backend.db.entity.ReviewEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface ReviewProvider {
 
-  Page<ReviewDto> findReviews(String search, Pageable pageable);
+  Page<ReviewEntity> findReviews(String search, Pageable pageable);
 
-  ReviewDto save(ReviewDto reviewDto);
+  ReviewEntity save(ReviewEntity reviewDto);
 
-  Optional<ReviewDto> findById(Integer id);
+  Optional<ReviewEntity> findById(Integer id);
 
-  Iterable<ReviewDto> findAll();
+  Iterable<ReviewEntity> findAll();
 
   void deleteById(Integer id);
 
@@ -27,12 +27,12 @@ public interface ReviewProvider {
                                                                  Integer ratedEntityId,
                                                                  Integer reviewTargetId);
 
-  Page<ReviewDto> findByCriteria(Integer ratedEntityId,
-                                 Integer authorId,
-                                 Integer reviewTargetId,
-                                 Integer minRating,
-                                 Integer maxRating,
-                                 String sortOrder,
-                                 String sortBy,
-                                 Pageable pageable);
+  Page<ReviewEntity> findByCriteria(Integer ratedEntityId,
+                                    Integer authorId,
+                                    Integer reviewTargetId,
+                                    Integer minRating,
+                                    Integer maxRating,
+                                    String sortOrder,
+                                    String sortBy,
+                                    Pageable pageable);
 }

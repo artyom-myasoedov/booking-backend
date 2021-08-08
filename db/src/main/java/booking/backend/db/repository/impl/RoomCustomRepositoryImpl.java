@@ -18,15 +18,8 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
   @PersistenceContext
   private EntityManager entityManager;
 
-
   @Override
   public Page<RoomEntity> findByLandlordId(Integer landlordId, Pageable pageable) {
-    return null;
-  }
-
-  @Override
-  public Optional<RoomEntity> findByRoomId(Integer roomId) {
-
     return null;
   }
 

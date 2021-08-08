@@ -123,7 +123,7 @@ public class RoomEntity {
     name = "rated_entity_id",
     referencedColumnName = "room_id"
   )
-  private List<ReviewDto> reviews;
+  private List<ReviewEntity> reviews;
 
   @OneToMany
   @JoinColumn(
@@ -219,11 +219,11 @@ public class RoomEntity {
     this.typesOfRent = typeOfRents;
   }
 
-  public List<ReviewDto> getReviews() {
+  public List<ReviewEntity> getReviews() {
     return reviews;
   }
 
-  public void setReviews(List<ReviewDto> reviews) {
+  public void setReviews(List<ReviewEntity> reviews) {
     this.reviews = reviews;
   }
 

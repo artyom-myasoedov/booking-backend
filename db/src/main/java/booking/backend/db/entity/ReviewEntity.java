@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Table(schema = "booking", name = "reviews")
 @Entity(name = "reviews")
-public class ReviewDto {
+public class ReviewEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
