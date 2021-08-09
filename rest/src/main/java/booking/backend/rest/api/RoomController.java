@@ -29,7 +29,6 @@ public class RoomController {
   }
 
   @GetMapping("/{roomId}")
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public RoomDto findById(@PathVariable Integer roomId) {
     return roomService.findById(roomId);
   }
