@@ -87,7 +87,7 @@ public class RoomEntity {
   private TypeOfRoom typeOfRoom;
 
   @Column(name = "status",
-  insertable = false)
+    insertable = false)
   private RoomStatus roomStatus;
 
   @ManyToOne
