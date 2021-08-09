@@ -165,3 +165,14 @@ databaseChangeLog:
             path: BOK-001-202108090027.sql
             relativeToChangelogFile: true
 
+
+  - changeSet:
+      id: BOK-001-202108091059
+      author: amyasoedov
+      comment: TODO
+      changes:
+        - sqlFile:
+            path: BOK-001-202108091059.sql
+            relativeToChangelogFile: true
+
+
