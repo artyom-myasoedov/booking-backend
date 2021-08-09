@@ -86,7 +86,8 @@ public class RoomEntity {
   @Column(name = "type")
   private TypeOfRoom typeOfRoom;
 
-  @Column(name = "status")
+  @Column(name = "status",
+  insertable = false)
   private RoomStatus roomStatus;
 
   @ManyToOne
@@ -114,28 +115,36 @@ public class RoomEntity {
   @OneToMany
   @JoinColumn(
     name = "room_id",
-    referencedColumnName = "room_id"
+    referencedColumnName = "room_id",
+    insertable = false,
+    updatable = false
   )
   private List<TypeOfRentEntity> typesOfRent;
 
   @OneToMany
   @JoinColumn(
     name = "rated_entity_id",
-    referencedColumnName = "room_id"
+    referencedColumnName = "room_id",
+    insertable = false,
+    updatable = false
   )
   private List<ReviewDto> reviews;
 
   @OneToMany
   @JoinColumn(
     name = "room_id",
-    referencedColumnName = "room_id"
+    referencedColumnName = "room_id",
+    insertable = false,
+    updatable = false
   )
   private List<PhotoEntity> photos;
 
   @OneToMany
   @JoinColumn(
     name = "room_id",
-    referencedColumnName = "room_id"
+    referencedColumnName = "room_id",
+    insertable = false,
+    updatable = false
   )
   private List<EquipmentEntity> equipments;
 
