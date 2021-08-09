@@ -1,29 +1,30 @@
 package booking.backend.service.model;
 
-import booking.backend.service.validation.UserReviewIdentical;
+public class UserReviewDto {
+  private Integer id;
 
-import javax.validation.constraints.NotNull;
+  private Integer userId;
 
-@UserReviewIdentical
-public class RoomReviewCreateDto {
-  @NotNull(message = "roomId.is-null")
-  private Integer roomId;
-
-  @NotNull(message = "rating.is-null")
   private Integer rating;
 
-  @NotNull(message = "description.is-null")
   private String description;
 
-  @NotNull(message = "authorId.is-null")
   private Integer authorId;
 
-  public Integer getRoomId() {
-    return roomId;
+  public Integer getId() {
+    return id;
   }
 
-  public void setRoomId(Integer roomId) {
-    this.roomId = roomId;
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
   public Integer getRating() {

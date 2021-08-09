@@ -5,9 +5,9 @@ import booking.backend.service.validation.UserReviewIdentical;
 import javax.validation.constraints.NotNull;
 
 @UserReviewIdentical
-public class RoomReviewCreateDto {
-  @NotNull(message = "roomId.is-null")
-  private Integer roomId;
+public class UserReviewCreateDto {
+  @NotNull(message = "userId.is-null")
+  private Integer userId;
 
   @NotNull(message = "rating.is-null")
   private Integer rating;
@@ -18,12 +18,12 @@ public class RoomReviewCreateDto {
   @NotNull(message = "authorId.is-null")
   private Integer authorId;
 
-  public Integer getRoomId() {
-    return roomId;
+  public Integer getUserId() {
+    return userId;
   }
 
-  public void setRoomId(Integer roomId) {
-    this.roomId = roomId;
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
   public Integer getRating() {

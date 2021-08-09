@@ -1,24 +1,26 @@
-package booking.backend.service.model;
+package booking.backend.db.entity;
 
-import booking.backend.service.validation.RoomReviewIdentical;
+import javax.persistence.*;
 
-import javax.validation.constraints.NotNull;
+@Table(schema = "booking", name = "user_reviews")
+@Entity(name = "user_reviews")
+public class UserReviewEntity {
 
-@RoomReviewIdentical
-public class RoomReviewUpdateDto {
-  @NotNull(message = "id.is-null")
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "review_id")
   private Integer id;
 
-  @NotNull(message = "roomId.is-null")
-  private Integer roomId;
+  @Column(name = "user_id")
+  private Integer userId;
 
-  @NotNull(message = "rating.is-null")
+  @Column(name = "rating")
   private Integer rating;
 
-  @NotNull(message = "description.is-null")
+  @Column(name = "description")
   private String description;
 
-  @NotNull(message = "authorId.is-null")
+  @Column(name = "author_id")
   private Integer authorId;
 
   public Integer getId() {
@@ -29,12 +31,12 @@ public class RoomReviewUpdateDto {
     this.id = id;
   }
 
-  public Integer getRoomId() {
-    return roomId;
+  public Integer getUserId() {
+    return userId;
   }
 
-  public void setRoomId(Integer roomId) {
-    this.roomId = roomId;
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
   public Integer getRating() {

@@ -2,13 +2,13 @@ package booking.backend.service.validation.validator;
 
 import booking.backend.db.provider.RoomReviewProvider;
 import booking.backend.service.model.RoomReviewCreateDto;
-import booking.backend.service.validation.ReviewIdentical;
+import booking.backend.service.validation.RoomReviewIdentical;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class RoomReviewIdenticalForCreate implements ConstraintValidator<ReviewIdentical, RoomReviewCreateDto> {
+public class RoomReviewIdenticalForCreate implements ConstraintValidator<RoomReviewIdentical, RoomReviewCreateDto> {
 
   private final RoomReviewProvider provider;
 

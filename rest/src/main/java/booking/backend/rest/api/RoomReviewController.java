@@ -8,7 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/roomReview")
 public class RoomReviewController {
   private final RoomReviewService roomReviewService;
 
