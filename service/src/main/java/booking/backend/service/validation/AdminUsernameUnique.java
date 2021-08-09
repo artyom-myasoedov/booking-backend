@@ -9,16 +9,15 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-
 @Documented
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(
   validatedBy = {
-    StringUsernameUnique.class,
-    UsernameUniqueForUpdate.class,
+    StringAdminUsernameUnique.class,
+    AdminUsernameUniqueForUpdate.class
   })
-public @interface UsernameUnique {
+public @interface AdminUsernameUnique {
 
   String message() default "username.already-exists";
 

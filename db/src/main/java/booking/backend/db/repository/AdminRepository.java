@@ -12,15 +12,13 @@ import org.springframework.stereotype.Repository;
 public interface AdminRepository extends JpaRepository<UserEntity, Integer> {
 
   @Query(
-//      + "SELECT u "
-//      + "FROM users u "
-////      + "LEFT JOIN u.rooms r "
-//      + "WHERE first_name <> 'john' "
-//      +
-//      "AND"
-//      + "(LOWER(first_name) like CONCAT('%', lower(?1), '%') "
-//      + "OR LOWER(last_name) like CONCAT('%', lower(?1),'%'))"
-    "select u from users u where u.phoneNumber = '5'"
+    ""
+      + "SELECT u "
+      + "FROM users u "
+      + "WHERE"
+      + "(LOWER(first_name) like CONCAT('%', lower(?1), '%') "
+      + "OR LOWER(last_name) like CONCAT('%', lower(?1),'%'))"
+      + "AND role_id = 3"
   )
   Page<UserEntity>getVal
     (String search, Pageable pageable);
@@ -35,4 +33,8 @@ public interface AdminRepository extends JpaRepository<UserEntity, Integer> {
       + "AND user_id <> ?1"
   )
   Integer countUniqueForUpdate(Integer id, String username);
+  @Query(
+    "SELECT u FROM users u WHERE role_id = 3"
+  )
+  Page<UserEntity> findAllAdmins(Pageable page);
 }
