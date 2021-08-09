@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
   (uses = {
     EquipmentMapper.class,
-    ReviewMapper.class,
+    RoomReviewMapper.class,
     UserMapper.class,
     PhotoMapper.class,
     TypeOfRentMapper.class

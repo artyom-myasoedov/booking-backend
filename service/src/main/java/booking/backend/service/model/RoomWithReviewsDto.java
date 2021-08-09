@@ -4,13 +4,13 @@ import java.util.List;
 
 public class RoomWithReviewsDto extends RoomDto {
 
-  private List<ReviewDto> reviews;
+  private List<RoomReviewDto> reviews;
 
-  public List<ReviewDto> getReviews() {
+  public List<RoomReviewDto> getReviews() {
     return reviews;
   }
 
-  public void setReviews(List<ReviewDto> reviews) {
+  public void setReviews(List<RoomReviewDto> reviews) {
     this.reviews = reviews;
   }
 }

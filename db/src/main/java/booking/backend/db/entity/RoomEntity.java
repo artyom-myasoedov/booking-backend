@@ -33,7 +33,7 @@ import java.util.List;
       name = "review",
       attributeNodes = {
         @NamedAttributeNode("id"),
-        @NamedAttributeNode("ratedEntityId"),
+        @NamedAttributeNode("roomId"),
         @NamedAttributeNode("rating"),
         @NamedAttributeNode("description"),
         @NamedAttributeNode("author"),
@@ -87,7 +87,7 @@ public class RoomEntity {
   private TypeOfRoom typeOfRoom;
 
   @Column(name = "status",
-  insertable = false)
+    insertable = false)
   private RoomStatus roomStatus;
 
   @ManyToOne
@@ -123,12 +123,12 @@ public class RoomEntity {
 
   @OneToMany
   @JoinColumn(
-    name = "rated_entity_id",
+    name = "room_id",
     referencedColumnName = "room_id",
     insertable = false,
     updatable = false
   )
-  private List<ReviewDto> reviews;
+  private List<RoomReviewEntity> reviews;
 
   @OneToMany
   @JoinColumn(
@@ -228,11 +228,11 @@ public class RoomEntity {
     this.typesOfRent = typeOfRents;
   }
 
-  public List<ReviewDto> getReviews() {
+  public List<RoomReviewEntity> getReviews() {
     return reviews;
   }
 
-  public void setReviews(List<ReviewDto> reviews) {
+  public void setReviews(List<RoomReviewEntity> reviews) {
     this.reviews = reviews;
   }
 

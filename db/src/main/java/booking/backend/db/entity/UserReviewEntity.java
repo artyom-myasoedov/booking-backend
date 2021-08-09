@@ -2,17 +2,17 @@ package booking.backend.db.entity;
 
 import javax.persistence.*;
 
-@Table(schema = "booking", name = "reviews")
-@Entity(name = "reviews")
-public class ReviewDto {
+@Table(schema = "booking", name = "user_reviews")
+@Entity(name = "user_reviews")
+public class UserReviewEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "review_id")
   private Integer id;
 
-  @Column(name = "rated_entity_id")
-  private Integer ratedEntityId;
+  @Column(name = "user_id")
+  private Integer userId;
 
   @Column(name = "rating")
   private Integer rating;
@@ -23,9 +23,6 @@ public class ReviewDto {
   @Column(name = "author_id")
   private Integer authorId;
 
-  @Column(name = "review_target_id")
-  private ReviewTarget reviewTarget;
-
   public Integer getId() {
     return id;
   }
@@ -34,12 +31,12 @@ public class ReviewDto {
     this.id = id;
   }
 
-  public Integer getRatedEntityId() {
-    return ratedEntityId;
+  public Integer getUserId() {
+    return userId;
   }
 
-  public void setRatedEntityId(Integer ratedEntityId) {
-    this.ratedEntityId = ratedEntityId;
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
   public Integer getRating() {
@@ -64,13 +61,5 @@ public class ReviewDto {
 
   public void setAuthorId(Integer authorId) {
     this.authorId = authorId;
-  }
-
-  public ReviewTarget getReviewTarget() {
-    return reviewTarget;
-  }
-
-  public void setReviewTarget(ReviewTarget reviewTarget) {
-    this.reviewTarget = reviewTarget;
   }
 }
