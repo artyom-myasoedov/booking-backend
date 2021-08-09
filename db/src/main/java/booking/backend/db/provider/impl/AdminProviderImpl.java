@@ -1,8 +1,10 @@
 package booking.backend.db.provider.impl;
 
 import booking.backend.db.entity.AdminEntity;
+import booking.backend.db.entity.UserEntity;
 import booking.backend.db.provider.AdminProvider;
 import booking.backend.db.repository.AdminRepository;
+import booking.backend.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,30 +23,40 @@ public class AdminProviderImpl implements AdminProvider {
   }
 
   @Override
-  public Page<AdminEntity> findByUsername(String search, Pageable pageable) {
+  public Page<UserEntity> findByUsername(String search, Pageable pageable) {
     if (search == null) {
-      return adminRepository.findAll(pageable);
+      return adminRepository.findAllAdmins(pageable);
     }
-    return adminRepository.getAllByUsernameIsContaining(search, pageable);
+    return adminRepository.getVal(search, pageable);
   }
 
   @Override
-  public AdminEntity save(AdminEntity adminEntity) {
+  public UserEntity save(UserEntity adminEntity) {
     return adminRepository.save(adminEntity);
   }
 
   @Override
-  public Optional<AdminEntity> findById(Integer id) {
+  public Optional<UserEntity> findById(Integer id) {
     return adminRepository.findById(id);
   }
 
   @Override
-  public Iterable<AdminEntity> findAll() {
+  public Iterable<UserEntity> findAll() {
     return adminRepository.findAll();
   }
 
   @Override
   public void deleteById(Integer id) {
     adminRepository.deleteById(id);
+  }
+
+  @Override
+  public boolean isUsernameUnique(String value) {
+    return !adminRepository.existsByUsernameIgnoreCase(value);
+  }
+
+  @Override
+  public boolean isUsernameUnique(Integer id, String username) {
+    return adminRepository.countUniqueForUpdate(id, username) == 0;
   }
 }

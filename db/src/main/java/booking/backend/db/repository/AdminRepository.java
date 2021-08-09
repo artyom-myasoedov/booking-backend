@@ -9,14 +9,32 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
-//  @Query(
-//    ""
-//      + "SELECT u "
-//      + "FROM admins u "
-//      + "WHERE LOWER(first_name) like CONCAT('%', lower(?1), '%') "
-//      + "OR LOWER(last_name) like CONCAT('%', lower(?1),'%')"
-//  )
-//  Page<AdminEntity> findAdmins(String search, Pageable pageable);
-  Page<AdminEntity>getAllByUsernameIsContaining(String search, Pageable pageable);
+public interface AdminRepository extends JpaRepository<UserEntity, Integer> {
+
+  @Query(
+    ""
+      + "SELECT u "
+      + "FROM users u "
+      + "WHERE"
+      + "(LOWER(first_name) like CONCAT('%', lower(?1), '%') "
+      + "OR LOWER(last_name) like CONCAT('%', lower(?1),'%'))"
+      + "AND role_id = 3"
+  )
+  Page<UserEntity>getVal
+    (String search, Pageable pageable);
+
+  boolean existsByUsernameIgnoreCase(String value);
+
+  @Query(
+    ""
+      + "SELECT COUNT(u) "
+      + "FROM users u "
+      + "WHERE LOWER(username) = LOWER(?2) "
+      + "AND user_id <> ?1"
+  )
+  Integer countUniqueForUpdate(Integer id, String username);
+  @Query(
+    "SELECT u FROM users u WHERE role_id = 3"
+  )
+  Page<UserEntity> findAllAdmins(Pageable page);
 }

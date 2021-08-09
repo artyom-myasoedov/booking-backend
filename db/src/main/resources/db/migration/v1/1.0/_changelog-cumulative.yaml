@@ -155,3 +155,21 @@ databaseChangeLog:
         - sqlFile:
             path: BOK-001-202108090053.sql
             relativeToChangelogFile: true
+
+  - changeSet:
+      id: BOK-001-202108082001
+      author: mlarionov
+      comment: Add end rental period attribute in db
+      changes:
+        - sqlFile:
+            path: BOK-001-202108082001.sql
+            relativeToChangelogFile: true
+            
+  - changeSet:
+      id: BOK-001-202108090027
+      author: mlarionov
+      comment: Add end rental period attribute in db
+      changes:
+        - sqlFile:
+            path: BOK-001-202108090027.sql
+            relativeToChangelogFile: true

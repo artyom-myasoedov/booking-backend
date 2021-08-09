@@ -1,20 +1,22 @@
 package booking.backend.service.validation.validator;
 
+import booking.backend.db.provider.AdminProvider;
 import booking.backend.db.provider.UserProvider;
+import booking.backend.service.validation.AdminUsernameUnique;
 import booking.backend.service.validation.UsernameUnique;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.concurrent.TimeUnit;
 
-public class StringUsernameUnique implements ConstraintValidator<UsernameUnique, String> {
+public class StringAdminUsernameUnique implements ConstraintValidator<AdminUsernameUnique, String> {
 
-  private final UserProvider userProvider;
+  private final AdminProvider adminProvider;
 
   @Autowired
-  public StringUsernameUnique(UserProvider userProvider) {
-    this.userProvider = userProvider;
+
+  public StringAdminUsernameUnique(AdminProvider adminProvider) {
+    this.adminProvider = adminProvider;
   }
 
   @Override
@@ -22,6 +24,7 @@ public class StringUsernameUnique implements ConstraintValidator<UsernameUnique,
     if (value == null) {
       return true;
     }
-    return !userProvider.isUsernameUnique(value);
+
+    return !adminProvider.isUsernameUnique(value);
   }
 }

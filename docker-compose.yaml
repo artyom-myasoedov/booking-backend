@@ -4,12 +4,13 @@ services:
     image: postgres:latest
     environment:
       POSTGRES_PASSWORD: 123321
+      POSTGRES_USER: postgres
+    ports:
+    - 5432:5432
     volumes:
       - type: volume
         source: pgdata
         target: /var/lib/postgresql/data
-    ports:
-      - 35432:5432
   backend:
     image: booking-backend:latest
     depends_on:
@@ -21,19 +22,7 @@ services:
     links:
       - postgres
     ports:
-      - 8080:8081
-#  vue:
-#    image: healthtech-frontend:latest
-#    depends_on:
-#      - backend
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    volumes:
-#      - '.:/app'
-#      - '/app/node_modules'
-#    ports:
-#      - '8081:8080'
+      - 8080:8080
 volumes:
   pgdata:
     name: pgdata

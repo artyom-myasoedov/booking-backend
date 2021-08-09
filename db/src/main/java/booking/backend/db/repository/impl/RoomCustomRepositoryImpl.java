@@ -125,12 +125,12 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
       .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
       .getResultList();
 
-    List<RoomEntity> rooms2 = entityManager
+    rooms = entityManager
       .createQuery("select distinct r " +
         "from rooms r " +
         "" +
-        "join fetch r.typesOfRent t " +
-        "where  t.typeOfRent in :typesOfRent " +
+        "left join fetch r.typesOfRent t " +
+        "where t.typeOfRent in :typesOfRent " +
         "AND t.price between :minPrice AND :maxPrice " +
         "AND r in :rooms", RoomEntity.class)
       .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
@@ -140,18 +140,59 @@ public class RoomCustomRepositoryImpl implements RoomCustomRepository {
       .setParameter("rooms", rooms)
       .getResultList();
 
-//    rooms = entityManager
+//    List<RoomEntity> rooms2 = entityManager
 //      .createQuery("select distinct r " +
 //        "from rooms r " +
-//        "left join bookings b " +
-//       // "where b.rentalStartDate >= :ending " +
-//        //"AND UNIX_TIMESTEP(b.rentalStartDate) + b.periodOfBooking * 3600 <= :starting " +
-//        "where r in :rooms", RoomEntity.class)
+//        "" +
+//        "left join fetch r.typesOfRent t " +
+//        "where  (t.typeOfRent in :typesOfRent " +
+//        "OR t.size = 0 AND :typesSize = 4) " +
+//        "AND t.price between :minPrice AND :maxPrice " +
+//        "AND r in :rooms", RoomEntity.class)
 //      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
-//      //.setParameter("starting", startOfBooking.getEpochSecond())
-//      //.setParameter("ending", endOfBooking.getEpochSecond())
-//      .setParameter("rooms", rooms2)
+//      .setParameter("typesOfRent", typesOfRent)
+//      .setParameter("minPrice", minPrice)
+//      .setParameter("typesSize", typesOfRent.size())
+//      .setParameter("maxPrice", maxPrice)
+//      .setParameter("rooms", rooms)
 //      .getResultList();
+
+//    startOfBooking = startOfBooking == null ? Instant.now() : startOfBooking;
+//    endOfBooking = endOfBooking == null ? Instant.now().plusSeconds(10) : endOfBooking;
+
+
+    if (startOfBooking != null & endOfBooking != null) {
+
+
+    rooms = entityManager
+      .createQuery("select distinct r " +
+        "from rooms r " +
+        "where " +
+        "(select count(b) from bookings b " +
+        "where b.room.id = r.id " +
+        "AND (b.rentalStartDate between :starting AND :ending " +
+        "OR b.rentalEndDate between :starting AND :ending " +
+        "OR :starting between b.rentalStartDate AND b.rentalEndDate " +
+        "OR :ending between b.rentalStartDate AND b.rentalEndDate)) = 0 " +
+        "AND r in :rooms", RoomEntity.class)
+      .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+      .setParameter("starting", startOfBooking)
+      .setParameter("ending", endOfBooking)
+      .setParameter("rooms", rooms)
+      .getResultList();
+
+//      rooms = entityManager
+//        .createQuery("select distinct r " +
+//          "from rooms r " +
+//          "where " +
+//          "(select count(b) from bookings b " +
+//          "where b.room.id = r.id " +
+//          ") = 0 " +
+//          "AND r in :rooms", RoomEntity.class)
+//        .setHint(QueryHints.PASS_DISTINCT_THROUGH, false)
+//        .setParameter("rooms", rooms)
+//        .getResultList();
+    }
 
 
     return new PageImpl<>(rooms, pageable, rooms.size());

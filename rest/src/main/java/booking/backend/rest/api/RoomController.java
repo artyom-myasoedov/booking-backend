@@ -29,13 +29,11 @@ public class RoomController {
   }
 
   @GetMapping("/{roomId}")
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public RoomDto findById(@PathVariable Integer roomId) {
     return roomService.findById(roomId);
   }
 
   @DeleteMapping("/{roomId}")
-  @Secured({"ROLE_LANDLORD", "ROLE_ADMIN"})
   public void deleteById(@PathVariable Integer roomId) {
     roomService.deleteById(roomId);
   }
@@ -66,7 +64,6 @@ public class RoomController {
   }
 
   @GetMapping("/getAllRooms")
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findAll(
     @RequestParam(defaultValue = "rating") String sortBy,
     @RequestParam(defaultValue = "ASC") String sortOrder,
@@ -78,7 +75,6 @@ public class RoomController {
 
   @GetMapping("/byCriteria")
   @ResponseStatus(HttpStatus.OK)
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   public PageDto<RoomDto> findByCriteria(
     @RequestParam(defaultValue = "0") Integer minSquare,
     @RequestParam(defaultValue = "99999999") Integer maxSquare,

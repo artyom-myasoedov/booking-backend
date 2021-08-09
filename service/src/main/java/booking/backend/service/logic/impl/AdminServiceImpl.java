@@ -1,31 +1,36 @@
 package booking.backend.service.logic.impl;
 
 import booking.backend.db.provider.AdminProvider;
+import booking.backend.service.exceptions.EntityNotFoundException;
 import booking.backend.service.logic.AdminService;
 import booking.backend.service.mapper.AdminMapper;
 import booking.backend.service.model.*;
-import org.springframework.data.domain.Page;
+import booking.backend.service.security.BookingPasswordEncoder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImpl implements AdminService {
   private final AdminMapper adminMapper;
   private final AdminProvider adminProvider;
+  private final BookingPasswordEncoder passwordEncoder;
 
-  public AdminServiceImpl(AdminMapper adminMapper, AdminProvider adminProvider) {
+  public AdminServiceImpl(AdminMapper adminMapper, AdminProvider adminProvider, BookingPasswordEncoder passwordEncoder) {
     this.adminMapper = adminMapper;
     this.adminProvider = adminProvider;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
-  public AdminDto createAdmin(AdminCreateDto dto) {
+  public AdminDto createAdmin(@Valid AdminCreateDto admin) {
+    String encodePassword = passwordEncoder.encode(admin.getPassword());
+    admin.setPassword(encodePassword);
     return
-            Optional.ofNullable(dto)
+            Optional.of(admin)
                     .map(adminMapper::toEntity)
                     .map(adminProvider::save)
                     .map(adminMapper::fromEntity)
@@ -33,8 +38,16 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
-  public AdminDto updateAdmin(AdminCreateDto dto) {
-    return createAdmin(dto);
+  public AdminDto updateAdmin(@Valid AdminUpdateDto admin) {
+    var adminEntity = adminProvider.findById(admin.getId())
+      .orElseThrow(() -> new EntityNotFoundException(admin.getId(), "Admin"));
+
+    String encodePassword = passwordEncoder.encode(admin.getPassword());
+    admin.setPassword(encodePassword);
+
+    adminMapper.toEntity(admin, adminEntity);
+
+    return adminMapper.fromEntity(adminProvider.save(adminEntity));
   }
 
   @Override

@@ -1,35 +1,54 @@
 package booking.backend.service.model;
 
 import booking.backend.commons.Role;
+import booking.backend.service.validation.UsernameUnique;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.Length;
 
-import java.math.BigDecimal;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-public class AdminDto {
+public class AdminUpdateDto {
+  @NotNull(message = "id.is-null")
   private Integer id;
 
+  @Pattern(regexp = "^[a-zA-Z\\d]{5,32}$", message = "username.invalid")
+  @NotNull(message = "username.is-null")
   private String username;
 
+  @NotBlank(message = "password.is-blank")
+  @Length(min = 12, message = "password.too-short")
+  @Length(max = 60, message = "password.too-long")
+  private String password;
+
+  @NotBlank(message = "firstName.is-blank")
+  @Size(min = 1, max = 45, message = "firstName.out-of-range")
   private String firstName;
 
+  @NotBlank(message = "lastName.is-blank")
+  @Size(min = 1, max = 45, message = "lastName.out-of-range")
   private String lastName;
+
+  @NotNull(message = "role.is-null")
+  private Role role;
 
   private byte[] photo;
 
+  @NotBlank(message = "phoneNumber.is-blank")
   private String phoneNumber;
 
+  @NotBlank(message = "email.is-blank")
+  @Pattern(regexp = "^.+@.+\\..+$", message = "email.invalid")
   private String email;
-
-  private Role role;
-
-  private BigDecimal userRating;
 
   public Integer getId() {
     return id;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setId(Integer userId) {
+    this.id = userId;
   }
 
   public String getUsername() {
@@ -88,11 +107,11 @@ public class AdminDto {
     this.role = role;
   }
 
-  public BigDecimal getUserRating() {
-    return userRating;
+  public String getPassword() {
+    return password;
   }
 
-  public void setUserRating(BigDecimal userRating) {
-    this.userRating = userRating;
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
