@@ -28,13 +28,13 @@ public class BookingController {
   }
 
   @GetMapping("/{id}")
-  @Secured({"ROLE_ADMIN"})
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   BookingDto findById(@PathVariable Integer id){
     return bookingService.findById(id);
   }
 
   @GetMapping("/byRoomId/{id}")
-  @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   PageDto<BookingDto> findByRoomId(
     @PathVariable Integer id,
     @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize,
@@ -62,7 +62,7 @@ public class BookingController {
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
-  @Secured({"ROLE_CLIENT", "ROLE_ADMIN"})
+  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   BookingDto updateBooking(@RequestBody BookingDto bookingDto){
     return bookingService.updateBooking(bookingDto);
   }
