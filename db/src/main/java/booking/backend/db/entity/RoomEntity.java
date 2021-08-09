@@ -33,7 +33,7 @@ import java.util.List;
       name = "review",
       attributeNodes = {
         @NamedAttributeNode("id"),
-        @NamedAttributeNode("ratedEntityId"),
+        @NamedAttributeNode("roomId"),
         @NamedAttributeNode("rating"),
         @NamedAttributeNode("description"),
         @NamedAttributeNode("author"),
@@ -87,7 +87,7 @@ public class RoomEntity {
   private TypeOfRoom typeOfRoom;
 
   @Column(name = "status",
-  insertable = false)
+    insertable = false)
   private RoomStatus roomStatus;
 
   @ManyToOne
@@ -123,7 +123,7 @@ public class RoomEntity {
 
   @OneToMany
   @JoinColumn(
-    name = "rated_entity_id",
+    name = "room_id",
     referencedColumnName = "room_id",
     insertable = false,
     updatable = false
