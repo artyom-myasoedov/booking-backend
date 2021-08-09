@@ -25,7 +25,7 @@ public class AdminProviderImpl implements AdminProvider {
   @Override
   public Page<UserEntity> findByUsername(String search, Pageable pageable) {
     if (search == null) {
-      return adminRepository.findAll(pageable);
+      return adminRepository.findAllAdmins(pageable);
     }
     return adminRepository.getVal(search, pageable);
   }
