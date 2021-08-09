@@ -4,13 +4,14 @@ import booking.backend.db.provider.AdminProvider;
 import booking.backend.db.provider.UserProvider;
 import booking.backend.service.model.AdminUpdateDto;
 import booking.backend.service.model.UserUpdateDto;
+import booking.backend.service.validation.AdminUsernameUnique;
 import booking.backend.service.validation.UsernameUnique;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class AdminUsernameUniqueForUpdate implements ConstraintValidator<UsernameUnique, AdminUpdateDto> {
+public class AdminUsernameUniqueForUpdate implements ConstraintValidator<AdminUsernameUnique, AdminUpdateDto> {
 
   private final UserProvider provider;
 

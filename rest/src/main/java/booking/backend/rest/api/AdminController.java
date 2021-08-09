@@ -9,6 +9,7 @@ import booking.backend.service.model.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class AdminController {
   }
 
   @GetMapping("/admins")
+  @Secured({"ROLE_ADMIN"})
   PageDto<AdminDto> find(
     @RequestParam(required = false) String search,
     @RequestParam(name = "page_size", defaultValue = "10") Integer pageSize,
@@ -31,23 +33,27 @@ public class AdminController {
   }
 
   @GetMapping("/{id}")
+  @Secured({"ROLE_ADMIN"})
   AdminDto findById(@PathVariable Integer id){
     return adminService.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
+  @Secured({"ROLE_ADMIN"})
   AdminDto addAdmin(@RequestBody AdminCreateDto admin){
     return adminService.createAdmin(admin);
   }
 
   @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.OK)
+  @Secured({"ROLE_ADMIN"})
   AdminDto updateAdmin(@RequestBody AdminUpdateDto admin){
     return adminService.updateAdmin(admin);
   }
 
   @DeleteMapping("/{id}")
+  @Secured({"ROLE_ADMIN"})
   void deleteById(@PathVariable int id) {
     adminService.deleteAdminById(id);
   }

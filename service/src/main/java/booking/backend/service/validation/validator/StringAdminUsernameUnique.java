@@ -2,13 +2,14 @@ package booking.backend.service.validation.validator;
 
 import booking.backend.db.provider.AdminProvider;
 import booking.backend.db.provider.UserProvider;
+import booking.backend.service.validation.AdminUsernameUnique;
 import booking.backend.service.validation.UsernameUnique;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class StringAdminUsernameUnique implements ConstraintValidator<UsernameUnique, String> {
+public class StringAdminUsernameUnique implements ConstraintValidator<AdminUsernameUnique, String> {
 
   private final AdminProvider adminProvider;
 
