@@ -2,10 +2,7 @@ package booking.backend.service.mapper;
 
 import booking.backend.db.entity.AdminEntity;
 import booking.backend.db.entity.UserEntity;
-import booking.backend.service.model.AdminCreateDto;
-import booking.backend.service.model.AdminDto;
-import booking.backend.service.model.AdminUpdateDto;
-import booking.backend.service.model.UserUpdateDto;
+import booking.backend.service.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
@@ -14,13 +11,13 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
 
-  AdminDto fromEntity(AdminEntity adminEntity);
+  AdminDto fromEntity(UserEntity adminEntity);
 
-  void toEntity(AdminUpdateDto dto, @MappingTarget AdminEntity original);
+  void toEntity(AdminUpdateDto dto, @MappingTarget UserEntity original);
 
-  AdminEntity toEntity(AdminDto aminDto);
+  UserEntity toEntity(AdminDto aminDto);
 
-  List<AdminDto> fromEntities(Iterable<AdminEntity> bookingEntities);
+  List<AdminDto> fromEntities(Iterable<UserEntity> bookingEntities);
 
-  AdminEntity toEntity(AdminCreateDto dto);
+  UserEntity toEntity(AdminCreateDto dto);
 }

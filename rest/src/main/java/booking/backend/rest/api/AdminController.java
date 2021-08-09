@@ -1,6 +1,7 @@
 package booking.backend.rest.api;
 
 import booking.backend.service.logic.AdminService;
+import booking.backend.service.logic.UserService;
 import booking.backend.service.model.AdminCreateDto;
 import booking.backend.service.model.AdminDto;
 import booking.backend.service.model.AdminUpdateDto;
@@ -16,8 +17,8 @@ public class AdminController {
   private final AdminService adminService;
 
   @Autowired
-  public AdminController(AdminService adminService) {
-    this.adminService = adminService;
+  public AdminController(AdminService userService) {
+    this.adminService = userService;
   }
 
   @GetMapping("/admins")
