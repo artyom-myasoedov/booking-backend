@@ -19,7 +19,6 @@ public class UserController {
     this.userService = userService;
   }
 
-  @Secured({"ROLE_CLIENT", "ROLE_LANDLORD", "ROLE_ADMIN"})
   @GetMapping("/{id}")
   UserDto getUser(@PathVariable int id) {
     return userService.findById(id);
